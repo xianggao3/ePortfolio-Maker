@@ -1,38 +1,52 @@
 {
     "title":"Eric Cartman",
     "navbar":[
-        {"page1":"About Eric Cartman"},
-        {"page2":"Likes and Dislikes"},
-        {"page3":"Favourite Quotes"},
-        {"page4":"Pictures"},
-        {"page5":"Watch Cartman"}
+        {"page1":"About Eric Cartman","a":"../ePortfolio/public_html/index.html"},
+        {"page2":"Likes and Dislikes","a":"../ePortfolio/public_html/page2.html"},
+        {"page3":"Favourite Quotes","a":"../ePortfolio/public_html/page3.html"},
+        {"page4":"Pictures","a":"../ePortfolio/public_html/page4.html"},
+        {"page5":"Watch Cartman","a":"../ePortfolio/public_html/page5.html"}
     ],
     "pages":[
+        
         {
             "banner":"Eric Cartman",
-            "bannerImgPath":"C:\Users\xgao3\Documents\NetBeansProjects\ePortfolio\public_html\img",
-            "paragraph":"Eric Theodore Cartman, usually referred to as just Cartman, is one of the main characters of South Park, along with Stan Marsh, Kyle Broflovski, and Kenny McCormick. Cartman is sometimes the main antagonist of an episode. None of the other three main children consider Cartman their friend and do not know why they started hanging out with him in the first place, however, he is usually Kyle's first choice when he breaks his friendship with Stan. In earlier episodes, Kenny was his best friend, however, in later seasons, Butters Stotch is usually depicted as such."
+            "bannerImgPath":"../ePortfolio/public_html/img/banner1.jpg",
             
-        }
+            "1":[{"p":"Eric Theodore Cartman, usually referred to as just Cartman, is one of the main characters of South Park, along with Stan Marsh, Kyle Broflovski, and Kenny McCormick. Cartman is sometimes the main antagonist of an episode. None of the other three main children consider Cartman their friend and do not know why they started hanging out with him in the first place, however, he is usually Kyle's first choice when he breaks his friendship with Stan. In earlier episodes, Kenny was his best friend, however, in later seasons, Butters Stotch is usually depicted as such."}]
+            
+        },    
         {
             "banner":"Likes and Dislikes",
-            "paragraph":"Likes",
-            "list":[
-                {"Cheesy Poofs","Video Games","Kentucy Fried Chicken","Casa Bonita","Money"}
-            ],
-            "paragraph":"Dislikes",
-            "list2":[{
-                    "Kyle Borflovski","Hippies","Being Called Fat","Being Ignored"
+            
+            "1":[{"p":"Likes"
+                }],
+            "2":[{"list":[{
+                    "li":"Cheesy Poofs",
+                    "li":"Video Games",
+                    "li":"Kentucy Fried Chicken",
+                    "li":"Casa Bonita",
+                    "li":"Money"}]
+            }],
+            "3":[{"p":"Dislikes"
+                    }],
+            "4":[{"list":[{
+                    "li":"Kyle Borflovski",
+                    "li":"Hippies",
+                    "li":"Being Called Fat",
+                    "li":"Being Ignored"
+                    }]
             }]
-        }
+        },
         {
+            "banner":"Favourite Quotes"
             
-        }
+        },
         {
-            
-        }
+            "banner":"Pictures of Cartman"
+        },
         {
-            
+            "banner":"watch Cartman"
         }
     ]
 }
