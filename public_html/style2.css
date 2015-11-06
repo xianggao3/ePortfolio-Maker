@@ -9,5 +9,20 @@ and open the template in the editor.
 */
 
 body{
-    font-family: 'Oswald', sans-serif;
+font-family: 'Open Sans', sans-serif;
+    background-color: #97CBFF;
+}
+
+#writing{
+    background-color: #ffffff;
+  border: 1px solid black;
+  opacity:0.6;
+  filter:alpha(opacity=60);
+}
+
+#navbar{
+    border-bottom: 1px solid gray;
+        line-height: 40px;
+    border-bottom-color: black;
+    
 }
