@@ -1,6 +1,7 @@
 var title;
 var navbar;
 var pages;
+var currentPage;
 
 function initePortfolio(){
     navbar = new Array();
@@ -11,7 +12,6 @@ function initePortfolio(){
 
 function loadData(jsonFile) {
     $.getJSON(jsonFile, function (json) {
-        alert(json.title);
         loadePortfolio(json);
         initPage();
     });
@@ -19,12 +19,29 @@ function loadData(jsonFile) {
 
 function loadePortfolio(ePortfolioData) {
     title = ePortfolioData.title;
-    for(var i =0;i<ePortfolioData.navbar.length;i++){
-        var e=document.createElement(type);
+    loadNavBar(ePortfolioData);
+    loadBanner(ePortfolioData);
+}
+
+function loadNavBar(ePortfolioData){
+    for(var i =0; i<ePortfolioData.navbar.length;i++){
+        var e=document.createElement("a");
         e.innerHTML = ePortfolioData.navbar[i].page;
-        navbar.appendChild(e);
-        e.attr("href",ePortfolioData.navbar[i].src);
+        $(e).attr("href",ePortfolioData.navbar[i].src);
+        document.getElementById("navbar").appendChild(e);
     }
+}
+
+function loadBanner(ePortfolioData){
+        var bannerTitle = document.createElement("h1");
+        bannerTitle.innerHTML=ePortfolioData.pages[currentPage].banner;
+        $(bannerTitle).attr("id","bannerTitle");
+        document.getElementById("banner").appendChild(bannerTitle);
+    
+}
+
+function setCurrentPage(index){
+    currentPage=index;
 }
 
 function initPage(){

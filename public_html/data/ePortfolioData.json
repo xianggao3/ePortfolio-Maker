@@ -1,15 +1,15 @@
 {
     "title":"Eric Cartman",
     "navbar":[
-        {"page":"About Eric Cartman", "type":"a",  "src":"../ePortfolio/public_html/index.html"},
-        {"page":"Likes and Dislikes", "type":"a",  "src":"../ePortfolio/public_html/page2.html"},
-        {"page":"Favourite Quotes",   "type":"a",  "src":"../ePortfolio/public_html/page3.html"},
-        {"page":"Pictures",           "type":"a",  "src":"../ePortfolio/public_html/page4.html"},
-        {"page":"Watch Cartman",      "type":"a",  "src":"../ePortfolio/public_html/page5.html"}
+        {"page":"About Eric Cartman-", "type":"a",  "src":"../ePortfolio/index.html"},
+        {"page":"Likes and Dislikes-", "type":"a",  "src":"../ePortfolio/page2.html"},
+        {"page":"Favourite Quotes-",   "type":"a",  "src":"../ePortfolio/page3.html"},
+        {"page":"Pictures of Cartman-","type":"a",  "src":"../ePortfolio/page4.html"},
+        {"page":"Watch Cartman",       "type":"a",  "src":"../ePortfolio/page5.html"}
     ],
     "pages":[
         {
-            "banner":"Eric Cartman",
+            "banner":"About Eric Cartman",
             "bannerImgPath":"../ePortfolio/public_html/img/banner1.jpg",
             
             "1":[{"p":"Eric Theodore Cartman, usually referred to as just Cartman, is one of the main characters of South Park, along with Stan Marsh, Kyle Broflovski, and Kenny McCormick. Cartman is sometimes the main antagonist of an episode. None of the other three main children consider Cartman their friend and do not know why they started hanging out with him in the first place, however, he is usually Kyle's first choice when he breaks his friendship with Stan. In earlier episodes, Kenny was his best friend, however, in later seasons, Butters Stotch is usually depicted as such."}]
@@ -45,7 +45,7 @@
             "banner":"Pictures of Cartman"
         },
         {
-            "banner":"watch Cartman"
+            "banner":"Watch Cartman"
         }
     ]
 }
