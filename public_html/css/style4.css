@@ -15,8 +15,12 @@ body{
 #banner{
     text-align: center;
     color: white;
+    
 }
 #navbar{
+    position:absolute;
+    bottom:0%;
+        width:100%;
     border-bottom: 1px solid gray;
         line-height: 40px;
             background-color: yellow;
