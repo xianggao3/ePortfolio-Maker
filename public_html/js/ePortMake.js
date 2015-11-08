@@ -57,14 +57,19 @@ function addContent(ePortfolioData){
             
             document.getElementById("content").appendChild(p);
         }
-        if(ePortfolioData.pages.content[i].type=="list"){
+        
+        else if(ePortfolioData.pages.content[i].type=="list"){
             var list= document.createElement("ul");
-            for(var x =0;x<ePortfolioData.pages.content[i].length;x++){
-                var li = document.createElement("li");
-                li.innerHTML=ePortfolioData.pages.content[i][x];
+            var li;
+            for(var x =0; x<ePortfolioData.pages.content[i].list.length; x++){
+                li = document.createElement("li");
+                var r=ePortfolioData.pages.content[i].list[x].li;
+                li.innerHTML=ePortfolioData.pages.content[i].list[x].li;
+                list.appendChild(li);
             }
             document.getElementById("content").appendChild(list);
         }
+        else if(ePortfolio)
         
     }
 }

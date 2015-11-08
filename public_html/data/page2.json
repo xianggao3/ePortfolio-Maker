@@ -14,20 +14,22 @@
                 {"type":"p","p":"Likes"
                     
                     },
-                {"type":"list","list":[{
-                        "type":"li","li":"Cheesy Poofs",
-                        "type":"li","li":"Video Games",
-                        "type":"li","li":"Kentucy Fried Chicken",
-                        "type":"li","li":"Casa Bonita",
-                        "type":"li","li":"Money"}]
+                {"type":"list",
+                    "list":[{
+                        "type":"li","li":"Cheesy Poofs"},
+                        {"type":"li","li":"Video Games"},
+                        {"type":"li","li":"Kentucky Fried Chicken"},
+                        {"type":"li","li":"Casa Bonita"},
+                        {"type":"li","li":"Money"}
+                    ]
                 },
                 {"type":"p","p":"Dislikes"
                         },
                 {"type":"list","list":[{
-                        "type":"li","li":"Kyle Borflovski",
-                        "type":"li","li":"Hippies",
-                        "type":"li","li":"Being Called Fat",
-                        "type":"li","li":"Being Ignored"
+                        "type":"li","li":"Kyle Borflovski"},
+                        {"type":"li","li":"Hippies"},
+                        {"type":"li","li":"Being Called Fat"},
+                        {"type":"li","li":"Being Ignored"
                         }]
                 }
          
