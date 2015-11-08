@@ -16,6 +16,16 @@ body{
 #content{
     color: blue;
 }
-#navbar a.visited{
+#navbar{
+    
+    text-align: center;
+}
+#navbar a:visited{
     color:white;
+}
+#navbar a{
+            display:inline-block;
+        
+    border: 3px solid;
+    border-radius: 10px;
 }

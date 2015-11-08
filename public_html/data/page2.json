@@ -1,10 +1,10 @@
 {
     "title":"Eric Cartman",
     "navbar":[
-        {"page":"About Eric Cartman-", "type":"a",  "src":"../ePortfolio/index.html"},
-        {"page":"Likes and Dislikes-", "type":"a",  "src":"../ePortfolio/page2.html"},
-        {"page":"Favourite Quotes-",   "type":"a",  "src":"../ePortfolio/page3.html"},
-        {"page":"Pictures of Cartman-","type":"a",  "src":"../ePortfolio/page4.html"},
+        {"page":"About Eric Cartman", "type":"a",  "src":"../ePortfolio/index.html"},
+        {"page":"Likes and Dislikes", "type":"a",  "src":"../ePortfolio/page2.html"},
+        {"page":"Favourite Quotes",   "type":"a",  "src":"../ePortfolio/page3.html"},
+        {"page":"Pictures of Cartman","type":"a",  "src":"../ePortfolio/page4.html"},
         {"page":"Watch Cartman",       "type":"a",  "src":"../ePortfolio/page5.html"}
     ],
     "pages":

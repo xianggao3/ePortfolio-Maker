@@ -23,4 +23,12 @@ body{
 #navbar{
     background-color: grey;
     border-radius: 5px;
+    
+    text-align: center;
+}
+#navbar a{
+            display:inline-block;
+        
+    border: 3px solid;
+    border-radius: 10px;
 }
