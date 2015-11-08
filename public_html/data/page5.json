@@ -10,9 +10,11 @@
     "pages":
         {
             "banner":"Watch Cartman",
-            "content":[{
+            "content":[
+                {"type":"video", "source":"./video/southpark.mp4"},
+                {"type":"p","p":"Catch more Eric Cartman on <a href='http://southpark.cc.com/'>South Park!</a>"}
             
-            }]
+            ]
         }
     
 }

@@ -10,9 +10,24 @@
     "pages":
         {
             "banner":"Favourite Quotes",
-            "content":[{
+            "content":[
+                {"type":"img","src":"./img/Eric_cartman.png"},
+                {"type":"list","list":[
+                        {"type":"li","li":"Screw you guys, I’m going home!"},
+                        {"type":"li","li":"No kitty! Bad Kitty!!"},
+                        {"type":"li","li":"No Kitty, this is MY pot pie!!!"},
+                        {"type":"li","li":"Nya nya nya nya NYAAAA nya!"},
+                        {"type":"li","li":"HOW DO I REEEEECH THESE KEEEEEDS!?!?!?!?"},
+                        {"type":"li","li":"Boooooo. Boo Wendy. Boo Wendy Testaburger. Boo."},
+                        {"type":"li","li":"CARTMAN BRAAAAAH!"},
+                        {"type":"li","li":"Stan, don't you know the first law of physics? Anything that's fun costs at least $8"}
+                ]}
+            ]
+                
+                    
             
-            }]
+            }
+            ]
             
         }
     
