@@ -1,0 +1,34 @@
+{
+    "title":"Eric Cartman",
+    "navbar":[
+        {"page":"About Eric Cartman-", "type":"a",  "src":"../ePortfolio/index.html"},
+        {"page":"Likes and Dislikes-", "type":"a",  "src":"../ePortfolio/page2.html"},
+        {"page":"Favourite Quotes-",   "type":"a",  "src":"../ePortfolio/page3.html"},
+        {"page":"Pictures of Cartman-","type":"a",  "src":"../ePortfolio/page4.html"},
+        {"page":"Watch Cartman",       "type":"a",  "src":"../ePortfolio/page5.html"}
+    ],
+    "pages":[
+        {
+            "banner":"Likes and Dislikes",
+            
+            "1":[{"p":"Likes"
+                }],
+            "2":[{"list":[{
+                    "li":"Cheesy Poofs",
+                    "li":"Video Games",
+                    "li":"Kentucy Fried Chicken",
+                    "li":"Casa Bonita",
+                    "li":"Money"}]
+            }],
+            "3":[{"p":"Dislikes"
+                    }],
+            "4":[{"list":[{
+                    "li":"Kyle Borflovski",
+                    "li":"Hippies",
+                    "li":"Being Called Fat",
+                    "li":"Being Ignored"
+                    }]
+            }]
+        }
+   ]
+}

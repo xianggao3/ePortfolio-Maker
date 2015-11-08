@@ -1,12 +1,12 @@
 var title;
 var navbar;
 var pages;
-var currentPage;
+var htmlpg = document.location.pathname.match(/[^\/]+$/)[0];
 
 function initePortfolio(){
     navbar = new Array();
     pages = new Array();
-    var jsonFile = "./data/ePortfolioData.json";
+    var jsonFile = "./data/"+htmlpg.substr(0,htmlpg.length-4)+"json";
     loadData(jsonFile);
 }
 
@@ -38,10 +38,6 @@ function loadBanner(ePortfolioData){
         $(bannerTitle).attr("id","bannerTitle");
         document.getElementById("banner").appendChild(bannerTitle);
     
-}
-
-function setCurrentPage(index){
-    currentPage=index;
 }
 
 function initPage(){
