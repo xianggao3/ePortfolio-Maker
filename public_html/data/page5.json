@@ -7,9 +7,12 @@
         {"page":"Pictures of Cartman-","type":"a",  "src":"../ePortfolio/page4.html"},
         {"page":"Watch Cartman",       "type":"a",  "src":"../ePortfolio/page5.html"}
     ],
-    "pages":[
+    "pages":
         {
-            "banner":"Watch Cartman"
+            "banner":"Watch Cartman",
+            "content":[{
+            
+            }]
         }
-    ]
+    
 }

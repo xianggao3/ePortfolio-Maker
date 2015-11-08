@@ -7,28 +7,30 @@
         {"page":"Pictures of Cartman-","type":"a",  "src":"../ePortfolio/page4.html"},
         {"page":"Watch Cartman",       "type":"a",  "src":"../ePortfolio/page5.html"}
     ],
-    "pages":[
+    "pages":
         {
             "banner":"Likes and Dislikes",
-            
-            "1":[{"p":"Likes"
-                }],
-            "2":[{"list":[{
-                    "li":"Cheesy Poofs",
-                    "li":"Video Games",
-                    "li":"Kentucy Fried Chicken",
-                    "li":"Casa Bonita",
-                    "li":"Money"}]
-            }],
-            "3":[{"p":"Dislikes"
-                    }],
-            "4":[{"list":[{
-                    "li":"Kyle Borflovski",
-                    "li":"Hippies",
-                    "li":"Being Called Fat",
-                    "li":"Being Ignored"
-                    }]
-            }]
+            "content":[
+                {"p":"Likes"
+                    
+                    },
+                {"list":[{
+                        "li":"Cheesy Poofs",
+                        "li":"Video Games",
+                        "li":"Kentucy Fried Chicken",
+                        "li":"Casa Bonita",
+                        "li":"Money"}]
+                },
+                {"p":"Dislikes"
+                        },
+                {"list":[{
+                        "li":"Kyle Borflovski",
+                        "li":"Hippies",
+                        "li":"Being Called Fat",
+                        "li":"Being Ignored"
+                        }]
+                }
+            ]
         }
-   ]
+   
 }

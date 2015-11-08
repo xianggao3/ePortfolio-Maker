@@ -13,7 +13,7 @@ function initePortfolio(){
 function loadData(jsonFile) {
     $.getJSON(jsonFile, function (json) {
         loadePortfolio(json);
-        initPage();
+        initPage(json);
     });
 }
 
@@ -33,13 +33,29 @@ function loadNavBar(ePortfolioData){
 }
 
 function loadBanner(ePortfolioData){
-        var bannerTitle = document.createElement("h1");
-        bannerTitle.innerHTML=ePortfolioData.pages[currentPage].banner;
-        $(bannerTitle).attr("id","bannerTitle");
-        document.getElementById("banner").appendChild(bannerTitle);
+    var bannerTitle = document.createElement("h1");
+    bannerTitle.innerHTML=ePortfolioData.pages.banner;
+    $(bannerTitle).attr("id","bannerTitle");
+    document.getElementById("banner").appendChild(bannerTitle);
+    var bannerImg=document.createElement("img");
+    $(bannerImg).attr("src",ePortfolioData.pages.bannerImgPath);
+    document.getElementById("banner").appendChild(bannerImg);
     
 }
 
-function initPage(){
+function initPage(ePortfolioData){
     $("title").html(title);
+    var i;
+    ePortfolioData.pages.content.every(addContent(ePortfolioData));
+}
+
+function addContent(ePortfolioData){
+    for(var i =0;i<ePortfolioData.pages.content.length;i++){
+        if(ePortfolioData.pages.content[i]===ePortfolioData.pages.content.p){
+            var p = document.createElement("p");
+            p.innerHTML=ePortfolioData.pages.content[i].p;
+            document.getElementById(content).appendChild(p);
+            
+        }
+    }
 }
