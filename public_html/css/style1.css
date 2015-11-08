@@ -25,7 +25,40 @@ body{
 #navbar{
     border-bottom: 1px solid gray;
     line-height: 40px;
-    background-color: #F7F1C6;
+    background-color: lightslategray;
     border-bottom-color: black;
+    position: absolute;
+    left: 0px;
+    width: 100px;
+    height: 100%;
+    top:0%;
+    float:left;
     
+}
+
+#navbar a {
+    display: block;
+        margin-top: 1cm;
+    border: 1px solid;
+    border-radius: 10px;
+        color:white;
+    
+}
+
+#navbar a:hover{
+    color: red;
+    
+}
+#navbar a:visited{
+    
+}
+
+#banner {
+    position: absolute;
+    left: 100px;
+}
+#content{
+    position:relative;
+    left:100px;
+    top:400px;
 }

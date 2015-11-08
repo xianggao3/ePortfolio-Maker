@@ -69,7 +69,6 @@ function addContent(ePortfolioData){
             }
             document.getElementById("content").appendChild(list);
         }
-        else if(ePortfolio)
         
     }
 }

@@ -9,11 +9,11 @@
     ],
     "pages":
         {
-            "banner":"About Eric Cartman",
+            "banner":"About Eric Cartman, 'THEY TUK ER JERBZ ",
             "bannerImgPath":"../ePortfolio/img/banner1.jpg",
             "content":[
             
-                {"type":"p","p":"Eric Theodore Cartman, usually referred to as just Cartman, is one of the main characters of South Park, along with Stan Marsh, Kyle Broflovski, and Kenny McCormick. Cartman is sometimes the main antagonist of an episode. None of the other three main children consider Cartman their friend and do not know why they started hanging out with him in the first place, however, he is usually Kyle's first choice when he breaks his friendship with Stan. In earlier episodes, Kenny was his best friend, however, in later seasons, Butters Stotch is usually depicted as such."}
+                {"type":"p","p":"<a href='http://southpark.wikia.com/wiki/Eric_Cartman'>Eric Theodore Cartman</a>, usually referred to as just Cartman, is one of the main characters of South Park, along with <a href='http://southpark.wikia.com/wiki/Stan_Marsh'>Stan Marsh</a>, <a href='http://southpark.wikia.com/wiki/Kyle_Broflovski'>Kyle Broflovski</a>, and <a href='http://southpark.wikia.com/wiki/Kenny_McCormick'>Kenny McCormick</a>. Cartman is sometimes the main antagonist of an episode. None of the other three main children consider Cartman their friend and do not know why they started hanging out with him in the first place, however, he is usually Kyle's first choice when he breaks his friendship with Stan. In earlier episodes, Kenny was his best friend, however, in later seasons, <a href='http://southpark.wikia.com/wiki/Butters_Stotch'>Butters Stotch</a> is usually depicted as such."}
          
             ]
         }
