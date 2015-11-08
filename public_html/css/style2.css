@@ -25,5 +25,25 @@ background-image: url("http://i.stack.imgur.com/jGlzr.png");
     border-bottom-color: black;
     font-size:1vw;
     background-color:#408F65;
+    height:25px;
+    border-radius: 10px;
+    border-color: black;
+    border:3px solid;
+    
+}
+#navbar a {
+        display:inline-block;
+        
+    border: 1px solid;
+    border-radius: 10px;
+        color:black;
+        padding:4px;
+    
+}
+#navbar a:hover{
+    color: brown;
+    
+}
+#navbar a:visited{
     
 }
