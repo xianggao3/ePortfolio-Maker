@@ -13,5 +13,9 @@ body{
     background-image: url("http://pandora.com/images/background.jpg");
     color:white;
 }
-#navbar{
+#content{
+    color: blue;
+}
+#navbar a.visited{
+    color:white;
 }

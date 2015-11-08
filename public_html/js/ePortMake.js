@@ -80,5 +80,12 @@ function addContent(ePortfolioData){
             video.appendChild(source);
             document.getElementById("content").appendChild(video);
         }
+        else if(ePortfolioData.pages.content[i].type=="img"){
+            var img = document.createElement("img");
+            $(img).attr("src",ePortfolioData.pages.content[i].src);
+            $(img).attr("height","400");
+            $(img).attr("width","400");
+            document.getElementById("content").appendChild(img);
+        }
     }
 }

@@ -12,11 +12,9 @@
             "banner":"Likes and Dislikes",
             "content":[
                 {"type":"p","p":"Likes"
-                    
-                    },
-                {"type":"list",
-                    "list":[{
-                        "type":"li","li":"Cheesy Poofs"},
+                },
+                {"type":"list","list":[
+                        {"type":"li","li":"Cheesy Poofs"},
                         {"type":"li","li":"Video Games"},
                         {"type":"li","li":"Kentucky Fried Chicken"},
                         {"type":"li","li":"Casa Bonita"},
