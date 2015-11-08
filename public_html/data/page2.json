@@ -11,26 +11,27 @@
         {
             "banner":"Likes and Dislikes",
             "content":[
-                {"p":"Likes"
+                {"type":"p","p":"Likes"
                     
                     },
-                {"list":[{
-                        "li":"Cheesy Poofs",
-                        "li":"Video Games",
-                        "li":"Kentucy Fried Chicken",
-                        "li":"Casa Bonita",
-                        "li":"Money"}]
+                {"type":"list","list":[{
+                        "type":"li","li":"Cheesy Poofs",
+                        "type":"li","li":"Video Games",
+                        "type":"li","li":"Kentucy Fried Chicken",
+                        "type":"li","li":"Casa Bonita",
+                        "type":"li","li":"Money"}]
                 },
-                {"p":"Dislikes"
+                {"type":"p","p":"Dislikes"
                         },
-                {"list":[{
-                        "li":"Kyle Borflovski",
-                        "li":"Hippies",
-                        "li":"Being Called Fat",
-                        "li":"Being Ignored"
+                {"type":"list","list":[{
+                        "type":"li","li":"Kyle Borflovski",
+                        "type":"li","li":"Hippies",
+                        "type":"li","li":"Being Called Fat",
+                        "type":"li","li":"Being Ignored"
                         }]
                 }
-            ]
-        }
+         
+        ]}
+        
    
 }

@@ -51,11 +51,20 @@ function initPage(ePortfolioData){
 
 function addContent(ePortfolioData){
     for(var i =0;i<ePortfolioData.pages.content.length;i++){
-        if(ePortfolioData.pages.content[i]===ePortfolioData.pages.content.p){
+        if(ePortfolioData.pages.content[i].type=="p"){
             var p = document.createElement("p");
             p.innerHTML=ePortfolioData.pages.content[i].p;
-            document.getElementById(content).appendChild(p);
             
+            document.getElementById("content").appendChild(p);
         }
+        if(ePortfolioData.pages.content[i].type=="list"){
+            var list= document.createElement("ul");
+            for(var x =0;x<ePortfolioData.pages.content[i].length;x++){
+                var li = document.createElement("li");
+                li.innerHTML=ePortfolioData.pages.content[i][x];
+            }
+            document.getElementById("content").appendChild(list);
+        }
+        
     }
 }

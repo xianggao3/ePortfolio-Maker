@@ -12,3 +12,13 @@ body{
     font-family: 'Raleway', sans-serif;
     background-image: url("http://www.dreamtemplate.com/dreamcodes/bg_images/color/c10.jpg");
 }
+#banner{
+    text-align: center;
+    color: white;
+}
+#navbar{
+    border-bottom: 1px solid gray;
+        line-height: 40px;
+            background-color: yellow;
+    border-bottom-color: black;
+}
