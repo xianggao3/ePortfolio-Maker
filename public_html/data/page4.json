@@ -11,7 +11,8 @@
         
         {
             "banner":"Pictures of Cartman",
-            "content":[{
+            "content":[
+                {"type":"slideshow","iframe":"./cartman/index.html"
             }]
     
         }

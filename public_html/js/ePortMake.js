@@ -87,5 +87,12 @@ function addContent(ePortfolioData){
             $(img).attr("width","400");
             document.getElementById("content").appendChild(img);
         }
+        else if(ePortfolioData.pages.content[i].type=="slideshow"){
+            var slideshow=document.createElement("iframe");
+            $(slideshow).attr("width","100%");
+            $(slideshow).attr("height","700px");
+            $(slideshow).attr("src",ePortfolioData.pages.content[i].iframe);
+            document.getElementById("content").appendChild(slideshow);
+        }
     }
 }
