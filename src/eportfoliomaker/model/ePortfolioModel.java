@@ -14,7 +14,6 @@ import eportfoliomaker.view.ePortfolioAppMakerView;
 public class ePortfolioModel {
 
     public ePortfolioModel(ePortfolioAppMakerView aThis) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

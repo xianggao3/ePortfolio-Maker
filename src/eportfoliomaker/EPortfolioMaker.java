@@ -5,19 +5,38 @@
  */
 package eportfoliomaker;
 
+import eportfoliomaker.view.ePortfolioAppMakerView;
+import java.io.File;
+import java.net.URL;
+import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
  *
  * @author xgao3
  */
-public class EPortfolioMaker {
+public class EPortfolioMaker extends Application{
 
+    ePortfolioJSONFileManager fileManager=new ePortfolioJSONFileManager();
+    ePortfolioAppMakerView ui = new ePortfolioAppMakerView(fileManager);
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        String windowIconPath="./images/Logo.png";
+        File file=new File(windowIconPath);
+        //setting icon
+        URL fileURL = file.toURI().toURL();
+	Image windowIcon = new Image(fileURL.toExternalForm());
+	primaryStage.getIcons().add(windowIcon);
+        ui.startUI(primaryStage, "ePortfolio Maker");
     }
     
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
