@@ -12,12 +12,17 @@ import eportfoliomaker.model.ePortfolioModel;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -48,10 +53,31 @@ public class ePortfolioAppMakerView {
     FlowPane siteToolbar;//site editing toolbar below filetoolbar
     Button addPageButton;
     Button removePageButton;
-    Button selectPageButton;
     
-    FlowPane pageEditToolbar;//
-    Button selectLayoutTemplateButton;
+    TabPane tabbedPane=new TabPane();
+    Tab tab1;
+    
+    VBox pageEditToolbar;//
+    Button selectLayoutButton;
+    Button selectColorButton;
+    Button selectBannerImageButton;
+    Button selectComponentButton;
+    Button chooseComponentFontButton;
+    Button updatePageTitleButton;
+    Button updateStudentNameButton;
+    Button updateFooterButton;
+    Button addTextCompButton;
+    Button addImageCompButton;
+    Button addSlideShowCompButton;
+    Button addVideoCompButton;
+    Button removeCompButton;
+    Button editTextCompButton;
+    Button editImageCompButton;
+    Button editSlideShowCompButton;
+    Button editVideoCompButton;
+    Button addTextHyperlinkButton;
+    Button editTextHyperlinkButton;
+    Button NavSiteButton;
     
     ePortfolioModel ePortfolio;
     ePortfolioJSONFileManager fileManager;
@@ -67,6 +93,8 @@ public class ePortfolioAppMakerView {
     public void startUI(Stage initPrimaryStage, String windowTitle) {
         initFileToolBar();
         initWorkspace();
+        initPageEditToolbar();
+        initTabPane();
         //@todo initEventHandlers();
         primaryStage=initPrimaryStage;
         initWindow(windowTitle);
@@ -82,10 +110,39 @@ public class ePortfolioAppMakerView {
         saveAsPortButton=initChildButton(fileToolBarPane,"saveAs.png","",true,"Save the ePortfolio As");
         exportButton=initChildButton(fileToolBarPane,"ExportOrig.png","",true,"Export the Current ePortfolio");
     }
+    private void initPageEditToolbar(){
+        pageEditToolbar=new VBox();
+        selectLayoutButton=initChildButton(pageEditToolbar,"layout.png","",false,"Select Layout");
+        selectColorButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
+        selectBannerImageButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Banner Image");
+        selectComponentButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Component");
+        chooseComponentFontButton=initChildButton(pageEditToolbar,"color.png","",false,"Choose Component");
+        updatePageTitleButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
+        updateStudentNameButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
+        updateFooterButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
+        addTextCompButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
+        addImageCompButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
+        addSlideShowCompButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
+        addVideoCompButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
+        removeCompButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
+        editTextCompButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
+        editImageCompButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
+        editSlideShowCompButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
+        editVideoCompButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
+        addTextHyperlinkButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
+        editTextHyperlinkButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
+    }
 
     private void initWorkspace() {
     }
 
+    private void initTabPane(){
+        tab1=new Tab();
+        tab1.setText("Tab 1");
+        tab1.setContent(new Rectangle(200,200, Color.LIGHTSTEELBLUE));
+        tabbedPane.getTabs().add(tab1);
+    }
+    
     private void initWindow(String windowTitle) {
         primaryStage.setTitle(windowTitle);
 
@@ -100,6 +157,11 @@ public class ePortfolioAppMakerView {
 	primaryStage.setHeight(bounds.getHeight());
         ePortMakerPane=new BorderPane();//add css todo
         ePortMakerPane.setTop(fileToolBarPane);
+        
+        ePortMakerPane.setLeft(pageEditToolbar);
+
+        ePortMakerPane.setCenter(tabbedPane);
+        
         primaryScene=new Scene(ePortMakerPane);
         
         //add css todo
