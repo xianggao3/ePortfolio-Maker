@@ -50,7 +50,7 @@ public class ePortfolioAppMakerView {
     Button exportButton;
     Button exitButton;
     
-    FlowPane siteToolbar;//site editing toolbar below filetoolbar
+    FlowPane siteToolbar= new FlowPane();;//site editing toolbar below filetoolbar
     Button addPageButton;
     Button removePageButton;
     
@@ -92,9 +92,8 @@ public class ePortfolioAppMakerView {
     
     public void startUI(Stage initPrimaryStage, String windowTitle) {
         initFileToolBar();
-        initWorkspace();
+        initPageEditWorkspace();
         initPageEditToolbar();
-        initTabPane();
         //@todo initEventHandlers();
         primaryStage=initPrimaryStage;
         initWindow(windowTitle);
@@ -112,6 +111,7 @@ public class ePortfolioAppMakerView {
     }
     private void initPageEditToolbar(){
         pageEditToolbar=new VBox();
+        
         selectLayoutButton=initChildButton(pageEditToolbar,"layout.png","",false,"Select Layout");
         selectColorButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
         selectBannerImageButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Banner Image");
@@ -133,7 +133,17 @@ public class ePortfolioAppMakerView {
         editTextHyperlinkButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
     }
 
-    private void initWorkspace() {
+    private void initPageEditWorkspace() {
+        pageEditWorkspace=new BorderPane();
+        addPageButton=initChildButton(siteToolbar,"addPage.png","",false,"Add a Page");
+        removePageButton=initChildButton(siteToolbar,"deletePage.png","",false,"Delete Current Page");
+        pageEditWorkspace.setTop(siteToolbar);
+        initTabPane();
+        pageEditWorkspace.setCenter(tabbedPane);
+    }
+    
+    private void initSiteViewerWorkspace(){
+        siteViewWorkspace=new 
     }
 
     private void initTabPane(){
@@ -160,7 +170,7 @@ public class ePortfolioAppMakerView {
         
         ePortMakerPane.setLeft(pageEditToolbar);
 
-        ePortMakerPane.setCenter(tabbedPane);
+        ePortMakerPane.setCenter(pageEditWorkspace);
         
         primaryScene=new Scene(ePortMakerPane);
         
