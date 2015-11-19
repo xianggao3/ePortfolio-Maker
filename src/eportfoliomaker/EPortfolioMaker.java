@@ -27,7 +27,7 @@ public class EPortfolioMaker extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        String windowIconPath="./images/Logo.png";
+        String windowIconPath="./images/icons/Logo.png";
         File file=new File(windowIconPath);
         //setting icon
         URL fileURL = file.toURI().toURL();

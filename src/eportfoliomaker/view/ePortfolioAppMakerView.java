@@ -12,8 +12,12 @@ import eportfoliomaker.model.ePortfolioModel;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -69,6 +73,14 @@ public class ePortfolioAppMakerView {
     }    
 
     private void initFileToolBar() {
+        fileToolBarPane= new FlowPane();
+        //get css
+        
+        newPortButton=initChildButton(fileToolBarPane,"NewOrig.png","",false,"New ePortfolio");
+        loadPortButton=initChildButton(fileToolBarPane,"LoadOrig.png","",false,"Load an Existing ePortfolio");
+        savePortButton=initChildButton(fileToolBarPane,"SaveOrig.png","",true,"Save the Current ePortfolio");
+        saveAsPortButton=initChildButton(fileToolBarPane,"saveAs.png","",true,"Save the ePortfolio As");
+        exportButton=initChildButton(fileToolBarPane,"ExportOrig.png","",true,"Export the Current ePortfolio");
     }
 
     private void initWorkspace() {
@@ -96,4 +108,17 @@ public class ePortfolioAppMakerView {
         
         
     }
+
+    private Button initChildButton(Pane toolbar,String iconFileName,String cssClass,boolean disabled,String toolTip) {
+        
+	String imagePath = "file:" + "./images/icons/" + iconFileName;
+	Image buttonImage = new Image(imagePath);
+	Button button = new Button();
+	button.getStyleClass().add(cssClass);
+	button.setDisable(disabled);
+	button.setGraphic(new ImageView(buttonImage));
+	Tooltip buttonTooltip = new Tooltip(toolTip);
+	button.setTooltip(buttonTooltip);
+	toolbar.getChildren().add(button);
+	return button;    }
 }
