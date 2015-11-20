@@ -5,10 +5,16 @@
  */
 package eportfoliomaker.controller;
 
+import eportfoliomaker.view.ePortfolioAppMakerView;
+
 /**
  *
  * @author xgao3
  */
 public class ePortfolioController {
+    private ePortfolioAppMakerView ui;
     
+    ePortfolioController(ePortfolioAppMakerView initUI){
+        ui=initUI;
+    }
 }

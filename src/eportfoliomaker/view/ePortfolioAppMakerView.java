@@ -12,6 +12,7 @@ import eportfoliomaker.model.ePortfolioModel;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
@@ -23,6 +24,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.web.WebView;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -36,8 +38,10 @@ public class ePortfolioAppMakerView {
     Scene primaryScene;
     BorderPane ePortMakerPane;
     
-    BorderPane pageEditWorkspace;
-    BorderPane siteViewWorkspace;
+    BorderPane workspace;
+    
+    WebView siteView;
+    ScrollPane scrollPane;
     FlowPane workSpaceModeToolbar;//workspace switch toolbar
     Button selectPageEditorWorkspaceButton;
     Button selectSiteViewerWorkspaceButton;
@@ -92,7 +96,7 @@ public class ePortfolioAppMakerView {
     
     public void startUI(Stage initPrimaryStage, String windowTitle) {
         initFileToolBar();
-        initPageEditWorkspace();
+        initWorkspace();
         initPageEditToolbar();
         //@todo initEventHandlers();
         primaryStage=initPrimaryStage;
@@ -131,19 +135,29 @@ public class ePortfolioAppMakerView {
         editVideoCompButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
         addTextHyperlinkButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
         editTextHyperlinkButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
+        
+        pageEditToolbar.getStyleClass().add("page_edit_toolbar");
     }
 
-    private void initPageEditWorkspace() {
-        pageEditWorkspace=new BorderPane();
+    
+    private void initWorkspace() {
+        workspace=new BorderPane();
+        workSpaceModeToolbar = new FlowPane();
+        selectPageEditorWorkspaceButton=initChildButton(workSpaceModeToolbar,"editView.png","",true,"Enter Page Edit Mode");
+        selectSiteViewerWorkspaceButton=initChildButton(workSpaceModeToolbar,"siteView.png","",false,"Enter Site View Mode");
+        workspace.setBottom(workSpaceModeToolbar);
+        
         addPageButton=initChildButton(siteToolbar,"addPage.png","",false,"Add a Page");
         removePageButton=initChildButton(siteToolbar,"deletePage.png","",false,"Delete Current Page");
-        pageEditWorkspace.setTop(siteToolbar);
+        workspace.setTop(siteToolbar);
         initTabPane();
-        pageEditWorkspace.setCenter(tabbedPane);
+        workspace.setCenter(tabbedPane);
     }
     
     private void initSiteViewerWorkspace(){
-        siteViewWorkspace=new 
+        siteView=new WebView();
+        scrollPane = new ScrollPane(siteView);
+        workspace.setCenter(scrollPane);
     }
 
     private void initTabPane(){
@@ -170,15 +184,13 @@ public class ePortfolioAppMakerView {
         
         ePortMakerPane.setLeft(pageEditToolbar);
 
-        ePortMakerPane.setCenter(pageEditWorkspace);
+        ePortMakerPane.setCenter(workspace);
         
         primaryScene=new Scene(ePortMakerPane);
         
         //add css todo
 	primaryStage.setScene(primaryScene);
 	primaryStage.show();
-        
-        
     }
 
     private Button initChildButton(Pane toolbar,String iconFileName,String cssClass,boolean disabled,String toolTip) {
@@ -193,4 +205,8 @@ public class ePortfolioAppMakerView {
 	button.setTooltip(buttonTooltip);
 	toolbar.getChildren().add(button);
 	return button;    }
+    
+    private void initEventHandlers(){
+        controller= new ePortfolioController();
+    }
 }
