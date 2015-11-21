@@ -1,4 +1,12 @@
 .page_edit_toolbar{
     -fx-background-color:lightsteelblue;
     
+    -fx-alignment: center;
+    -fx-orientation: vertical;
+    -fx-vgap:20;
+    
+}
+.page_edit_toolbar_icons{
+    -fx-padding: 10px 10px 10px 10px;
+    -fx-spacing: 50px;
 }

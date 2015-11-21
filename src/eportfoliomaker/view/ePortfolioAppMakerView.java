@@ -7,6 +7,7 @@ package eportfoliomaker.view;
 
 import eportfoliomaker.ErrorHandler;
 import eportfoliomaker.controller.ePortfolioController;
+import eportfoliomaker.controller.listDialog;
 import eportfoliomaker.ePortfolioJSONFileManager;
 import eportfoliomaker.model.ePortfolioModel;
 import javafx.geometry.Rectangle2D;
@@ -74,11 +75,13 @@ public class ePortfolioAppMakerView {
     Button addImageCompButton;
     Button addSlideShowCompButton;
     Button addVideoCompButton;
+    Button addListCompButton;
     Button removeCompButton;
     Button editTextCompButton;
     Button editImageCompButton;
     Button editSlideShowCompButton;
     Button editVideoCompButton;
+    Button editListCompButton;
     Button addTextHyperlinkButton;
     Button editTextHyperlinkButton;
     Button NavSiteButton;
@@ -87,7 +90,7 @@ public class ePortfolioAppMakerView {
     ePortfolioJSONFileManager fileManager;
     private ErrorHandler errorHandler;
     private ePortfolioController controller;
-    
+    listDialog listD;
     public ePortfolioAppMakerView(ePortfolioJSONFileManager initFileManager){
         fileManager= initFileManager;
         ePortfolio = new ePortfolioModel(this);
@@ -98,7 +101,8 @@ public class ePortfolioAppMakerView {
         initFileToolBar();
         initWorkspace();
         initPageEditToolbar();
-        //@todo initEventHandlers();
+        initSiteViewerWorkspace();
+        initEventHandlers();
         primaryStage=initPrimaryStage;
         initWindow(windowTitle);
     }    
@@ -112,31 +116,34 @@ public class ePortfolioAppMakerView {
         savePortButton=initChildButton(fileToolBarPane,"SaveOrig.png","",true,"Save the Current ePortfolio");
         saveAsPortButton=initChildButton(fileToolBarPane,"saveAs.png","",true,"Save the ePortfolio As");
         exportButton=initChildButton(fileToolBarPane,"ExportOrig.png","",true,"Export the Current ePortfolio");
+        exitButton=initChildButton(fileToolBarPane,"ExitOrig.png","",false,"Exit Application");
     }
     private void initPageEditToolbar(){
         pageEditToolbar=new VBox();
-        
-        selectLayoutButton=initChildButton(pageEditToolbar,"layout.png","",false,"Select Layout");
-        selectColorButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
-        selectBannerImageButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Banner Image");
-        selectComponentButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Component");
-        chooseComponentFontButton=initChildButton(pageEditToolbar,"color.png","",false,"Choose Component");
-        updatePageTitleButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
-        updateStudentNameButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
-        updateFooterButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
-        addTextCompButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
-        addImageCompButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
-        addSlideShowCompButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
-        addVideoCompButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
-        removeCompButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
-        editTextCompButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
-        editImageCompButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
-        editSlideShowCompButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
-        editVideoCompButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
-        addTextHyperlinkButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
-        editTextHyperlinkButton=initChildButton(pageEditToolbar,"color.png","",false,"Select Color");
-        
         pageEditToolbar.getStyleClass().add("page_edit_toolbar");
+        
+        selectLayoutButton=initChildButton(pageEditToolbar,"layout.png","page_edit_toolbar_icons",false,"Select Layout");
+        selectColorButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
+        selectBannerImageButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Banner Image");
+        selectComponentButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Component");
+        chooseComponentFontButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Choose Component");
+        updatePageTitleButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
+        updateStudentNameButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
+        updateFooterButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
+        addTextCompButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
+        addListCompButton=initChildButton(pageEditToolbar,"list.png","page_edit_toolbar_icons",false,"Add a list");
+        addImageCompButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
+        addSlideShowCompButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
+        addVideoCompButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
+        removeCompButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
+        editTextCompButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
+        editImageCompButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
+        editSlideShowCompButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
+        editVideoCompButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
+        addTextHyperlinkButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
+        editTextHyperlinkButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
+        
+        
     }
 
     
@@ -157,12 +164,11 @@ public class ePortfolioAppMakerView {
     private void initSiteViewerWorkspace(){
         siteView=new WebView();
         scrollPane = new ScrollPane(siteView);
-        workspace.setCenter(scrollPane);
     }
 
     private void initTabPane(){
         tab1=new Tab();
-        tab1.setText("Tab 1");
+        tab1.setText("Page Title Here");
         tab1.setContent(new Rectangle(200,200, Color.LIGHTSTEELBLUE));
         tabbedPane.getTabs().add(tab1);
     }
@@ -188,7 +194,7 @@ public class ePortfolioAppMakerView {
         
         primaryScene=new Scene(ePortMakerPane);
         
-        //add css todo
+        primaryScene.getStylesheets().add("eportfoliomaker/style/Style.css");
 	primaryStage.setScene(primaryScene);
 	primaryStage.show();
     }
@@ -207,6 +213,10 @@ public class ePortfolioAppMakerView {
 	return button;    }
     
     private void initEventHandlers(){
-        controller= new ePortfolioController();
+        controller= new ePortfolioController(this);
+        
+        addListCompButton.setOnAction(e->{
+            listD=new listDialog(primaryStage);
+        });
     }
 }

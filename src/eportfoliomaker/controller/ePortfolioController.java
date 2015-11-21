@@ -6,6 +6,11 @@
 package eportfoliomaker.controller;
 
 import eportfoliomaker.view.ePortfolioAppMakerView;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  *
@@ -13,8 +18,14 @@ import eportfoliomaker.view.ePortfolioAppMakerView;
  */
 public class ePortfolioController {
     private ePortfolioAppMakerView ui;
-    
-    ePortfolioController(ePortfolioAppMakerView initUI){
-        ui=initUI;
+
+    public ePortfolioController(ePortfolioAppMakerView ui) {
+        this.ui = ui;
     }
+
+    public void handleAddList() {
+    }
+    
+    
+    
 }
