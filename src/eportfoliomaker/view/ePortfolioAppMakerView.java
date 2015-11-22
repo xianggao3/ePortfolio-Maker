@@ -12,11 +12,13 @@ import eportfoliomaker.controller.ePortfolioController;
 import eportfoliomaker.controller.fontDialog;
 import eportfoliomaker.controller.footerDialog;
 import eportfoliomaker.controller.headerDialog;
+import eportfoliomaker.controller.imgDialog;
 import eportfoliomaker.controller.layoutDialog;
 import eportfoliomaker.controller.listDialog;
 import eportfoliomaker.controller.pageFontDialog;
 import eportfoliomaker.controller.studentNameDialog;
 import eportfoliomaker.controller.titleDialog;
+import eportfoliomaker.controller.videoDialog;
 import eportfoliomaker.ePortfolioJSONFileManager;
 import eportfoliomaker.model.ePortfolioModel;
 import javafx.geometry.Rectangle2D;
@@ -117,6 +119,8 @@ public class ePortfolioAppMakerView {
     addCompDialog addD;
     headerDialog headerD;
     footerDialog footerD;
+    imgDialog imgD;
+    videoDialog vidD;
     
     
     public ePortfolioAppMakerView(ePortfolioJSONFileManager initFileManager){
@@ -211,6 +215,7 @@ public class ePortfolioAppMakerView {
     private void initTabPane(){
         tab1=new Tab();
         tab1.setText("First Title Here");
+        
         tab1.setContent(new Rectangle(200,200, Color.LIGHTSTEELBLUE));
         tab2=new Tab();
         tab2.setText("Second Title Here");
@@ -289,6 +294,12 @@ public class ePortfolioAppMakerView {
         });
         updateFooterButton.setOnAction(e->{
             footerD=new footerDialog();
+        });
+        editImageCompButton.setOnAction(e->{
+            imgD=new imgDialog();
+        });
+        editVideoCompButton.setOnAction(e->{
+           vidD=new videoDialog(); 
         });
     }
 }

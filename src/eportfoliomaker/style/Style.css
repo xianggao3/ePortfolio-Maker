@@ -1,21 +1,28 @@
 .page_edit_toolbar{
     -fx-background-color:lightblue;
-    
     -fx-alignment: center;
     -fx-orientation: vertical;
+    -fx-vgap:20;
     
 }
 .page_edit_toolbar_icons{
     -fx-padding: 10px 10px 10px 10px;
-    -fx-spacing: 50px;
+    -fx-spacing: 20px;
 }
 .file_toolbar{
-    -fx-background-color:white;
+    -fx-background-color:lightcyan;
 }
 
-.site_toolbar, .mode_toolbar{
-    -fx-background-color:lightgray;
+.site_toolbar{
+    -fx-background-color:lightblue;
+    -fx-alignment:CENTER;
+    -fx-orientation:horizontal;
+    -fx-vgap:10;
     
+}
+.mode_toolbar{
+    -fx-background-color:lightblue;
+    -fx-alignment:CENTER;
     -fx-orientation:horizontal;
     -fx-vgap:10;
     
