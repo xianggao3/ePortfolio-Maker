@@ -9,6 +9,7 @@ import eportfoliomaker.view.ePortfolioAppMakerView;
 import java.awt.Dialog;
 import java.awt.event.KeyEvent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -26,6 +27,8 @@ public class listDialog extends Stage{
     VBox listbox;
     Label listLabel;
     Scene listScene;
+    Button OKButton;
+    Button cancelButton;
 
     public listDialog(Stage primaryStage){
         initOwner(primaryStage);
@@ -35,14 +38,13 @@ public class listDialog extends Stage{
         Label listBullets=new Label("Bullets");
         
         TextArea bulletArea = new TextArea();
-        bulletArea.appendText(" • ");
         bulletArea.setOnKeyPressed(e->{
             if (e.getCode().equals(KeyCode.ENTER))
             {
                   bulletArea.appendText(" • ");
-                  bulletArea.(bulletArea.getCaretPosition() + 1 );
             }
         });
+        
         listbox.getChildren().addAll(listLabel,listHeader,listBullets,bulletArea);
         listScene = new Scene(listbox);
         this.setScene(listScene);
