@@ -1,9 +1,13 @@
 package eportfoliomaker.slideshow;
 
 import static eportfoliomaker.slideshow.LanguagePropertyType.LABEL_SLIDESHOW_TITLE;
+import static eportfoliomaker.slideshow.LanguagePropertyType.TOOLTIP_ADD_SLIDE;
 import static eportfoliomaker.slideshow.LanguagePropertyType.TOOLTIP_EXIT;
 import static eportfoliomaker.slideshow.LanguagePropertyType.TOOLTIP_LOAD_SLIDE_SHOW;
+import static eportfoliomaker.slideshow.LanguagePropertyType.TOOLTIP_MOVE_DOWN;
+import static eportfoliomaker.slideshow.LanguagePropertyType.TOOLTIP_MOVE_UP;
 import static eportfoliomaker.slideshow.LanguagePropertyType.TOOLTIP_NEW_SLIDE_SHOW;
+import static eportfoliomaker.slideshow.LanguagePropertyType.TOOLTIP_REMOVE_SLIDE;
 import static eportfoliomaker.slideshow.LanguagePropertyType.TOOLTIP_SAVE_SLIDE_SHOW;
 import static eportfoliomaker.slideshow.LanguagePropertyType.TOOLTIP_VIEW_SLIDE_SHOW;
 import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON;
@@ -14,11 +18,16 @@ import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_SLIDE_EDIT_VI
 import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_TITLE_PANE;
 import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_TITLE_PROMPT;
 import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_TITLE_TEXT_FIELD;
+import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_VERTICAL_TOOLBAR_BUTTON;
 import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_VERTICAL_TOOLBAR_PANE;
 import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_WORKSPACE;
+import static eportfoliomaker.slideshow.StartupConstants.ICON_ADD_SLIDE;
 import static eportfoliomaker.slideshow.StartupConstants.ICON_EXIT;
 import static eportfoliomaker.slideshow.StartupConstants.ICON_LOAD_SLIDE_SHOW;
+import static eportfoliomaker.slideshow.StartupConstants.ICON_MOVE_DOWN;
+import static eportfoliomaker.slideshow.StartupConstants.ICON_MOVE_UP;
 import static eportfoliomaker.slideshow.StartupConstants.ICON_NEW_SLIDE_SHOW;
+import static eportfoliomaker.slideshow.StartupConstants.ICON_REMOVE_SLIDE;
 import static eportfoliomaker.slideshow.StartupConstants.ICON_SAVE_SLIDE_SHOW;
 import static eportfoliomaker.slideshow.StartupConstants.ICON_VIEW_SLIDE_SHOW;
 import static eportfoliomaker.slideshow.StartupConstants.PATH_ICONS;
@@ -56,14 +65,6 @@ public class SlideShowMakerView {
     // THIS PANE ORGANIZES THE BIG PICTURE CONTAINERS FOR THE
     // APPLICATION GUI
     BorderPane ssmPane;
-
-    // THIS IS THE TOP TOOLBAR AND ITS CONTROLS
-    FlowPane fileToolbarPane;
-    Button newSlideShowButton;
-    Button loadSlideShowButton;
-    Button saveSlideShowButton;
-    Button viewSlideShowButton;
-    Button exitButton;
     
     // WORKSPACE
     BorderPane workspace;
@@ -92,6 +93,7 @@ public class SlideShowMakerView {
     
     // THIS CONTROLLER RESPONDS TO SLIDE SHOW EDIT BUTTONS
     private SlideShowEditController editController;
+    private ErrorHandler errorHandler;
 
     /**
      * Default constructor, it initializes the GUI for use, but does not yet
@@ -103,7 +105,6 @@ public class SlideShowMakerView {
 	slideShow = new SlideShowModel(this);
 
     }
-
     // ACCESSOR METHODS
     public SlideShowModel getSlideShow() {
 	return slideShow;
@@ -112,6 +113,9 @@ public class SlideShowMakerView {
     public Stage getWindow() {
 	return primaryStage;
     
+    }
+    public ErrorHandler getErrorHandler() {
+	return errorHandler;
     }
 
     /**
@@ -122,8 +126,6 @@ public class SlideShowMakerView {
      * @param windowTitle The title for this window.
      */
     public void startUI(Stage initPrimaryStage, String windowTitle) {
-	// THE TOOLBAR ALONG THE NORTH
-	initFileToolbar();
 
         // INIT THE CENTER WORKSPACE CONTROLS BUT DON'T ADD THEM
 	// TO THE WINDOW YET
@@ -142,6 +144,12 @@ public class SlideShowMakerView {
     private void initWorkspace() {
 	// FIRST THE WORKSPACE ITSELF, WHICH WILL CONTAIN TWO REGIONS
 	workspace = new BorderPane();
+	// THIS WILL GO IN THE LEFT SIDE OF THE SCREEN
+	slideEditToolbar = new FlowPane();
+	addSlideButton = this.initChildButton(slideEditToolbar,		ICON_ADD_SLIDE,	    TOOLTIP_ADD_SLIDE,	    CSS_CLASS_VERTICAL_TOOLBAR_BUTTON,  true);
+	removeSlideButton = this.initChildButton(slideEditToolbar,	ICON_REMOVE_SLIDE,  TOOLTIP_REMOVE_SLIDE,   CSS_CLASS_VERTICAL_TOOLBAR_BUTTON,  true);
+	moveSlideUpButton = this.initChildButton(slideEditToolbar,	ICON_MOVE_UP,	    TOOLTIP_MOVE_UP,	    CSS_CLASS_VERTICAL_TOOLBAR_BUTTON,  true);
+	moveSlideDownButton = this.initChildButton(slideEditToolbar,	ICON_MOVE_DOWN,	    TOOLTIP_MOVE_DOWN,	    CSS_CLASS_VERTICAL_TOOLBAR_BUTTON,  true);
 	
 	
 	// AND THIS WILL GO IN THE CENTER
@@ -157,6 +165,7 @@ public class SlideShowMakerView {
 
 	// SETUP ALL THE STYLE CLASSES
 	workspace.getStyleClass().add(CSS_CLASS_WORKSPACE);
+        System.out.println("op");
 	slideEditToolbar.getStyleClass().add(CSS_CLASS_VERTICAL_TOOLBAR_PANE);
 	slidesEditorPane.getStyleClass().add(CSS_CLASS_SLIDES_EDITOR_PANE);
 	slidesEditorScrollPane.getStyleClass().add(CSS_CLASS_SLIDES_EDITOR_PANE);
@@ -185,19 +194,7 @@ public class SlideShowMakerView {
      * This function initializes all the buttons in the toolbar at the top of
      * the application window. These are related to file management.
      */
-    private void initFileToolbar() {
-	fileToolbarPane = new FlowPane();
-	fileToolbarPane.getStyleClass().add(CSS_CLASS_HORIZONTAL_TOOLBAR_PANE);
-
-        // HERE ARE OUR FILE TOOLBAR BUTTONS, NOTE THAT SOME WILL
-	// START AS ENABLED (false), WHILE OTHERS DISABLED (true)
-	PropertiesManager props = PropertiesManager.getPropertiesManager();
-	newSlideShowButton = initChildButton(fileToolbarPane, ICON_NEW_SLIDE_SHOW,	TOOLTIP_NEW_SLIDE_SHOW,	    CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
-	loadSlideShowButton = initChildButton(fileToolbarPane, ICON_LOAD_SLIDE_SHOW,	TOOLTIP_LOAD_SLIDE_SHOW,    CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
-	saveSlideShowButton = initChildButton(fileToolbarPane, ICON_SAVE_SLIDE_SHOW,	TOOLTIP_SAVE_SLIDE_SHOW,    CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, true);
-	viewSlideShowButton = initChildButton(fileToolbarPane, ICON_VIEW_SLIDE_SHOW,	TOOLTIP_VIEW_SLIDE_SHOW,    CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, true);
-	exitButton = initChildButton(fileToolbarPane, ICON_EXIT, TOOLTIP_EXIT, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
-    }
+    
 
     private void initWindow(String windowTitle) {
 	// SET THE WINDOW TITLE
@@ -216,14 +213,13 @@ public class SlideShowMakerView {
         // SETUP THE UI, NOTE WE'LL ADD THE WORKSPACE LATER
 	ssmPane = new BorderPane();
 	ssmPane.getStyleClass().add(CSS_CLASS_WORKSPACE);
-	ssmPane.setTop(fileToolbarPane);	
 	primaryScene = new Scene(ssmPane);
 	
         // NOW TIE THE SCENE TO THE WINDOW, SELECT THE STYLESHEET
 	// WE'LL USE TO STYLIZE OUR GUI CONTROLS, AND OPEN THE WINDOW
 	primaryScene.getStylesheets().add(STYLE_SHEET_UI);
 	primaryStage.setScene(primaryScene);
-	primaryStage.show();
+	primaryStage.showAndWait();
     }
     
     /**
@@ -259,11 +255,6 @@ public class SlideShowMakerView {
     public void updateFileToolbarControls(boolean saved) {
 	// FIRST MAKE SURE THE WORKSPACE IS THERE
 	ssmPane.setCenter(workspace);
-	
-	// NEXT ENABLE/DISABLE BUTTONS AS NEEDED IN THE FILE TOOLBAR
-	saveSlideShowButton.setDisable(saved);
-	viewSlideShowButton.setDisable(false);
-	
 	updateSlideshowEditToolbarControls();
     }
     

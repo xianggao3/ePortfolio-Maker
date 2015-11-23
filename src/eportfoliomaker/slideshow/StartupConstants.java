@@ -22,7 +22,7 @@ public class StartupConstants {
     public static String PATH_IMAGES = "./images/";
     public static String PATH_ICONS = PATH_IMAGES + "icons/";
     public static String PATH_SLIDE_SHOW_IMAGES = PATH_IMAGES + "slide_show_images/";
-    public static String PATH_CSS = "/ssm/style/";
+    public static String PATH_CSS = "/eportfoliomaker/slideshow/";
     public static String STYLE_SHEET_UI = PATH_CSS + "SlideShowMakerStyle.css";
 
     // HERE ARE THE LANGUAGE INDEPENDENT GUI ICONS

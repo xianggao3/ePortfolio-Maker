@@ -3,7 +3,7 @@
     -fx-alignment: center;
     -fx-orientation: vertical;
     -fx-spacing: 20px;
-    
+    border-style: ridge;
     -fx-hgap:25;
     -fx-vgap:15;
 }
@@ -22,12 +22,18 @@
 }
 .file_toolbar{
     -fx-background-color:lightcyan;
+    -fx-border-style:solid;
+    -fx-border-width:2px;
+    -fx-border-color:green;
 }
 
 .site_toolbar{
     -fx-background-color:lightblue;
     -fx-alignment:CENTER;
     -fx-orientation:horizontal;
+     
+    -fx-hgap:20;
+    -fx-vgap:10;
     
     
 }
@@ -35,5 +41,9 @@
     -fx-background-color:lightblue;
     -fx-alignment:CENTER;
     -fx-orientation:horizontal;
+    border-style: ridge;
+    
+    -fx-hgap:15;
+    -fx-vgap:10;
     
 }

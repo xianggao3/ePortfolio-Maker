@@ -24,7 +24,8 @@ import eportfoliomaker.controller.titleDialog;
 import eportfoliomaker.controller.videoDialog;
 import eportfoliomaker.ePortfolioJSONFileManager;
 import eportfoliomaker.model.ePortfolioModel;
-import eportfoliomaker.slideshow.SlideShowMaker;
+import eportfoliomaker.slideshow.SlideShowMakerView;
+import eportfoliomaker.slideshow.ssDialog;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -128,7 +129,7 @@ public class ePortfolioAppMakerView {
     footerDialog footerD;
     imgDialog imgD;
     videoDialog vidD;
-    SlideShowMaker ssm;
+    ssDialog ssm;
     textDialog textD;
     bannerDialog bannerD;
     siteViewer sv;
@@ -214,6 +215,7 @@ public class ePortfolioAppMakerView {
         workspace.setTop(siteToolbar);
         initTabPane();
         workspace.setCenter(tabbedPane);
+        tabbedPane.getStyleClass().add("file_toolbar");
     }
     
     private void initSiteViewerWorkspace(){
@@ -225,7 +227,7 @@ public class ePortfolioAppMakerView {
         tab1=new Tab();
         tab1.setText("First Title Here");
         
-        tab1.setContent(new Rectangle(200,200, Color.LIGHTSTEELBLUE));
+        //tab1.setContent(new Rectangle(200,200, Color.LIGHTSTEELBLUE));
         tab2=new Tab();
         tab2.setText("Second Title Here");
         tabbedPane.getTabs().addAll(tab1,tab2);
@@ -308,7 +310,7 @@ public class ePortfolioAppMakerView {
            vidD=new videoDialog(); 
         });
         editSlideShowCompButton.setOnAction(e->{
-            ssm=new SlideShowMaker();
+            ssm=new ssDialog();
         });
         editTextCompButton.setOnAction(e->{
             textD=new textDialog(primaryStage);
