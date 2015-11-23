@@ -25,6 +25,9 @@ import eportfoliomaker.controller.videoDialog;
 import eportfoliomaker.ePortfolioJSONFileManager;
 import eportfoliomaker.model.ePortfolioModel;
 import eportfoliomaker.slideshow.SlideShowMaker;
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -314,7 +317,11 @@ public class ePortfolioAppMakerView {
            bannerD=new bannerDialog(); 
         });
         selectSiteViewerWorkspaceButton.setOnAction(e->{
-            sv = new siteViewer();
+            try {
+                sv = new siteViewer();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ePortfolioAppMakerView.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
 
     }
