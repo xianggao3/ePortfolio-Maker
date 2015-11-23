@@ -2,6 +2,7 @@ package eportfoliomaker.slideshow;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import properties_manager.PropertiesManager;
 
 /**
  * This class manages all the data associated with a slideshow.
@@ -9,11 +10,13 @@ import javafx.collections.ObservableList;
  * @author McKilla Gorilla & _____________
  */
 public class SlideShowModel {
+    SlideShowMakerView ui;
     String title;
     ObservableList<Slide> slides;
     Slide selectedSlide;
     
-    public SlideShowModel() {
+    public SlideShowModel(SlideShowMakerView initUI) {
+	ui = initUI;
 	slides = FXCollections.observableArrayList();
 	reset();	
     }

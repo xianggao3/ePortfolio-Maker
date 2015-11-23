@@ -21,6 +21,7 @@ import eportfoliomaker.controller.titleDialog;
 import eportfoliomaker.controller.videoDialog;
 import eportfoliomaker.ePortfolioJSONFileManager;
 import eportfoliomaker.model.ePortfolioModel;
+import eportfoliomaker.slideshow.SlideShowMaker;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -121,7 +122,7 @@ public class ePortfolioAppMakerView {
     footerDialog footerD;
     imgDialog imgD;
     videoDialog vidD;
-    
+    SlideShowMaker ssm;
     
     public ePortfolioAppMakerView(ePortfolioJSONFileManager initFileManager){
         fileManager= initFileManager;
@@ -300,6 +301,9 @@ public class ePortfolioAppMakerView {
         });
         editVideoCompButton.setOnAction(e->{
            vidD=new videoDialog(); 
+        });
+        editSlideShowCompButton.setOnAction(e->{
+            ssm=new SlideShowMaker();
         });
     }
 }

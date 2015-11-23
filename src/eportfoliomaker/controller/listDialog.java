@@ -35,7 +35,7 @@ public class listDialog extends Stage{
         listbox = new VBox();
         listLabel = new Label("List Header:");
         TextField listHeader= new TextField();
-        Label listBullets=new Label("Bullets");
+        Label listBullets=new Label("Bullets:");
         
         TextArea bulletArea = new TextArea();
         bulletArea.setOnKeyPressed(e->{
@@ -46,7 +46,12 @@ public class listDialog extends Stage{
         });
         
         listbox.getChildren().addAll(listLabel,listHeader,listBullets,bulletArea);
+        
+        
+        listbox.getStyleClass().add("dialog");
+        
         listScene = new Scene(listbox);
+        listScene.getStylesheets().add("eportfoliomaker/style/Style.css");
         this.setScene(listScene);
         showAndWait();
     }

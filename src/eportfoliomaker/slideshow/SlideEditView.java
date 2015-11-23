@@ -1,23 +1,20 @@
 package eportfoliomaker.slideshow;
 
+import eportfoliomaker.ErrorHandler;
+import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_CAPTION_PROMPT;
+import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_CAPTION_TEXT_FIELD;
+import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_SLIDE_EDIT_VIEW;
+import static eportfoliomaker.slideshow.StartupConstants.DEFAULT_THUMBNAIL_WIDTH;
 import java.io.File;
 import java.net.URL;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import static javafx.scene.input.KeyCode.SLASH;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import properties_manager.PropertiesManager;
-import ssm.LanguagePropertyType;
-import static ssm.StartupConstants.CSS_CLASS_CAPTION_PROMPT;
-import static ssm.StartupConstants.CSS_CLASS_CAPTION_TEXT_FIELD;
-import static ssm.StartupConstants.CSS_CLASS_SLIDE_EDIT_VIEW;
-import static ssm.StartupConstants.DEFAULT_THUMBNAIL_WIDTH;
-import ssm.controller.ImageSelectionController;
-import ssm.error.ErrorHandler;
-import ssm.model.Slide;
-import static ssm.file.SlideShowFileManager.SLASH;
 
 /**
  * This UI component has the controls for editing a single slide
@@ -27,6 +24,7 @@ import static ssm.file.SlideShowFileManager.SLASH;
  * @author McKilla Gorilla & _____________
  */
 public class SlideEditView extends HBox {
+    SlideShowMakerView ui;
     
     // SLIDE THIS COMPONENT EDITS
     Slide slide;
@@ -112,7 +110,6 @@ public class SlideEditView extends HBox {
 	    imageSelectionView.setFitHeight(scaledHeight);
 	} catch (Exception e) {
 	    ErrorHandler eH = new ErrorHandler(null);
-            eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
 	}
     }    
 }

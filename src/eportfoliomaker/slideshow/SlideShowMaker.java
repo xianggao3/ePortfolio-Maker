@@ -1,23 +1,17 @@
 package eportfoliomaker.slideshow;
 
+import eportfoliomaker.ErrorHandler;
+import static eportfoliomaker.slideshow.LanguagePropertyType.TITLE_WINDOW;
+import static eportfoliomaker.slideshow.StartupConstants.ICON_WINDOW_LOGO;
+import static eportfoliomaker.slideshow.StartupConstants.PATH_DATA;
+import static eportfoliomaker.slideshow.StartupConstants.PATH_IMAGES;
+import static eportfoliomaker.slideshow.StartupConstants.PROPERTIES_SCHEMA_FILE_NAME;
 import java.io.File;
 import java.net.URL;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import xml_utilities.InvalidXMLFileFormatException;
 import properties_manager.PropertiesManager;
-import static ssm.LanguagePropertyType.TITLE_WINDOW;
-import static ssm.StartupConstants.FINNISH_LANG;
-import static ssm.StartupConstants.ICON_WINDOW_LOGO;
-import static ssm.StartupConstants.PATH_DATA;
-import static ssm.StartupConstants.PATH_IMAGES;
-import static ssm.StartupConstants.PROPERTIES_SCHEMA_FILE_NAME;
-import ssm.error.ErrorHandler;
-import ssm.file.SlideShowFileManager;
-import ssm.file.SlideShowSiteExporter;
-import ssm.view.LanguageSelectionDialog;
-import ssm.view.SlideShowMakerView;
 
 /**
  * SlideShowMaker is a program for making custom image slideshows. It will allow
@@ -27,27 +21,32 @@ import ssm.view.SlideShowMakerView;
  * @author McKilla Gorilla & _____________
  */
 public class SlideShowMaker extends Application {
-    // THIS WILL PERFORM SLIDESHOW READING AND WRITING
-    SlideShowFileManager fileManager = new SlideShowFileManager();
-    
-    // THIS WILL EXPORT THE WEB SITES
-    SlideShowSiteExporter siteExporter = new SlideShowSiteExporter();
-
     // THIS HAS THE FULL USER INTERFACE AND ONCE IN EVENT
     // HANDLING MODE, BASICALLY IT BECOMES THE FOCAL
     // POINT, RUNNING THE UI AND EVERYTHING ELSE
-    SlideShowMakerView ui = new SlideShowMakerView(fileManager, siteExporter);
+    SlideShowMakerView ui = new SlideShowMakerView();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+	String imagePath = PATH_IMAGES + ICON_WINDOW_LOGO;
+	File file = new File(imagePath);
 	
-
-	    // NOW START THE UI IN EVENT HANDLING MODE
-	    ui.startUI(primaryStage);
+	// GET AND SET THE IMAGE
+	URL fileURL = file.toURI().toURL();
+	Image windowIcon = new Image(fileURL.toExternalForm());
+	primaryStage.getIcons().add(windowIcon);
 	
-	}
+        // LOAD APP SETTINGS INTO THE GUI AND START IT UP
+        
+	    ui.startUI(primaryStage,"Slideshow Maker");
     }
     
+    /**
+     * Loads this application's properties file, which has a number of settings
+     * for initializing the user interface.
+     * 
+     * @return true if the properties file was loaded successfully, false otherwise.
+     */
 
     /**
      * This is where the application starts execution. We'll load the

@@ -1,5 +1,4 @@
 package eportfoliomaker.slideshow;
-
 /**
  * This class represents a single slide in a slide show.
  * 
