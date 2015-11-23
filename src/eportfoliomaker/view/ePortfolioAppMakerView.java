@@ -7,6 +7,7 @@ package eportfoliomaker.view;
 
 import eportfoliomaker.ErrorHandler;
 import eportfoliomaker.controller.addCompDialog;
+import eportfoliomaker.controller.bannerDialog;
 import eportfoliomaker.controller.colorDialog;
 import eportfoliomaker.controller.ePortfolioController;
 import eportfoliomaker.controller.fontDialog;
@@ -16,6 +17,7 @@ import eportfoliomaker.controller.imgDialog;
 import eportfoliomaker.controller.layoutDialog;
 import eportfoliomaker.controller.listDialog;
 import eportfoliomaker.controller.pageFontDialog;
+import eportfoliomaker.controller.siteViewer;
 import eportfoliomaker.controller.studentNameDialog;
 import eportfoliomaker.controller.textDialog;
 import eportfoliomaker.controller.titleDialog;
@@ -125,6 +127,8 @@ public class ePortfolioAppMakerView {
     videoDialog vidD;
     SlideShowMaker ssm;
     textDialog textD;
+    bannerDialog bannerD;
+    siteViewer sv;
     
     public ePortfolioAppMakerView(ePortfolioJSONFileManager initFileManager){
         fileManager= initFileManager;
@@ -157,13 +161,13 @@ public class ePortfolioAppMakerView {
         pageEditToolbar=new VBox();
         pageEditToolbar.getStyleClass().add("page_edit_toolbar");
         
-        selectLayoutButton=initChildButton(pageEditToolbar,"layout.png","page_edit_toolbar_icons",false,"Select Layout");
-        selectColorButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
-        selectBannerImageButton=initChildButton(pageEditToolbar,"banner.png","page_edit_toolbar_icons",false,"Select Banner Image");
-        chooseComponentFontButton=initChildButton(pageEditToolbar,"font.png","page_edit_toolbar_icons",false,"Choose Component Font");
         updatePageTitleButton=initChildButton(pageEditToolbar,"title.png","page_edit_toolbar_icons",false,"Change the Title of the Current Page");
         updateStudentNameButton=initChildButton(pageEditToolbar,"name.png","page_edit_toolbar_icons",false,"Change Student Name");
-        selectPageFontButton=initChildButton(pageEditToolbar,"pgFont.png","page_edit_toolbar_icons",false,"Change the Page's Font");
+        selectBannerImageButton=initChildButton(pageEditToolbar,"banner.png","page_edit_toolbar_icons",false,"Select Banner Image");
+        selectLayoutButton=initChildButton(pageEditToolbar,"layout.png","page_edit_toolbar_icons",false,"Select Layout");
+        selectColorButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
+        //dont need chooseComponentFontButton=initChildButton(pageEditToolbar,"font.png","page_edit_toolbar_icons",false,"Choose Component Font");
+        selectPageFontButton=initChildButton(pageEditToolbar,"font.png","page_edit_toolbar_icons",false,"Change the Page's Font");
         updateHeaderButton=initChildButton(pageEditToolbar,"header.png","page_edit_toolbar_icons",false,"Change Header");
         updateFooterButton=initChildButton(pageEditToolbar,"footer.png","page_edit_toolbar_icons",false,"Change Footer");
         //
@@ -177,7 +181,6 @@ public class ePortfolioAppMakerView {
         editImageCompButton=initChildButton(rightEditToolbar,"img.png","page_edit_toolbar_icons",false,"Image");
         editSlideShowCompButton=initChildButton(rightEditToolbar,"slideshow.png","page_edit_toolbar_icons",false,"Slideshow");
         editVideoCompButton=initChildButton(rightEditToolbar,"video.png","page_edit_toolbar_icons",false,"Video");
-        addTextHyperlinkButton=initChildButton(rightEditToolbar,"hyperlink.png","page_edit_toolbar_icons",false,"Hyperlink");
         /*
         editTextCompButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
         editImageCompButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
@@ -286,9 +289,6 @@ public class ePortfolioAppMakerView {
         selectPageFontButton.setOnAction(e->{
             pgFontD=new pageFontDialog();
         });
-        chooseComponentFontButton.setOnAction(e->{
-            fontD=new fontDialog();
-        });
         addComponentButton.setOnAction(e->{
            addD= new addCompDialog(); 
         });
@@ -310,5 +310,12 @@ public class ePortfolioAppMakerView {
         editTextCompButton.setOnAction(e->{
             textD=new textDialog(primaryStage);
         });
+        selectBannerImageButton.setOnAction(e->{
+           bannerD=new bannerDialog(); 
+        });
+        selectSiteViewerWorkspaceButton.setOnAction(e->{
+            sv = new siteViewer();
+        });
+
     }
 }

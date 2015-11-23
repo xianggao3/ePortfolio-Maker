@@ -16,7 +16,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -34,6 +39,7 @@ public class textDialog extends Stage{
     Button OKButton;
     Button cancelButton;
     TextArea textArea;
+    GridPane topPane;
 
     public textDialog(Stage primaryStage){
         initOwner(primaryStage);
@@ -47,13 +53,18 @@ public class textDialog extends Stage{
         );
         textbox = new VBox();
         
+        topPane = new GridPane();
         Label font = new Label("Paragraph Font:");
         textFont= new ComboBox(fonts);
+        Button addTextHyperlinkButton=initChildButton(topPane,"hyperlink.png","page_edit_toolbar_icons",false,"Set a Hyperlink");
+        topPane.add(font, 0,0);
+        topPane.add(textFont, 0,1);
+        topPane.add(new Label("     Set a Hyperlink: "), 1, 0);
         
         textLabel=new Label("Paragraph:");
         textArea = new TextArea();
         OKButton= new Button("OK");
-        textbox.getChildren().addAll(font, textFont,textLabel,textArea,OKButton);
+        textbox.getChildren().addAll(topPane,textLabel,textArea,OKButton);
         
         textbox.getStyleClass().add("dialog");
         
@@ -62,4 +73,17 @@ public class textDialog extends Stage{
         this.setScene(textScene);
         showAndWait();
     }
+    private Button initChildButton(GridPane toolbar,String iconFileName,String cssClass,boolean disabled,String toolTip) {
+        
+	String imagePath = "file:" + "./images/icons/" + iconFileName;
+	Image buttonImage = new Image(imagePath);
+	Button button = new Button();
+	button.getStyleClass().add(cssClass);
+	button.setDisable(disabled);
+	button.setGraphic(new ImageView(buttonImage));
+	Tooltip buttonTooltip = new Tooltip(toolTip);
+	button.setTooltip(buttonTooltip);
+	toolbar.add(button, 2,1);
+	return button;    }
+    
 }

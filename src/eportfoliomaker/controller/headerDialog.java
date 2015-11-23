@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  */
 public class headerDialog extends Stage{
     public headerDialog(){
-        TextInputDialog dialog = new TextInputDialog("Header");
+        TextInputDialog dialog = new TextInputDialog("Header Text");
         dialog.setTitle("Header");
         dialog.setHeaderText("Change Header Text");
         dialog.setContentText("Please enter your Header Text:");

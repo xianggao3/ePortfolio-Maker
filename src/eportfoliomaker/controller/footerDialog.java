@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  */
 public class footerDialog extends Stage{
     public footerDialog(){
-        TextInputDialog dialog = new TextInputDialog("Footer");
+        TextInputDialog dialog = new TextInputDialog("Footer Text");
         dialog.setTitle("Footer");
         dialog.setHeaderText("Change Footer Text");
         dialog.setContentText("Please enter your Footer Text:");
