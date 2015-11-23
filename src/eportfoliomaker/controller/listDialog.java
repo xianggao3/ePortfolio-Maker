@@ -44,8 +44,8 @@ public class listDialog extends Stage{
                   bulletArea.appendText(" • ");
             }
         });
-        
-        listbox.getChildren().addAll(listLabel,listHeader,listBullets,bulletArea);
+        OKButton= new Button("OK");
+        listbox.getChildren().addAll(listLabel,listHeader,listBullets,bulletArea,OKButton);
         
         
         listbox.getStyleClass().add("dialog");

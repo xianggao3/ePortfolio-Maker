@@ -17,6 +17,7 @@ import eportfoliomaker.controller.layoutDialog;
 import eportfoliomaker.controller.listDialog;
 import eportfoliomaker.controller.pageFontDialog;
 import eportfoliomaker.controller.studentNameDialog;
+import eportfoliomaker.controller.textDialog;
 import eportfoliomaker.controller.titleDialog;
 import eportfoliomaker.controller.videoDialog;
 import eportfoliomaker.ePortfolioJSONFileManager;
@@ -123,6 +124,7 @@ public class ePortfolioAppMakerView {
     imgDialog imgD;
     videoDialog vidD;
     SlideShowMaker ssm;
+    textDialog textD;
     
     public ePortfolioAppMakerView(ePortfolioJSONFileManager initFileManager){
         fileManager= initFileManager;
@@ -304,6 +306,9 @@ public class ePortfolioAppMakerView {
         });
         editSlideShowCompButton.setOnAction(e->{
             ssm=new SlideShowMaker();
+        });
+        editTextCompButton.setOnAction(e->{
+            textD=new textDialog(primaryStage);
         });
     }
 }

@@ -56,11 +56,15 @@ public class imgDialog extends Stage{
         scn.add(heightPane,2,0);
         scn.add(imgSelect,0,0);
         scn.add(widthPane,2,1);
+        
+        Button OKButton= new Button("OK");
+        scn.add(OKButton, 2,2);
         scn.getStyleClass().add("dialog");
         imgSelect.getStyleClass().add("dialog");
         buttonsPane.getStyleClass().add("dialog");
         imgScreen= new Scene(scn);
         imgScreen.getStylesheets().add("eportfoliomaker/style/Style.css");
+        this.setTitle("Image");
         this.setScene(imgScreen);
         showAndWait();
     }

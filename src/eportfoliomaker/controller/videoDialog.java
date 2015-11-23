@@ -39,6 +39,9 @@ public class videoDialog extends Stage{
         dimensionsPane.getChildren().addAll(new Label("Height:"),height,new Label("px  Width:"),width,new Label("px"));
         scn.add(vidSelect,0,0);
         scn.add(dimensionsPane,1,0);
+        Button OKButton= new Button("OK");
+        OKButton.getStyleClass().add("dialog");
+        scn.add(OKButton,2,0);
         scn.getStyleClass().add("dialog");
         vidSelect.getStyleClass().add("dialog");
         dimensionsPane.getStyleClass().add("dialog");
