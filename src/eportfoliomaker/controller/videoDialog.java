@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -24,22 +25,26 @@ import javafx.stage.Stage;
  */
 public class videoDialog extends Stage{
     ePortfolioAppMakerView ui;
-    VBox scn = new VBox();
-    BorderPane topScn= new BorderPane();
+    GridPane scn= new GridPane();
     Button vidSelect = new Button("Select Video");
     HBox dimensionsPane=new HBox();
     TextField height= new TextField();
     TextField width=new TextField();
     Scene imgScreen;
     public videoDialog(){
-        topScn.setLeft(vidSelect);
+        
         vidSelect.setOnAction(e->{
             processSelectImage();
         });
-        dimensionsPane.getChildren().addAll(new Label("              Height:"),height,new Label("px  Width:"),width,new Label("px"));
-        topScn.setRight(dimensionsPane);
-        scn.getChildren().addAll(topScn);
+        dimensionsPane.getChildren().addAll(new Label("Height:"),height,new Label("px  Width:"),width,new Label("px"));
+        scn.add(vidSelect,0,0);
+        scn.add(dimensionsPane,1,0);
+        scn.getStyleClass().add("dialog");
+        vidSelect.getStyleClass().add("dialog");
+        dimensionsPane.getStyleClass().add("dialog");
         imgScreen= new Scene(scn);
+        imgScreen.getStylesheets().add("eportfoliomaker/style/Style.css");
+        
         this.setScene(imgScreen);
         showAndWait();
     }

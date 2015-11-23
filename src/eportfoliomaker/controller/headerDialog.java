@@ -23,7 +23,7 @@ public class headerDialog extends Stage{
         // Traditional way to get the response value.
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
-            System.out.println("Your name: " + result.get());
+            System.out.println("Your header: " + result.get());
         }
     }
 }
