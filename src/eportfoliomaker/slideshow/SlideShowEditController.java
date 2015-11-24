@@ -12,12 +12,12 @@ import properties_manager.PropertiesManager;
  */
 public class SlideShowEditController {
     // APP UI
-    private SlideShowMakerView ui;
+    private ssDialog ui;
     
     /**
      * This constructor keeps the UI for later.
      */
-    public SlideShowEditController(SlideShowMakerView initUI) {
+    public SlideShowEditController(ssDialog initUI) {
 	ui = initUI;
     }
     

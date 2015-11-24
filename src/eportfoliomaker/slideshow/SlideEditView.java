@@ -24,7 +24,7 @@ import properties_manager.PropertiesManager;
  * @author McKilla Gorilla & _____________
  */
 public class SlideEditView extends HBox {
-    SlideShowMakerView ui;
+    ssDialog ui;
     
     // SLIDE THIS COMPONENT EDITS
     Slide slide;
@@ -46,7 +46,7 @@ public class SlideEditView extends HBox {
      * 
      * @param initSlide The slide to be edited by this component.
      */
-    public SlideEditView(SlideShowMakerView initUi, Slide initSlide) {
+    public SlideEditView(ssDialog initUi, Slide initSlide) {
 	// KEEP THIS FOR LATER
 	ui = initUi;
 	

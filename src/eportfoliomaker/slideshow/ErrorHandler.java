@@ -3,7 +3,7 @@ package eportfoliomaker.slideshow;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import properties_manager.PropertiesManager;
-import eportfoliomaker.slideshow.SlideShowMakerView;
+import eportfoliomaker.slideshow.ssDialog;
 
 /**
  * This class provides error messages to the user when the occur. Note
@@ -15,10 +15,10 @@ import eportfoliomaker.slideshow.SlideShowMakerView;
  */
 public class ErrorHandler {
     // APP UI
-    private SlideShowMakerView ui;
+    private ssDialog ui;
     
     // KEEP THE APP UI FOR LATER
-    public ErrorHandler(SlideShowMakerView initUI) {
+    public ErrorHandler(ssDialog initUI) {
 	ui = initUI;
     }
     

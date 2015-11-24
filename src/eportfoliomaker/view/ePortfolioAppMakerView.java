@@ -24,7 +24,7 @@ import eportfoliomaker.controller.titleDialog;
 import eportfoliomaker.controller.videoDialog;
 import eportfoliomaker.ePortfolioJSONFileManager;
 import eportfoliomaker.model.ePortfolioModel;
-import eportfoliomaker.slideshow.SlideShowMakerView;
+import eportfoliomaker.slideshow.ssDialog;
 import eportfoliomaker.slideshow.ssDialog;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
@@ -36,6 +36,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Tooltip;
@@ -227,7 +228,12 @@ public class ePortfolioAppMakerView {
         tab1=new Tab();
         tab1.setText("First Title Here");
         
-        //tab1.setContent(new Rectangle(200,200, Color.LIGHTSTEELBLUE));
+        VBox tabcontent = new VBox();
+        Label ta = new Label("");
+        Image im = new Image("http://www.vapor-rage.com/wp-content/uploads/2014/05/sample.jpg");
+        tabcontent.getChildren().addAll(ta);
+        
+        tab1.setContent(tabcontent);
         tab2=new Tab();
         tab2.setText("Second Title Here");
         tabbedPane.getTabs().addAll(tab1,tab2);
@@ -310,7 +316,7 @@ public class ePortfolioAppMakerView {
            vidD=new videoDialog(); 
         });
         editSlideShowCompButton.setOnAction(e->{
-            ssm=new ssDialog();
+            ssm=new ssDialog(this.primaryStage);
         });
         editTextCompButton.setOnAction(e->{
             textD=new textDialog(primaryStage);

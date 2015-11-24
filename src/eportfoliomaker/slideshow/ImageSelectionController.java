@@ -11,12 +11,12 @@ import javafx.stage.FileChooser;
  * @author McKilla Gorilla & _____________
  */
 public class ImageSelectionController {
-    SlideShowMakerView ui;
+    ssDialog ui;
     
     /**
      * Default contstructor doesn't need to initialize anything
      */
-    public ImageSelectionController(SlideShowMakerView initUi) {   
+    public ImageSelectionController(ssDialog initUi) {   
 	ui = initUi;
     }
     

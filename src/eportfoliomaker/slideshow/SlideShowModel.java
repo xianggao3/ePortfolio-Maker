@@ -10,16 +10,17 @@ import properties_manager.PropertiesManager;
  * @author McKilla Gorilla & _____________
  */
 public class SlideShowModel {
-    SlideShowMakerView ui;
+    ssDialog ui;
     String title;
     ObservableList<Slide> slides;
     Slide selectedSlide;
     
-    public SlideShowModel(SlideShowMakerView initUI) {
+    public SlideShowModel(ssDialog initUI) {
 	ui = initUI;
 	slides = FXCollections.observableArrayList();
 	reset();	
     }
+
 
     // ACCESSOR METHODS
     public boolean isSlideSelected() {
