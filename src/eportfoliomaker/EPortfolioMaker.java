@@ -5,6 +5,8 @@
  */
 package eportfoliomaker;
 
+import static eportfoliomaker.slideshow.StartupConstants.DEFAULT_SLIDE_IMAGE;
+import static eportfoliomaker.slideshow.StartupConstants.PATH_SLIDE_SHOW_IMAGES;
 import eportfoliomaker.view.ePortfolioAppMakerView;
 import java.io.File;
 import java.net.URL;
@@ -38,5 +40,8 @@ public class EPortfolioMaker extends Application{
     
     public static void main(String[] args) {
         launch(args);
+        
+        System.out.println(PATH_SLIDE_SHOW_IMAGES);
+        System.out.println(DEFAULT_SLIDE_IMAGE);
     }
 }

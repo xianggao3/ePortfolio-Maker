@@ -82,13 +82,13 @@ public class ssDialog extends Stage{
     public ssDialog(Stage stage){
 	slideShow = new SlideShowModel(this);
         
-        startUI(this,"Slideshow");
+        startUI(this,"Slideshow Maker");
         HBox s = new HBox();
         
 	ssmPane.setCenter(workspace);
         s.getChildren().addAll(ssmPane);      
         Scene primaryScene = new Scene(s);
-	primaryScene.getStylesheets().add(STYLE_SHEET_UI);
+	primaryScene.getStylesheets()   .add(STYLE_SHEET_UI);
         setScene(primaryScene);
         showAndWait();
     }
@@ -180,7 +180,7 @@ public class ssDialog extends Stage{
     private void initWindow(String windowTitle) {
 	// SET THE WINDOW TITLE
 	setTitle(windowTitle);
-        
+        /*
 	// GET THE SIZE OF THE SCREEN
 	Screen screen = Screen.getPrimary();
 	Rectangle2D bounds = screen.getVisualBounds();
@@ -190,7 +190,7 @@ public class ssDialog extends Stage{
 	setY(bounds.getMinY()/2);
 	setWidth(bounds.getWidth()/1.5);
 	setHeight(bounds.getHeight()/2);
-
+        */
         // SETUP THE UI, NOTE WE'LL ADD THE WORKSPACE LATER
 	ssmPane = new BorderPane();
 	ssmPane.getStyleClass().add(CSS_CLASS_WORKSPACE);

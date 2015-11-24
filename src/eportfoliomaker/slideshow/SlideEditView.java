@@ -6,6 +6,7 @@ import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_SLIDE_EDIT_VI
 import static eportfoliomaker.slideshow.StartupConstants.DEFAULT_THUMBNAIL_WIDTH;
 import java.io.File;
 import java.net.URL;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -58,7 +59,7 @@ public class SlideEditView extends HBox {
 	// MAKE SURE WE ARE DISPLAYING THE PROPER IMAGE
 	imageSelectionView = new ImageView();
 	updateSlideImage();
-
+        //Button a = new Button("a");
 	// SETUP THE CAPTION CONTROLS
 	captionVBox = new VBox();
 	PropertiesManager props = PropertiesManager.getPropertiesManager();
@@ -70,6 +71,7 @@ public class SlideEditView extends HBox {
 
 	// LAY EVERYTHING OUT INSIDE THIS COMPONENT
 	getChildren().add(imageSelectionView);
+        //getChildren().add(a);
 	getChildren().add(captionVBox);
 
 	// SETUP THE EVENT HANDLERS

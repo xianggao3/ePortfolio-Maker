@@ -135,7 +135,7 @@ public class ePortfolioAppMakerView {
     textDialog textD;
     bannerDialog bannerD;
     siteViewer sv;
-    
+    Tab nTab;
     SingleSelectionModel<Tab> currentTab;   
     
     public ePortfolioAppMakerView(ePortfolioJSONFileManager initFileManager){
@@ -232,6 +232,7 @@ public class ePortfolioAppMakerView {
         tab1.setText("First Title Here");
         currentTab = tabbedPane.getSelectionModel();
         
+        
         VBox tabcontent = new VBox();
         Image im = new Image("http://www.vapor-rage.com/wp-content/uploads/2014/05/sample.jpg");
         ImageView iv = new ImageView(im);
@@ -282,8 +283,9 @@ public class ePortfolioAppMakerView {
 	Tooltip buttonTooltip = new Tooltip(toolTip);
 	button.setTooltip(buttonTooltip);
 	toolbar.getChildren().add(button);
-	return button;    }
-    
+	return button;   
+    }
+        
     private void initEventHandlers(){
         controller= new ePortfolioController(this);
         
@@ -337,11 +339,12 @@ public class ePortfolioAppMakerView {
             }
         });
         addPageButton.setOnAction(e->{
-            tabbedPane.getTabs().add(new Tab(" New Tab Title"));
+            tabbedPane.getTabs().add(nTab= new Tab(" New Tab Title"));
+            currentTab.select(nTab);
         });
 
         removePageButton.setOnAction(e->{
-           tabbedPane.getTabs().remove(currentTab);
+           tabbedPane.getTabs().remove(currentTab.getSelectedItem());
         });
     }
 }
