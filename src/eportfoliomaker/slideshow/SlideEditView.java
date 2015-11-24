@@ -59,7 +59,7 @@ public class SlideEditView extends HBox {
 	// MAKE SURE WE ARE DISPLAYING THE PROPER IMAGE
 	imageSelectionView = new ImageView();
 	updateSlideImage();
-        //Button a = new Button("a");
+        Button a = new Button("Select Image");
 	// SETUP THE CAPTION CONTROLS
 	captionVBox = new VBox();
 	PropertiesManager props = PropertiesManager.getPropertiesManager();
@@ -71,12 +71,15 @@ public class SlideEditView extends HBox {
 
 	// LAY EVERYTHING OUT INSIDE THIS COMPONENT
 	getChildren().add(imageSelectionView);
-        //getChildren().add(a);
+        getChildren().add(a);
 	getChildren().add(captionVBox);
 
 	// SETUP THE EVENT HANDLERS
 	imageController = new ImageSelectionController(ui);
 	imageSelectionView.setOnMousePressed(e -> {
+	    imageController.processSelectImage(slide, this);
+	});
+        a.setOnMousePressed(e -> {
 	    imageController.processSelectImage(slide, this);
 	});
 	captionTextField.textProperty().addListener(e -> {
