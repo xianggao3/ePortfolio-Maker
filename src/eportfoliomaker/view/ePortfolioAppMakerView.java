@@ -34,6 +34,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
@@ -135,6 +136,8 @@ public class ePortfolioAppMakerView {
     bannerDialog bannerD;
     siteViewer sv;
     
+    SingleSelectionModel<Tab> currentTab;   
+    
     public ePortfolioAppMakerView(ePortfolioJSONFileManager initFileManager){
         fileManager= initFileManager;
         ePortfolio = new ePortfolioModel(this);
@@ -227,16 +230,18 @@ public class ePortfolioAppMakerView {
     private void initTabPane(){
         tab1=new Tab();
         tab1.setText("First Title Here");
+        currentTab = tabbedPane.getSelectionModel();
         
         VBox tabcontent = new VBox();
-        Label ta = new Label("");
         Image im = new Image("http://www.vapor-rage.com/wp-content/uploads/2014/05/sample.jpg");
-        tabcontent.getChildren().addAll(ta);
+        ImageView iv = new ImageView(im);
+        tabcontent.getChildren().addAll(iv);
         
         tab1.setContent(tabcontent);
         tab2=new Tab();
         tab2.setText("Second Title Here");
         tabbedPane.getTabs().addAll(tab1,tab2);
+        
     }
     
     private void initWindow(String windowTitle) {
@@ -331,6 +336,12 @@ public class ePortfolioAppMakerView {
                 Logger.getLogger(ePortfolioAppMakerView.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+        addPageButton.setOnAction(e->{
+            tabbedPane.getTabs().add(new Tab(" New Tab Title"));
+        });
 
+        removePageButton.setOnAction(e->{
+           tabbedPane.getTabs().remove(currentTab);
+        });
     }
 }

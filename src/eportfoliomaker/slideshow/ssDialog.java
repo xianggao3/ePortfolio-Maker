@@ -181,7 +181,15 @@ public class ssDialog extends Stage{
 	// SET THE WINDOW TITLE
 	setTitle(windowTitle);
         
-	
+	// GET THE SIZE OF THE SCREEN
+	Screen screen = Screen.getPrimary();
+	Rectangle2D bounds = screen.getVisualBounds();
+
+	// AND USE IT TO SIZE THE WINDOW
+	setX(bounds.getMinX()/1.5);
+	setY(bounds.getMinY()/2);
+	setWidth(bounds.getWidth()/1.5);
+	setHeight(bounds.getHeight()/2);
 
         // SETUP THE UI, NOTE WE'LL ADD THE WORKSPACE LATER
 	ssmPane = new BorderPane();
@@ -257,7 +265,7 @@ public class ssDialog extends Stage{
     
     private void initTitleControls() {
 	PropertiesManager props = PropertiesManager.getPropertiesManager();
-	String labelPrompt = props.getProperty(LABEL_SLIDESHOW_TITLE);
+	String labelPrompt ="Slideshow Title:";
 	titlePane = new FlowPane();
 	titleLabel = new Label(labelPrompt);
 	titleTextField = new TextField();

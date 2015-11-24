@@ -1,8 +1,11 @@
 package eportfoliomaker.slideshow;
 
-import static eportfoliomaker.slideshow.StartupConstants.PATH_SLIDE_SHOW_IMAGES;
 import java.io.File;
 import javafx.stage.FileChooser;
+import static eportfoliomaker.slideshow.StartupConstants.PATH_SLIDE_SHOW_IMAGES;
+import eportfoliomaker.slideshow.Slide;
+import eportfoliomaker.slideshow.SlideEditView;
+import eportfoliomaker.slideshow.ssDialog;
 
 /**
  * This controller provides a controller for when the user chooses to

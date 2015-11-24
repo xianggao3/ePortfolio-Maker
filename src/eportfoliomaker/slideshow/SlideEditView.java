@@ -1,6 +1,5 @@
 package eportfoliomaker.slideshow;
 
-import eportfoliomaker.ErrorHandler;
 import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_CAPTION_PROMPT;
 import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_CAPTION_TEXT_FIELD;
 import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_SLIDE_EDIT_VIEW;
@@ -63,7 +62,7 @@ public class SlideEditView extends HBox {
 	// SETUP THE CAPTION CONTROLS
 	captionVBox = new VBox();
 	PropertiesManager props = PropertiesManager.getPropertiesManager();
-	captionLabel = new Label(props.getProperty(LanguagePropertyType.LABEL_CAPTION));
+	captionLabel = new Label("Caption:");
 	captionTextField = new TextField();
 	captionTextField.setText(slide.getCaption());
 	captionVBox.getChildren().add(captionLabel);
@@ -110,6 +109,7 @@ public class SlideEditView extends HBox {
 	    imageSelectionView.setFitHeight(scaledHeight);
 	} catch (Exception e) {
 	    ErrorHandler eH = new ErrorHandler(null);
+            eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
 	}
     }    
 }
