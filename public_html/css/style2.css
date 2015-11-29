@@ -1,0 +1,51 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 4, 2015, 7:46:17 PM
+    Author     : xgao3
+*/
+
+body{
+font-family: 'Open Sans', sans-serif;
+background-image: url("http://i.stack.imgur.com/jGlzr.png");
+}
+
+#writing{
+    background-color: #ffffff;
+  border: 1px solid black;
+  opacity:0.6;
+  filter:alpha(opacity=60);
+}
+
+#navbar{
+    border-bottom: 1px solid gray;
+    border-bottom-color: black;
+    font-size:1vw;
+    background-color:#408F65;
+    height:25px;
+    border-radius: 10px;
+    border-color: black;
+    border:3px solid;
+    
+    text-align: center;
+    
+}
+#navbar a {
+        display:inline-block;
+        
+    border: 1px solid;
+    border-radius: 10px;
+        color:black;
+        padding:4px;
+    
+}
+#navbar a:hover{
+    color: brown;
+    
+}
+#navbar a:visited{
+    
+}

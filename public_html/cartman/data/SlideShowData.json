@@ -1,0 +1,26 @@
+
+{
+    "title":"cartman",
+    "slides":[
+        {
+            "image_file_name":"EricWithoutHat.jpg",
+            "image_path":"C:\\Users\\xgao3\\Documents\\NetBeansProjects\\ePortfolio\\public_html\\img\\",
+            "caption":"Cartman without his hat"
+        },
+        {
+            "image_file_name":"SuperFunTime09.jpg",
+            "image_path":"C:\\Users\\xgao3\\Documents\\NetBeansProjects\\ePortfolio\\public_html\\img\\",
+            "caption":"Cartman and Butters"
+        },
+        {
+            "image_file_name":"cartman-wallpaper.png",
+            "image_path":"C:\\Users\\xgao3\\Documents\\NetBeansProjects\\ePortfolio\\public_html\\img\\",
+            "caption":"Mountains"
+        },
+        {
+            "image_file_name":"Picture_10.png",
+            "image_path":"C:\\Users\\xgao3\\Documents\\NetBeansProjects\\ePortfolio\\public_html\\img\\",
+            "caption":"Baby Cartman"
+        }
+    ]
+}
