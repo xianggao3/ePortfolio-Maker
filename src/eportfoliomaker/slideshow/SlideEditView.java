@@ -1,5 +1,6 @@
 package eportfoliomaker.slideshow;
 
+import eportfoliomaker.model.Slide;
 import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_CAPTION_PROMPT;
 import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_CAPTION_TEXT_FIELD;
 import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_SLIDE_EDIT_VIEW;

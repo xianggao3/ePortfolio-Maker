@@ -6,6 +6,7 @@
 package eportfoliomaker.model;
 
 import eportfoliomaker.view.ePortfolioAppMakerView;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -13,6 +14,8 @@ import eportfoliomaker.view.ePortfolioAppMakerView;
  */
 public class ePortfolioModel {
 
+    String navbar;
+    ObservableList<Page> pages;
     public ePortfolioModel(ePortfolioAppMakerView aThis) {
     }
     

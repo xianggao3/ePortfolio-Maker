@@ -1,5 +1,6 @@
 package eportfoliomaker.slideshow;
 
+import eportfoliomaker.model.SlideShowModel;
 import static eportfoliomaker.slideshow.LanguagePropertyType.DEFAULT_IMAGE_CAPTION;
 import static eportfoliomaker.slideshow.StartupConstants.DEFAULT_SLIDE_IMAGE;
 import static eportfoliomaker.slideshow.StartupConstants.PATH_SLIDE_SHOW_IMAGES;

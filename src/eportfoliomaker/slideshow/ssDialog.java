@@ -5,6 +5,8 @@
  */
 package eportfoliomaker.slideshow;
 
+import eportfoliomaker.model.Slide;
+import eportfoliomaker.model.SlideShowModel;
 import static eportfoliomaker.slideshow.LanguagePropertyType.LABEL_SLIDESHOW_TITLE;
 import static eportfoliomaker.slideshow.LanguagePropertyType.TOOLTIP_ADD_SLIDE;
 import static eportfoliomaker.slideshow.LanguagePropertyType.TOOLTIP_MOVE_DOWN;

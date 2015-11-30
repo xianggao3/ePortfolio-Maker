@@ -1,5 +1,7 @@
-package eportfoliomaker.slideshow;
+package eportfoliomaker.model;
 
+import eportfoliomaker.slideshow.LanguagePropertyType;
+import eportfoliomaker.slideshow.ssDialog;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import properties_manager.PropertiesManager;
@@ -9,13 +11,14 @@ import properties_manager.PropertiesManager;
  * 
  * @author McKilla Gorilla & _____________
  */
-public class SlideShowModel {
+public class SlideShowModel extends Component{
     ssDialog ui;
     String title;
     ObservableList<Slide> slides;
     Slide selectedSlide;
     
     public SlideShowModel(ssDialog initUI) {
+        type="slideshow";
 	ui = initUI;
 	slides = FXCollections.observableArrayList();
 	reset();	

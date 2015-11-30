@@ -5,10 +5,15 @@
  */
 package eportfoliomaker.model;
 
+import javafx.collections.ObservableList;
+
 /**
  *
  * @author xgao3
  */
 public class Page {
+    String bannertext;
+    String banner;
+    ObservableList<Component> components;
     
 }

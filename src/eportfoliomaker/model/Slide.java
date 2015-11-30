@@ -1,4 +1,4 @@
-package eportfoliomaker.slideshow;
+package eportfoliomaker.model;
 /**
  * This class represents a single slide in a slide show.
  * 

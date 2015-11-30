@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ssm;
+package eportfoliomaker.model;
 
 /**
  *
  * @author xgao3
  */
-public class StartupConstants {
-    
+public class Component {
+    String type;
 }

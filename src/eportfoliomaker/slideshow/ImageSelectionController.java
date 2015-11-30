@@ -3,7 +3,7 @@ package eportfoliomaker.slideshow;
 import java.io.File;
 import javafx.stage.FileChooser;
 import static eportfoliomaker.slideshow.StartupConstants.PATH_SLIDE_SHOW_IMAGES;
-import eportfoliomaker.slideshow.Slide;
+import eportfoliomaker.model.Slide;
 import eportfoliomaker.slideshow.SlideEditView;
 import eportfoliomaker.slideshow.ssDialog;
 
