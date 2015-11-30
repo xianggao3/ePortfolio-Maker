@@ -9,6 +9,14 @@ package eportfoliomaker.model;
  *
  * @author xgao3
  */
-public class Component {
+public abstract class Component {
     String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

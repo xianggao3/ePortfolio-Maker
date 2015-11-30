@@ -59,7 +59,6 @@ import javafx.stage.Stage;
  * @author xgao3
  */
 public class ePortfolioAppMakerView {
-    
     Stage primaryStage;
     Scene primaryScene;
     BorderPane ePortMakerPane;
@@ -346,5 +345,105 @@ public class ePortfolioAppMakerView {
         removePageButton.setOnAction(e->{
            tabbedPane.getTabs().remove(currentTab.getSelectedItem());
         });
+    }
+    public void updateFileToolbarControls(boolean saved) {
+	// FIRST MAKE SURE THE WORKSPACE IS THERE
+	ePortMakerPane.setCenter(workspace);
+	
+	// NEXT ENABLE/DISABLE BUTTONS AS NEEDED IN THE FILE TOOLBAR
+	savePortButton.setDisable(saved);
+	selectSiteViewerWorkspaceButton.setDisable(false);
+	
+        updatePageEditToolbarControls();
+    }
+    public void updatePageEditToolbarControls(){
+        boolean pageSelected=false;
+        editTextCompButton.setDisable(true);
+        editListCompButton.setDisable(true);
+        editImageCompButton.setDisable(true);
+        editSlideShowCompButton.setDisable(true);
+        editVideoCompButton.setDisable(true);
+	if(ePortfolio.isPageSelected()==true){
+            if(ePortfolio.getSelectedPage().isCompSelected()==true){
+                pageSelected =true;
+                if(ePortfolio.getSelectedPage().getSelectedComp().getType()=="p"){
+                    editTextCompButton.setDisable(false);
+                }else if(ePortfolio.getSelectedPage().getSelectedComp().getType()=="list"){
+                    editListCompButton.setDisable(false);
+                }else if(ePortfolio.getSelectedPage().getSelectedComp().getType()=="img"){
+                    editImageCompButton.setDisable(false);
+                }else if(ePortfolio.getSelectedPage().getSelectedComp().getType()=="slideshow"){
+                    editSlideShowCompButton.setDisable(false);
+                }else if(ePortfolio.getSelectedPage().getSelectedComp().getType()=="video"){
+                    editVideoCompButton.setDisable(false);
+                }
+            }
+        }
+	removeCompButton.setDisable(!pageSelected);
+        updatePageTitleButton.setDisable(!pageSelected);	
+        updateStudentNameButton.setDisable(!pageSelected);	
+        selectBannerImageButton.setDisable(!pageSelected);	
+        selectLayoutButton.setDisable(!pageSelected);	
+        selectColorButton.setDisable(!pageSelected);	
+        selectPageFontButton.setDisable(!pageSelected);	
+        updateHeaderButton.setDisable(!pageSelected);	
+        updateFooterButton.setDisable(!pageSelected);	
+        addComponentButton.setDisable(!pageSelected);	
+        selectComponentButton.setDisable(!pageSelected);	
+        removeCompButton.setDisable(!pageSelected);	
+        
+    }
+    /**
+     * Uses the slide show data to reload all the components for
+     * slide editing.
+     * 
+     * @param slideShowToLoad SLide show being reloaded.
+     */
+    //hey xiang note to self, change these so that they match current app.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    public void reloadSlideShowPane() {
+	slidesEditorPane.getChildren().clear();
+	reloadTitleControls();
+	for (Slide slide : slideShow.getSlides()) {
+	    SlideEditView slideEditor = new SlideEditView(this, slide);
+	    if (slideShow.isSelectedSlide(slide))
+		slideEditor.getStyleClass().add(CSS_CLASS_SELECTED_SLIDE_EDIT_VIEW);
+	    else
+		slideEditor.getStyleClass().add(CSS_CLASS_SLIDE_EDIT_VIEW);
+	    slidesEditorPane.getChildren().add(slideEditor);
+	    slideEditor.setOnMousePressed(e -> {
+		slideShow.setSelectedSlide(slide);
+		this.reloadSlideShowPane();
+	    });
+	}
+	updateSlideshowEditToolbarControls();
+    }
+    
+    private void initTitleControls() {
+	PropertiesManager props = PropertiesManager.getPropertiesManager();
+	String labelPrompt = props.getProperty(LABEL_SLIDESHOW_TITLE);
+	titlePane = new FlowPane();
+	titleLabel = new Label(labelPrompt);
+	titleTextField = new TextField();
+	
+	titlePane.getChildren().add(titleLabel);
+	titlePane.getChildren().add(titleTextField);
+	
+	String titlePrompt = props.getProperty(LanguagePropertyType.LABEL_SLIDESHOW_TITLE);
+	titleTextField.setText(titlePrompt);
+	
+	titleTextField.textProperty().addListener(e -> {
+	    slideShow.setTitle(titleTextField.getText());
+	    updateFileToolbarControls(false);
+	});
+	
+	titlePane.getStyleClass().add(CSS_CLASS_TITLE_PANE);
+	titleLabel.getStyleClass().add(CSS_CLASS_TITLE_PROMPT);
+	titleTextField.getStyleClass().add(CSS_CLASS_TITLE_TEXT_FIELD);
+    }
+    
+    public void reloadTitleControls() {
+	if (slidesEditorPane.getChildren().size() == 0)
+	    slidesEditorPane.getChildren().add(titlePane);
+	titleTextField.setText(slideShow.getTitle());
     }
 }
