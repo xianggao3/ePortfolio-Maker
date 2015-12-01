@@ -19,7 +19,7 @@ public class titleDialog extends Stage{
     public titleDialog(){
         dialog = new TextInputDialog("Title Here");
         dialog.setTitle("Change Title");
-        dialog.setHeaderText("Enter your ePortfolio's Title");
+        dialog.setHeaderText("Enter your ePortfolio Page's Title");
         dialog.setContentText("Please enter your Title:");
         // Traditional way to get the response value.
         Optional<String> result = dialog.showAndWait();

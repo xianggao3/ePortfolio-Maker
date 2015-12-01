@@ -31,12 +31,14 @@ public class videoDialog extends Stage{
     TextField height= new TextField();
     TextField width=new TextField();
     Scene imgScreen;
+    TextField caption= new TextField();
+    
     public videoDialog(){
         
         vidSelect.setOnAction(e->{
             processSelectImage();
         });
-        dimensionsPane.getChildren().addAll(new Label("Height:"),height,new Label("px  Width:"),width,new Label("px"));
+        dimensionsPane.getChildren().addAll(new Label("Caption:"),caption,new Label("Height:"),height,new Label("px  Width:"),width,new Label("px"));
         scn.add(vidSelect,0,0);
         scn.add(dimensionsPane,1,0);
         Button OKButton= new Button("OK");

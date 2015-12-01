@@ -10,16 +10,8 @@ package eportfoliomaker.model;
  * @author xgao3
  */
 public class List extends Component{
-    String header;
     String bullets;
 
-    public String getHeader() {
-        return header;
-    }
-
-    public void setHeader(String header) {
-        this.header = header;
-    }
 
     public String getBullets() {
         return bullets;
@@ -39,7 +31,6 @@ public class List extends Component{
     
     public List(){
         type="list";
-        header=null;
         bullets=null;
     }
 }

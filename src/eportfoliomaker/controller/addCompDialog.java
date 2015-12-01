@@ -34,5 +34,6 @@ public class addCompDialog extends Stage{
         if (result.isPresent()){
             System.out.println("Your choice: " + result.get());
         }
+        
     }
 }

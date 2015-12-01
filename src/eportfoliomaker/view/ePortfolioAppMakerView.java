@@ -23,6 +23,8 @@ import eportfoliomaker.controller.textDialog;
 import eportfoliomaker.controller.titleDialog;
 import eportfoliomaker.controller.videoDialog;
 import eportfoliomaker.ePortfolioJSONFileManager;
+import eportfoliomaker.model.Component;
+import eportfoliomaker.model.Page;
 import eportfoliomaker.model.ePortfolioModel;
 import eportfoliomaker.slideshow.ssDialog;
 import eportfoliomaker.slideshow.ssDialog;
@@ -79,13 +81,16 @@ public class ePortfolioAppMakerView {
     Button exportButton;
     Button exitButton;
     
-    FlowPane siteToolbar= new FlowPane();;//site editing toolbar below filetoolbar
+    FlowPane siteToolbar= new FlowPane();//site editing toolbar below filetoolbar
     Button addPageButton;
     Button removePageButton;
     
+    //Tabs in the middle (Pages)
     TabPane tabbedPane=new TabPane();
     Tab tab1;
     Tab tab2;
+    VBox pagesEditorPane;
+    ScrollPane pagesEditorScrollPane;
     
     VBox pageEditToolbar;//
     VBox rightEditToolbar;
@@ -99,11 +104,7 @@ public class ePortfolioAppMakerView {
     Button updateStudentNameButton;
     Button selectPageFontButton;
     Button updateFooterButton;
-    Button addComponentButton;/*
-    Button addImageCompButton;
-    Button addSlideShowCompButton;
-    Button addVideoCompButton;
-    Button addListCompButton;*/
+    Button addComponentButton;
     Button removeCompButton;
     Button editTextCompButton;
     Button editImageCompButton;
@@ -117,6 +118,8 @@ public class ePortfolioAppMakerView {
     ePortfolioModel ePortfolio;
     ePortfolioJSONFileManager fileManager;
     private ErrorHandler errorHandler;
+    
+    //Dialogs
     private ePortfolioController controller;
     listDialog listD;
     titleDialog titleDialog;
@@ -216,7 +219,9 @@ public class ePortfolioAppMakerView {
         TextField studentName = new TextField();
         siteToolbar.getChildren().addAll(titleLabel,pageTitle,nameLabel,studentName);*/
         workspace.setTop(siteToolbar);
+        
         initTabPane();
+        
         workspace.setCenter(tabbedPane);
         tabbedPane.getStyleClass().add("file_toolbar");
     }
@@ -232,12 +237,14 @@ public class ePortfolioAppMakerView {
         currentTab = tabbedPane.getSelectionModel();
         
         
-        VBox tabcontent = new VBox();
-        Image im = new Image("http://www.vapor-rage.com/wp-content/uploads/2014/05/sample.jpg");
-        ImageView iv = new ImageView(im);
-        tabcontent.getChildren().addAll(iv);
+        pagesEditorPane = new VBox();
+        pagesEditorScrollPane= new ScrollPane(pagesEditorPane);
+        pagesEditorScrollPane.setFitToWidth(true);
+	pagesEditorScrollPane.setFitToHeight(true);
+	//initTitleControls();
+
         
-        tab1.setContent(tabcontent);
+        tab1.setContent(pagesEditorPane);
         tab2=new Tab();
         tab2.setText("Second Title Here");
         tabbedPane.getTabs().addAll(tab1,tab2);
@@ -346,6 +353,7 @@ public class ePortfolioAppMakerView {
            tabbedPane.getTabs().remove(currentTab.getSelectedItem());
         });
     }
+    
     public void updateFileToolbarControls(boolean saved) {
 	// FIRST MAKE SURE THE WORKSPACE IS THERE
 	ePortMakerPane.setCenter(workspace);
@@ -356,6 +364,7 @@ public class ePortfolioAppMakerView {
 	
         updatePageEditToolbarControls();
     }
+    
     public void updatePageEditToolbarControls(){
         boolean pageSelected=false;
         editTextCompButton.setDisable(true);
@@ -399,28 +408,27 @@ public class ePortfolioAppMakerView {
      * 
      * @param slideShowToLoad SLide show being reloaded.
      */
-    //hey xiang note to self, change these so that they match current app.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-    public void reloadSlideShowPane() {
-	slidesEditorPane.getChildren().clear();
+        
+    public void reloadPagePane() {//redo this
+	pagesEditorPane.getChildren().clear();
 	reloadTitleControls();
-	for (Slide slide : slideShow.getSlides()) {
-	    SlideEditView slideEditor = new SlideEditView(this, slide);
-	    if (slideShow.isSelectedSlide(slide))
-		slideEditor.getStyleClass().add(CSS_CLASS_SELECTED_SLIDE_EDIT_VIEW);
-	    else
-		slideEditor.getStyleClass().add(CSS_CLASS_SLIDE_EDIT_VIEW);
-	    slidesEditorPane.getChildren().add(slideEditor);
+	for (Page page : ePortfolio.getPages()) {
+	    PageEditView slideEditor = new PageEditView(this, page);
+	    //if (ePortfolio.isSelectedPage(page))
+		//slideEditor.getStyleClass().add(CSS_CLASS_SELECTED_SLIDE_EDIT_VIEW);
+	    //else
+		//slideEditor.getStyleClass().add(CSS_CLASS_SLIDE_EDIT_VIEW);
+	    pagesEditorPane.getChildren().add(slideEditor);
 	    slideEditor.setOnMousePressed(e -> {
-		slideShow.setSelectedSlide(slide);
-		this.reloadSlideShowPane();
+		ePortfolio.setSelectedPage(page);
+		this.reloadPagePane();
 	    });
 	}
-	updateSlideshowEditToolbarControls();
+	updatePageEditToolbarControls();
     }
     
     private void initTitleControls() {
-	PropertiesManager props = PropertiesManager.getPropertiesManager();
-	String labelPrompt = props.getProperty(LABEL_SLIDESHOW_TITLE);
+	String labelPrompt = "New Title";
 	titlePane = new FlowPane();
 	titleLabel = new Label(labelPrompt);
 	titleTextField = new TextField();

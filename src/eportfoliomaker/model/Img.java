@@ -9,12 +9,21 @@ package eportfoliomaker.model;
  *
  * @author xgao3
  */
-public class Image extends Component {
+public class Img extends Component {
     String imgFileName;
     String src;
     String orientation;
     String imgH;
     String imgW;
+    String caption;
+
+    public String getCaption() {
+        return caption;
+    }
+
+    public void setCaption(String caption) {
+        this.caption = caption;
+    }
 
     public String getImgFileName() {
         return imgFileName;
@@ -65,7 +74,7 @@ public class Image extends Component {
     }
     
     
-    public Image(){
+    public Img(){
         type="img";
         imgFileName=null;
         src=null;

@@ -40,23 +40,26 @@ public class imgDialog extends Stage{
     Button leftFloat;
     Button rightFloat;
     Button midFloat;
+    TextField caption= new TextField();
+    HBox captionPane= new HBox();
     
     public imgDialog(){
         
         imgSelect.setOnAction(e->{
             processSelectImage();
         });
-        heightPane.getChildren().addAll(new Label("Height:"),height,new Label("px"));
-        widthPane.getChildren().addAll(new Label("Width:"),width,new Label("px"));
-        buttonsPane.getChildren().add(new Label("Image Orientation:"));
+        heightPane.getChildren().addAll(new Label("Height: "),height,new Label("px"));
+        widthPane.getChildren().addAll(new Label("Width: "),width,new Label("px"));
+        captionPane.getChildren().addAll(new Label("Caption: "),caption);
+        buttonsPane.getChildren().addAll(new Label("Image Orientation: "));
         leftFloat=initChildButton(buttonsPane,"left.png","",false,"Left Float the Image");
         midFloat=initChildButton(buttonsPane,"mid.png","",false,"Center Float the Image");
         rightFloat=initChildButton(buttonsPane,"right.png","",false,"Right Float the Image");
-        scn.add(buttonsPane,1,0);
+        scn.add(buttonsPane,1,1);
         scn.add(heightPane,2,0);
         scn.add(imgSelect,0,0);
         scn.add(widthPane,2,1);
-        
+        scn.add(captionPane,1,0);
         Button OKButton= new Button("OK");
         scn.add(OKButton, 2,2);
         scn.getStyleClass().add("dialog");
