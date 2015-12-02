@@ -5,6 +5,7 @@
  */
 package eportfoliomaker.controller;
 
+import eportfoliomaker.model.Video;
 import eportfoliomaker.view.ePortfolioAppMakerView;
 import java.io.File;
 import javafx.scene.Scene;
@@ -32,9 +33,11 @@ public class videoDialog extends Stage{
     TextField width=new TextField();
     Scene imgScreen;
     TextField caption= new TextField();
+    String path;
+    String fileName;
     
-    public videoDialog(){
-        
+    public videoDialog(Stage primaryStage,Video vToEdit){
+        initOwner(primaryStage);
         vidSelect.setOnAction(e->{
             processSelectImage();
         });
@@ -49,6 +52,13 @@ public class videoDialog extends Stage{
         dimensionsPane.getStyleClass().add("dialog");
         imgScreen= new Scene(scn);
         imgScreen.getStylesheets().add("eportfoliomaker/style/Style.css");
+        OKButton.setOnMouseReleased(e->{
+            vToEdit.setVideoW(width.getText());
+            vToEdit.setVideoH(height.getText());
+            vToEdit.setCaption(caption.getText());
+            vToEdit.setVideoFileName(fileName);
+            vToEdit.setVideoPath(path);
+        });
         
         this.setScene(imgScreen);
         showAndWait();
@@ -68,11 +78,9 @@ public class videoDialog extends Stage{
         
 	File file = videoFileChooser.showOpenDialog(null);
 	if (file != null) {
-	    String path = file.getPath().substring(0, file.getPath().indexOf(file.getName()));
-	    //String fileName = file.getName();
-	    //slideToEdit.setImage(path, fileName);
-	    //view.updateSlideImage();
-	    //ui.updateFileToolbarControls(false);
+	    path = file.getPath().substring(0, file.getPath().indexOf(file.getName()));
+	    fileName = file.getName();
+	    
 	}   
     }
 }

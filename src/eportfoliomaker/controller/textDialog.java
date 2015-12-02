@@ -5,6 +5,8 @@
  */
 package eportfoliomaker.controller;
 
+import eportfoliomaker.model.Paragraph;
+import eportfoliomaker.model.ePortfolioModel;
 import eportfoliomaker.view.ePortfolioAppMakerView;
 import java.awt.Dialog;
 import java.awt.event.KeyEvent;
@@ -31,7 +33,7 @@ import javafx.stage.Stage;
  */
 public class textDialog extends Stage{
     private ePortfolioAppMakerView ui;
-    
+    ePortfolioModel model;
     VBox textbox;
     Label textLabel;
     Scene textScene;
@@ -41,7 +43,7 @@ public class textDialog extends Stage{
     TextArea textArea;
     GridPane topPane;
 
-    public textDialog(Stage primaryStage){
+    public textDialog(Stage primaryStage,Paragraph pToEdit){
         initOwner(primaryStage);
         
         ObservableList<String> fonts = FXCollections.observableArrayList(
@@ -64,6 +66,10 @@ public class textDialog extends Stage{
         textLabel=new Label("Paragraph:");
         textArea = new TextArea();
         OKButton= new Button("OK");
+        OKButton.setOnMouseReleased(e->{
+           pToEdit.setText(textArea.getText());
+           pToEdit.setFont(textFont.getValue().toString());
+        });
         textbox.getChildren().addAll(topPane,textLabel,textArea,OKButton);
         
         textbox.getStyleClass().add("dialog");
@@ -72,6 +78,8 @@ public class textDialog extends Stage{
         textScene.getStylesheets().add("eportfoliomaker/style/Style.css");
         this.setScene(textScene);
         showAndWait();
+        
+        
     }
     private Button initChildButton(GridPane toolbar,String iconFileName,String cssClass,boolean disabled,String toolTip) {
         

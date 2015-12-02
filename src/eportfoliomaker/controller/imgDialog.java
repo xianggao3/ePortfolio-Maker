@@ -5,6 +5,7 @@
  */
 package eportfoliomaker.controller;
 
+import eportfoliomaker.model.Img;
 import eportfoliomaker.view.ePortfolioAppMakerView;
 import java.io.File;
 import javafx.scene.Scene;
@@ -42,26 +43,52 @@ public class imgDialog extends Stage{
     Button midFloat;
     TextField caption= new TextField();
     HBox captionPane= new HBox();
+    ImageView imgView;
+    Image selectedImg;
+    String path;
+    String fileName;
+    String orientationPreference;
     
-    public imgDialog(){
-        
+    public imgDialog(Stage primaryStage,Img pToEdi){
+        initOwner(primaryStage);
         imgSelect.setOnAction(e->{
             processSelectImage();
         });
+        imgView= new ImageView (selectedImg);
         heightPane.getChildren().addAll(new Label("Height: "),height,new Label("px"));
         widthPane.getChildren().addAll(new Label("Width: "),width,new Label("px"));
         captionPane.getChildren().addAll(new Label("Caption: "),caption);
         buttonsPane.getChildren().addAll(new Label("Image Orientation: "));
         leftFloat=initChildButton(buttonsPane,"left.png","",false,"Left Float the Image");
-        midFloat=initChildButton(buttonsPane,"mid.png","",false,"Center Float the Image");
+        midFloat=initChildButton(buttonsPane,"mid.png","",false,"No Float Preference");
         rightFloat=initChildButton(buttonsPane,"right.png","",false,"Right Float the Image");
+        leftFloat.setOnMouseReleased(e->{
+            orientationPreference="left";
+        });
+        midFloat.setOnMouseReleased(e->{
+            orientationPreference="none";
+        });
+        leftFloat.setOnMouseReleased(e->{
+            orientationPreference="right";
+        });
+        
         scn.add(buttonsPane,1,1);
         scn.add(heightPane,2,0);
         scn.add(imgSelect,0,0);
+        scn.add(imgView, 0, 1);
         scn.add(widthPane,2,1);
         scn.add(captionPane,1,0);
         Button OKButton= new Button("OK");
         scn.add(OKButton, 2,2);
+        OKButton.setOnMouseReleased(e->{
+            pToEdi.setCaption(caption.getText());
+            pToEdi.setImgFileName(fileName);
+            pToEdi.setImgPath(path);
+            pToEdi.setImgH(height.getText());
+            pToEdi.setImgW(width.getText());
+            pToEdi.setOrientation(orientationPreference);
+        });
+        
         scn.getStyleClass().add("dialog");
         imgSelect.getStyleClass().add("dialog");
         buttonsPane.getStyleClass().add("dialog");
@@ -88,11 +115,9 @@ public class imgDialog extends Stage{
         
 	File file = imageFileChooser.showOpenDialog(null);
 	if (file != null) {
-	    String path = file.getPath().substring(0, file.getPath().indexOf(file.getName()));
-	    //String fileName = file.getName();
-	    //slideToEdit.setImage(path, fileName);
-	    //view.updateSlideImage();
-	    //ui.updateFileToolbarControls(false);
+	     path = file.getPath().substring(0, file.getPath().indexOf(file.getName()));
+	     fileName = file.getName();
+	    selectedImg= new Image(path+ fileName);
 	}   
     }
     

@@ -5,6 +5,9 @@
  */
 package eportfoliomaker.controller;
 
+import eportfoliomaker.model.ePortfolioModel;
+import eportfoliomaker.view.PageEditView;
+import eportfoliomaker.view.ePortfolioAppMakerView;
 import java.util.Optional;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
@@ -14,8 +17,10 @@ import javafx.stage.Stage;
  * @author xgao3
  */
 public class titleDialog extends Stage{
-
+    ePortfolioAppMakerView ui;
+    ePortfolioModel pui;
     TextInputDialog dialog;
+    
     public titleDialog(){
         dialog = new TextInputDialog("Title Here");
         dialog.setTitle("Change Title");
@@ -24,7 +29,8 @@ public class titleDialog extends Stage{
         // Traditional way to get the response value.
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
-            System.out.println("Title: " + result.get());
+            pui.getSelectedPage().setTitle(result.get());
         }
+        ui.reloadPagePane();
     }
 }

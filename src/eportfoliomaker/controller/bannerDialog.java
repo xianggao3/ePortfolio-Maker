@@ -5,6 +5,9 @@
  */
 package eportfoliomaker.controller;
 
+import eportfoliomaker.model.ePortfolioModel;
+import eportfoliomaker.view.PageEditView;
+import eportfoliomaker.view.ePortfolioAppMakerView;
 import java.io.File;
 import java.util.Optional;
 import javafx.scene.control.Alert;
@@ -23,6 +26,10 @@ import javafx.stage.FileChooser;
  * @author xgao3
  */
 public class bannerDialog {
+    
+    ePortfolioModel model;
+    ePortfolioAppMakerView ui;
+    PageEditView pages;
     public bannerDialog(){
     Alert alert = new Alert(AlertType.CONFIRMATION);
     alert.setTitle("Banner Image");
@@ -56,10 +63,10 @@ public class bannerDialog {
 	File file = imageFileChooser.showOpenDialog(null);
 	if (file != null) {
 	    String path = file.getPath().substring(0, file.getPath().indexOf(file.getName()));
-	    //String fileName = file.getName();
-	    //slideToEdit.setImage(path, fileName);
-	    //view.updateSlideImage();
-	    //ui.updateFileToolbarControls(false);
+	    String fileName = file.getName();
+	    model.getSelectedPage().setBanner(path+fileName);
+	    pages.updateSlideImage();
+	    ui.updateFileToolbarControls(false);//is this right? am i supposed to make a pageeditview and a apmakerview in this class?
 	}   
     }
     

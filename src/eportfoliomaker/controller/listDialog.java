@@ -5,6 +5,7 @@
  */
 package eportfoliomaker.controller;
 
+import eportfoliomaker.model.ListComp;
 import eportfoliomaker.view.ePortfolioAppMakerView;
 import java.awt.Dialog;
 import java.awt.event.KeyEvent;
@@ -30,7 +31,7 @@ public class listDialog extends Stage{
     Button OKButton;
     Button cancelButton;
 
-    public listDialog(Stage primaryStage){
+    public listDialog(Stage primaryStage,ListComp ltoEdit){        
         initOwner(primaryStage);
         listbox = new VBox();
         listLabel = new Label("List Header:");
@@ -45,8 +46,11 @@ public class listDialog extends Stage{
             }
         });
         OKButton= new Button("OK");
-        listbox.getChildren().addAll(listLabel,listHeader,listBullets,bulletArea,OKButton);
+        OKButton.setOnMouseReleased(e->{
+            ltoEdit.setBullets(bulletArea.getText());
+        });
         
+        listbox.getChildren().addAll(listLabel,listHeader,listBullets,bulletArea,OKButton);
         
         listbox.getStyleClass().add("dialog");
         
