@@ -30,6 +30,7 @@ public class bannerDialog {
     ePortfolioModel model;
     ePortfolioAppMakerView ui;
     PageEditView pages;
+    
     public bannerDialog(){
     Alert alert = new Alert(AlertType.CONFIRMATION);
     alert.setTitle("Banner Image");

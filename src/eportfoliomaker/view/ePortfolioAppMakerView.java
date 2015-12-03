@@ -148,6 +148,8 @@ public class ePortfolioAppMakerView {
     Tab nTab;
     SingleSelectionModel<Tab> currentTab;   
     Page pg;
+    Label pgTitle;
+    HBox pvTitlePane;
     
     public ePortfolioAppMakerView(ePortfolioJSONFileManager initFileManager){
         fileManager= initFileManager;
@@ -347,10 +349,10 @@ public class ePortfolioAppMakerView {
             }
         });
         updatePageTitleButton.setOnAction(e->{
-           titleDialog= new titleDialog();      
+           titleDialog= new titleDialog(this,ePortfolio);      
         });
         updateStudentNameButton.setOnAction(e->{
-            nameDi=new studentNameDialog();
+            nameDi=new studentNameDialog(this,ePortfolio);
         });
         selectLayoutButton.setOnAction(e->{
            layoutD=new layoutDialog(); 
@@ -413,7 +415,18 @@ public class ePortfolioAppMakerView {
             }
         });
         addPageButton.setOnAction(e->{
-            tab1=new Tab("New Tab");
+            Page pg = new Page(this);
+            PageEditView pv = new PageEditView(ePortfolio);
+            pgTitle = new Label("By "+ pg.getStudentName());
+            pvTitlePane = new HBox(pgTitle); 
+            pv.getChildren().add(pvTitlePane);
+            pv.setPg(pg);
+            ePortfolio.setSelectedPage(pg);
+            pg.setPageEditView(pv);
+            ePortfolio.getPages().add(pg);
+            ePortfolio.setSelectedPage(pg);
+            
+            tab1=new Tab(ePortfolio.getSelectedPage().getTitle());
             pagesEditorScrollPane = new ScrollPane(pagesEditorPane);
             pagesEditorScrollPane.setFitToWidth(true);
             pagesEditorScrollPane.setFitToHeight(true);
@@ -421,15 +434,6 @@ public class ePortfolioAppMakerView {
             tab1.setContent(pagesEditorScrollPane);
             tabbedPane.getTabs().add(tab1);
             
-            Page pg = new Page(this);
-            PageEditView pv = new PageEditView(ePortfolio);
-            Label pgTitle = new Label(pg.getTitle()+" By "+ pg.getStudentName()+"");
-            HBox pvTitlePane = new HBox(pgTitle);
-            pv.getChildren().add(pvTitlePane);
-            pv.setPg(pg);
-            pg.setPageEditView(pv);
-            ePortfolio.getPages().add(pg);
-            ePortfolio.setSelectedPage(pg);
             reloadPagePane(pv);
             
             //pv.getStyleClass().add("tabPane");
@@ -489,7 +493,13 @@ public class ePortfolioAppMakerView {
     
         
     public void reloadPagePane(PageEditView pv) {
+        
         pv.getChildren().clear();
+        
+            Label pgTitle= new Label("By "+ ePortfolio.getSelectedPage().getStudentName());
+            
+            pv.getChildren().add(pgTitle);
+            pv.getStyleClass().add("tabPane_a");
         for(Component comp:ePortfolio.getSelectedPage().getComponents()){
             ComponentEditView compEditor = new ComponentEditView(comp);
             if(ePortfolio.getSelectedPage().isSelectedComp(comp)){
@@ -507,6 +517,7 @@ public class ePortfolioAppMakerView {
             pagesEditorScrollPane.setFitToWidth(true);
             pagesEditorScrollPane.setFitToHeight(true);
             currentTab.getSelectedItem().setContent(pagesEditorScrollPane);
+            currentTab.getSelectedItem().setText(ePortfolio.getSelectedPage().getTitle()+"-"+ePortfolio.getSelectedPage().getStudentName());
         }
     }
     /*

@@ -28,8 +28,8 @@ public class fontDialog extends Stage{
 
         ChoiceDialog<String> dialog = new ChoiceDialog<>(" ", choices);
         dialog.setTitle("Fonts");
-        dialog.setHeaderText("Component Font Choices");
-        dialog.setContentText("Choose your Component Font:");
+        dialog.setHeaderText("Page Font Choices");
+        dialog.setContentText("Choose your Page Font:");
 
         // Traditional way to get the response value.
         Optional<String> result = dialog.showAndWait();

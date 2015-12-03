@@ -140,8 +140,8 @@ public class Page {
     public void reset() {
 	components.clear();
 	selectedComp = null;
-        Title= "";
-        studentName= "";
+        Title= "New ePortfolio Page";
+        studentName= "Michael Appleseed";
         bannerText= "";
         banner= "";
         colorTheme= "";

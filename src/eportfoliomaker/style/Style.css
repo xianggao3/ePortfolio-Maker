@@ -37,6 +37,9 @@
     
     
 }
+.tabPane a{
+    -fx-font-size:30;
+}
 .tabPane{
     spacing:20;
     -padding: 10;

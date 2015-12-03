@@ -6,6 +6,7 @@
 package eportfoliomaker.controller;
 
 import eportfoliomaker.model.ePortfolioModel;
+import eportfoliomaker.view.ePortfolioAppMakerView;
 import java.util.Optional;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
@@ -15,17 +16,21 @@ import javafx.stage.Stage;
  * @author xgao3
  */
 public class studentNameDialog extends Stage{
+    ePortfolioAppMakerView ui;
     ePortfolioModel model;
     TextInputDialog dialog;
-    public studentNameDialog(){
-        dialog = new TextInputDialog("Michael Apple");
+    public studentNameDialog(ePortfolioAppMakerView ui,ePortfolioModel eP){
+        this.ui=ui;
+        model=eP;
+        dialog = new TextInputDialog("Michael Appleseed");
         dialog.setTitle("Student Name");
         dialog.setHeaderText("Enter your Name");
         dialog.setContentText("What is your name?");
         // Traditional way to get the response value.
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
-            model.setStudentName(result.get());
+            eP.getSelectedPage().setStudentName(result.get());
         }
+        ui.reloadPagePane(eP.getSelectedPage().getPv());
     }
 }

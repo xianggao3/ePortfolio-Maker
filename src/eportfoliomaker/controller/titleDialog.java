@@ -18,19 +18,21 @@ import javafx.stage.Stage;
  */
 public class titleDialog extends Stage{
     ePortfolioAppMakerView ui;
-    ePortfolioModel pui;
+    ePortfolioModel ePortfolio;
     TextInputDialog dialog;
     
-    public titleDialog(){
-        dialog = new TextInputDialog("Title Here");
+    public titleDialog(ePortfolioAppMakerView gui,ePortfolioModel eP){
+        ui=gui;
+        ePortfolio=eP;
+        dialog = new TextInputDialog("New ePortfolio Page");
         dialog.setTitle("Change Title");
         dialog.setHeaderText("Enter your ePortfolio Page's Title");
         dialog.setContentText("Please enter your Title:");
         // Traditional way to get the response value.
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
-            pui.getSelectedPage().setTitle(result.get());
+            ePortfolio.getSelectedPage().setTitle(result.get());
         }
-        ui.reloadPagePane(ui.getePortfolio().getSelectedPage().getPv());
+        ui.reloadPagePane(ePortfolio.getSelectedPage().getPv());
     }
 }
