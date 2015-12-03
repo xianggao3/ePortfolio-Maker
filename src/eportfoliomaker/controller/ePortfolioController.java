@@ -60,7 +60,7 @@ public class ePortfolioController {
 
 		// MAKE SURE THE TITLE CONTROLS ARE ENABLED
 		//ui.reloadTitleControls();	
-		ui.reloadPagePane();
+		ui.reloadPagePane(ePortfolio.getPv());
             }
         } catch (IOException ioe) {
             ErrorHandler eH = ui.getErrorHandler();

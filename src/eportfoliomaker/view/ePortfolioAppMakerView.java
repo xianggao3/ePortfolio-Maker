@@ -494,7 +494,7 @@ public class ePortfolioAppMakerView {
     
         
     public void reloadPagePane(PageEditView pv) {
-        currentTab.getSelectedItem().setContent(null);
+        pv.getChildren().clear();
         for(Component comp:ePortfolio.getSelectedPage().getComponents()){
             ComponentEditView compEditor = new ComponentEditView(comp);
             //initTitleControls();
