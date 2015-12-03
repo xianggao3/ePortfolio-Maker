@@ -52,6 +52,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -218,21 +219,12 @@ public class ePortfolioAppMakerView {
         rightEditToolbar=new VBox();
         rightEditToolbar.getStyleClass().add("page_edit_toolbar");
         addComponentButton=initChildButton(rightEditToolbar,"addComp.png","page_edit_toolbar_icons",false,"Add Component");
-        selectComponentButton=initChildButton(rightEditToolbar,"component.png","page_edit_toolbar_icons",false,"Select Component");
         removeCompButton=initChildButton(rightEditToolbar,"remove.png","page_edit_toolbar_icons",false,"Remove Component");
         editTextCompButton=initChildButton(rightEditToolbar,"text.png","page_edit_toolbar_icons",false,"Text");
         editListCompButton=initChildButton(rightEditToolbar,"list.png","page_edit_toolbar_icons",false,"List");
         editImageCompButton=initChildButton(rightEditToolbar,"img.png","page_edit_toolbar_icons",false,"Image");
         editSlideShowCompButton=initChildButton(rightEditToolbar,"slideshow.png","page_edit_toolbar_icons",false,"Slideshow");
         editVideoCompButton=initChildButton(rightEditToolbar,"video.png","page_edit_toolbar_icons",false,"Video");
-        /*
-        editTextCompButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
-        editImageCompButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
-        editSlideShowCompButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
-        editVideoCompButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
-        editTextHyperlinkButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
-        */
-        
     }
 
     
@@ -368,9 +360,7 @@ public class ePortfolioAppMakerView {
         });
         removeCompButton.setOnAction(e->{
            ePortfolio.getSelectedPage().getComponents().remove(ePortfolio.getSelectedPage().getSelectedComp());
-        });
-        selectComponentButton.setOnAction(e->{
-            
+           reloadPagePane(ePortfolio.getPv());
         });
         selectPageFontButton.setOnAction(e->{
             pgFontD=new pageFontDialog();
@@ -433,6 +423,9 @@ public class ePortfolioAppMakerView {
             
             Page pg = new Page(this);
             PageEditView pv = new PageEditView(ePortfolio);
+            Label pgTitle = new Label(pg.getTitle()+" By "+ pg.getStudentName()+"");
+            HBox pvTitlePane = new HBox(pgTitle);
+            pv.getChildren().add(pvTitlePane);
             pv.setPg(pg);
             pg.setPageEditView(pv);
             ePortfolio.getPages().add(pg);
@@ -507,7 +500,7 @@ public class ePortfolioAppMakerView {
             //initTitleControls();
             pagesEditorScrollPane = new ScrollPane(pv);
             pv.getChildren().add(compEditor);
-            pv.setOnMousePressed(b->{
+            compEditor.setOnMousePressed(b->{
                 ePortfolio.getSelectedPage().setSelectedComp(comp);
                 this.reloadPagePane(pv);
             });

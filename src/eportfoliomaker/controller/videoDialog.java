@@ -58,6 +58,7 @@ public class videoDialog extends Stage{
             vToEdit.setCaption(caption.getText());
             vToEdit.setVideoFileName(fileName);
             vToEdit.setVideoPath(path);
+            this.close();
         });
         
         this.setScene(imgScreen);

@@ -22,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import static javafx.scene.input.KeyCode.SLASH;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -69,12 +70,13 @@ public  class ComponentEditView extends HBox{
             
         }else if(comp.getType()=="img"){
             img=(Img)comp;
-            String imagePath = img.getImgPath() + SLASH + img.getImgFileName();
-            File file = new File(imagePath);
-            try {
+            String imagePath = img.getImgPath()+ img.getImgFileName();
+//            File file = new File(imagePath);
+//            try {
                 // GET AND SET THE IMAGE
-                URL fileURL = file.toURI().toURL();
-                Image imgImage = new Image(fileURL.toExternalForm());
+                //URL fileURL = file.toURI().toURL();
+                //Image imgImage = new Image(fileURL.toExternalForm());
+                Image imgImage= new Image("file:images/img/"+img.getImgFileName());//imagePath);
                 imgview.setImage(imgImage);
 
                 // AND RESIZE IT
@@ -82,34 +84,31 @@ public  class ComponentEditView extends HBox{
                 double scaledHeight = img.getImgH();
                 imgview.setFitWidth(scaledWidth);
                 imgview.setFitHeight(scaledHeight);
-            } catch (Exception e) {
-                ErrorHandler eH = new ErrorHandler(null);
-                eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
-            }
-            getChildren().add(imgview);
+//            } catch (Exception e) {
+//                ErrorHandler eH = new ErrorHandler(null);
+//                eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
+//            }
+                text.setText(img.getCaption());
+                VBox compbox = new VBox(imgview,text);
+            getChildren().addAll(compbox);
             
         }else if(comp.getType()=="video"){
+            
             video=(Video)comp;
-            String imagePath = video.getVideoPath() + SLASH +video.getVideoFileName();
-            File file = new File(imagePath);
-            try {
-	    // GET AND SET THE IMAGE
-	    URL fileURL = file.toURI().toURL();
-	    Media moviecomp = new Media(fileURL.toExternalForm());
-            MediaPlayer mplayer = new MediaPlayer(moviecomp);
-            
-	    movieView.setMediaPlayer(mplayer);
-	    
-	    // AND RESIZE IT
-	    double scaledWidth = video.getVideoW();
-	    double scaledHeight = video.getVideoH();
-	    movieView.setFitWidth(scaledWidth);
-	    movieView.setFitHeight(scaledHeight);
-            } catch (Exception e) {
-                ErrorHandler eH = new ErrorHandler(null);
-                eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
-            }
-            
+            String videoPath = video.getVideoPath()+ video.getVideoFileName();
+            File file=new File("images/img/"+video.getVideoFileName());
+                Media movie= new Media(file.toURI().toString());//imagePath);
+                MediaPlayer mplayer = new MediaPlayer(movie);
+                movieView.setMediaPlayer(mplayer);
+                // AND RESIZE IT
+                double scaledWidth = video.getVideoW();
+                double scaledHeight = video.getVideoH();
+                movieView.setFitWidth(scaledWidth);
+                movieView.setFitHeight(scaledHeight);
+                movieView.getMediaPlayer().play();
+                text.setText(video.getCaption());
+                VBox compbox = new VBox(movieView,text);
+            getChildren().addAll(compbox);
         }
     }
 }

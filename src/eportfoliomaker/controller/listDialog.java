@@ -34,8 +34,6 @@ public class listDialog extends Stage{
     public listDialog(Stage primaryStage,ListComp ltoEdit){        
         initOwner(primaryStage);
         listbox = new VBox();
-        listLabel = new Label("List Header:");
-        TextField listHeader= new TextField();
         Label listBullets=new Label("Bullets:");
         
         TextArea bulletArea = new TextArea();
@@ -50,7 +48,7 @@ public class listDialog extends Stage{
             ltoEdit.setBullets(bulletArea.getText());
         });
         
-        listbox.getChildren().addAll(listLabel,listHeader,listBullets,bulletArea,OKButton);
+        listbox.getChildren().addAll(listLabel,listBullets,bulletArea,OKButton);
         
         listbox.getStyleClass().add("dialog");
         
