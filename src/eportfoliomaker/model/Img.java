@@ -11,7 +11,7 @@ package eportfoliomaker.model;
  */
 public class Img extends Component {
     String imgFileName;
-    String src;
+    String imgPath;
     String orientation;
     String imgH;
     String imgW;
@@ -34,11 +34,11 @@ public class Img extends Component {
     }
 
     public String getImgPath() {
-        return src;
+        return imgPath;
     }
 
     public void setImgPath(String imgPath) {
-        this.src = imgPath;
+        this.imgPath = imgPath;
     }
 
     public String getOrientation() {
@@ -77,7 +77,7 @@ public class Img extends Component {
     public Img(){
         type="img";
         imgFileName=null;
-        src=null;
+        imgPath=null;
         orientation="middle";
         imgH="375";
         imgW="500";

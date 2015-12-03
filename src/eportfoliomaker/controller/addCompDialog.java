@@ -23,9 +23,11 @@ import eportfoliomaker.model.Video;
  * @author xgao3
  */
 public class addCompDialog extends Stage{
-    public ePortfolioModel ui;
     
-    public addCompDialog(){
+    public ePortfolioModel ePortfolio;
+    
+    public addCompDialog(ePortfolioModel eP){
+        ePortfolio=eP;
         List<String> choices = new ArrayList<>();
         choices.add("Text");
         choices.add("List");
@@ -42,21 +44,25 @@ public class addCompDialog extends Stage{
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
             if (result.get()=="Text"){
+                
                 Paragraph p = new Paragraph();
-                ui.getSelectedPage().addComp(p);
+                textDialog tD = new textDialog(this,p);
+                
+                ePortfolio.getSelectedPage().addComp(p);
             }else if(result.get()=="List"){
                 ListComp list = new ListComp();
-                ui.getSelectedPage().addComp(list);
+                ePortfolio.getSelectedPage().addComp(list);
             }else if(result.get()=="Image"){
                 Img img = new Img();
-                ui.getSelectedPage().addComp(img);
+                ePortfolio.getSelectedPage().addComp(img);
             }else if(result.get()=="Video"){
                 Video vid = new Video();
-                ui.getSelectedPage().addComp(vid);
+                ePortfolio.getSelectedPage().addComp(vid);
             }else if(result.get()=="Slideshow"){
                 //SlideShowModel ss = new SlideShowModel();
                 //ui.getSelectedPage().addComp(ss);
             }
+           
         }
         
     }

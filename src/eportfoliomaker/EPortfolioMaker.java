@@ -41,7 +41,5 @@ public class EPortfolioMaker extends Application{
     public static void main(String[] args) {
         launch(args);
         
-        System.out.println(PATH_SLIDE_SHOW_IMAGES);
-        System.out.println(DEFAULT_SLIDE_IMAGE);
     }
 }

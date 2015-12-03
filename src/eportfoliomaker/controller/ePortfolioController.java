@@ -9,6 +9,7 @@ import eportfoliomaker.ErrorHandler;
 import eportfoliomaker.ePortfolioJSONFileManager;
 import eportfoliomaker.model.ePortfolioModel;
 import eportfoliomaker.slideshow.LanguagePropertyType;
+import static eportfoliomaker.slideshow.LanguagePropertyType.LABEL_SAVE_UNSAVED_WORK;
 import eportfoliomaker.view.ePortfolioAppMakerView;
 import java.io.IOException;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import properties_manager.PropertiesManager;
+import ssm.view.YesNoCancelDialog;
 
 /**
  *
@@ -51,7 +53,7 @@ public class ePortfolioController {
                 ePortfolioModel ePortfolio = ui.getePortfolio();
 		ePortfolio.reset();
                 saved = false;
-
+                
                 // REFRESH THE GUI, WHICH WILL ENABLE AND DISABLE
                 // THE APPROPRIATE CONTROLS
                 ui.updateFileToolbarControls(saved);
@@ -79,7 +81,7 @@ public class ePortfolioController {
         // IF THE USER SAID YES, THEN SAVE BEFORE MOVING ON
         if (saveWork) {
             ePortfolioModel slideShow = ui.getePortfolio();
-            ePortfolioIO.saveEPortfolio(slideShow);
+            //ePortfolioIO.saveEPortfolio(slideShow);
             saved = true;
         } // IF THE USER SAID CANCEL, THEN WE'LL TELL WHOEVER
         // CALLED THIS THAT THE USER IS NOT INTERESTED ANYMORE
@@ -92,9 +94,5 @@ public class ePortfolioController {
         // HAD IN MIND IN THE FIRST PLACE
         return true;
     }
-    }
-
-    
-    
     
 }

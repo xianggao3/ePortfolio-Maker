@@ -5,6 +5,7 @@
  */
 package eportfoliomaker.controller;
 
+import eportfoliomaker.view.ePortfolioAppMakerView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
  * @author xgao3
  */
 public class pageFontDialog extends Stage{
+    ePortfolioAppMakerView ui;
     public pageFontDialog(){
         List<String> choices = new ArrayList<>();
         choices.add("SAMPLE PAGE FONT A");
@@ -31,8 +33,8 @@ public class pageFontDialog extends Stage{
 
         // Traditional way to get the response value.
         Optional<String> result = dialog.showAndWait();
-        if (result.isPresent()){
-            System.out.println("Your choice: " + result.get());
+        if (result.isPresent())
+        {            ui.getePortfolio().getSelectedPage().setPageFont(result.get());
         }
     }
 }

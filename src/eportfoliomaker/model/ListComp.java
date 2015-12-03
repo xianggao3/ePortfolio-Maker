@@ -9,7 +9,7 @@ package eportfoliomaker.model;
  *
  * @author xgao3
  */
-public class List extends Component{
+public class ListComp extends Component{
     String bullets;
 
 
@@ -29,7 +29,7 @@ public class List extends Component{
         this.type = type;
     }
     
-    public List(){
+    public ListComp(){
         type="list";
         bullets=null;
     }

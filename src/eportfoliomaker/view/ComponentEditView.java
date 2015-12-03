@@ -7,7 +7,7 @@ package eportfoliomaker.view;
 
 import eportfoliomaker.model.Component;
 import eportfoliomaker.model.Img;
-import eportfoliomaker.model.List;
+import eportfoliomaker.model.ListComp;
 import eportfoliomaker.model.Page;
 import eportfoliomaker.model.Paragraph;
 import eportfoliomaker.model.SlideShowModel;
@@ -35,36 +35,31 @@ public  class ComponentEditView extends HBox{
     
     //component types
     Paragraph p;
-    List list;
+    ListComp list;
     Img img;
     Video video;
     SlideShowModel ss;
     
-    Label text;
-    Label text2;
-    ImageView imgview;
-    MediaView movieView;
+    Label text= new Label();
+    Label text2= new Label();
+    ImageView imgview= new ImageView();
+    MediaView movieView= new MediaView();
     
     
     
-    ComponentEditView(PageEditView aThis, Component component) {
+    ComponentEditView( Component component) {
         loadComp(component);
-        updateComp(component);
     }
     
-    public void updateComp(Component comp){
-        if(comp.getType()=="p"){
-        }
-    }
 
-    private void loadComp(Component comp) {
+    public void loadComp(Component comp) {
         if(comp.getType()=="p"){
             p = (Paragraph)comp;
             text.setText(p.getText());
             getChildren().add(text);
             
         }else if(comp.getType()=="list"){
-            list=(List)comp;
+            list=(ListComp)comp;
             text.setText(list.getBullets());
             getChildren().add(text);
             

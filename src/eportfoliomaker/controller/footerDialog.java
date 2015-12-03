@@ -5,6 +5,7 @@
  */
 package eportfoliomaker.controller;
 
+import eportfoliomaker.view.ePortfolioAppMakerView;
 import java.util.Optional;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
  * @author xgao3
  */
 public class footerDialog extends Stage{
+    ePortfolioAppMakerView ui;
     public footerDialog(){
         TextInputDialog dialog = new TextInputDialog("Footer Text");
         dialog.setTitle("Footer");
@@ -23,7 +25,7 @@ public class footerDialog extends Stage{
         // Traditional way to get the response value.
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
-            System.out.println("Your footer: " + result.get());
+            ui.getePortfolio().getSelectedPage().setFooter(result.get());
         }
     }
 }

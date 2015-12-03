@@ -1,13 +1,16 @@
 package eportfoliomaker.slideshow;
 
 import eportfoliomaker.model.Slide;
+import eportfoliomaker.slideshow.ErrorHandler;
+import eportfoliomaker.slideshow.ImageSelectionController;
+import eportfoliomaker.slideshow.LanguagePropertyType;
 import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_CAPTION_PROMPT;
 import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_CAPTION_TEXT_FIELD;
 import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_SLIDE_EDIT_VIEW;
 import static eportfoliomaker.slideshow.StartupConstants.DEFAULT_THUMBNAIL_WIDTH;
+import eportfoliomaker.slideshow.ssDialog;
 import java.io.File;
 import java.net.URL;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -60,27 +63,25 @@ public class SlideEditView extends HBox {
 	// MAKE SURE WE ARE DISPLAYING THE PROPER IMAGE
 	imageSelectionView = new ImageView();
 	updateSlideImage();
-        Button a = new Button("Select Image");
+
 	// SETUP THE CAPTION CONTROLS
 	captionVBox = new VBox();
 	PropertiesManager props = PropertiesManager.getPropertiesManager();
-	captionLabel = new Label("Caption:");
+	captionLabel = new Label(props.getProperty(LanguagePropertyType.LABEL_CAPTION));
 	captionTextField = new TextField();
 	captionTextField.setText(slide.getCaption());
 	captionVBox.getChildren().add(captionLabel);
 	captionVBox.getChildren().add(captionTextField);
 
 	// LAY EVERYTHING OUT INSIDE THIS COMPONENT
+        Image im = new Image("DefaultStartSlide.png");
+        imageSelectionView.setImage(im);
 	getChildren().add(imageSelectionView);
-        getChildren().add(a);
 	getChildren().add(captionVBox);
 
 	// SETUP THE EVENT HANDLERS
 	imageController = new ImageSelectionController(ui);
 	imageSelectionView.setOnMousePressed(e -> {
-	    imageController.processSelectImage(slide, this);
-	});
-        a.setOnMousePressed(e -> {
 	    imageController.processSelectImage(slide, this);
 	});
 	captionTextField.textProperty().addListener(e -> {
@@ -108,7 +109,7 @@ public class SlideEditView extends HBox {
 	    imageSelectionView.setImage(slideImage);
 	    
 	    // AND RESIZE IT
-	    double scaledWidth = DEFAULT_THUMBNAIL_WIDTH;
+	    double scaledWidth = 120;
 	    double perc = scaledWidth / slideImage.getWidth();
 	    double scaledHeight = slideImage.getHeight() * perc;
 	    imageSelectionView.setFitWidth(scaledWidth);

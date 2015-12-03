@@ -24,7 +24,12 @@ import eportfoliomaker.controller.titleDialog;
 import eportfoliomaker.controller.videoDialog;
 import eportfoliomaker.ePortfolioJSONFileManager;
 import eportfoliomaker.model.Component;
+import eportfoliomaker.model.Img;
+import eportfoliomaker.model.ListComp;
 import eportfoliomaker.model.Page;
+import eportfoliomaker.model.Paragraph;
+import eportfoliomaker.model.SlideShowModel;
+import eportfoliomaker.model.Video;
 import eportfoliomaker.model.ePortfolioModel;
 import eportfoliomaker.slideshow.ssDialog;
 import eportfoliomaker.slideshow.ssDialog;
@@ -61,6 +66,8 @@ import javafx.stage.Stage;
  * @author xgao3
  */
 public class ePortfolioAppMakerView {
+    
+    
     Stage primaryStage;
     Scene primaryScene;
     BorderPane ePortMakerPane;
@@ -89,7 +96,7 @@ public class ePortfolioAppMakerView {
     TabPane tabbedPane=new TabPane();
     Tab tab1;
     Tab tab2;
-    VBox pagesEditorPane;
+    PageEditView pagesEditorPane;
     ScrollPane pagesEditorScrollPane;
     
     VBox pageEditToolbar;//
@@ -139,12 +146,39 @@ public class ePortfolioAppMakerView {
     siteViewer sv;
     Tab nTab;
     SingleSelectionModel<Tab> currentTab;   
+    Page pg;
     
     public ePortfolioAppMakerView(ePortfolioJSONFileManager initFileManager){
         fileManager= initFileManager;
         ePortfolio = new ePortfolioModel(this);
         errorHandler=new ErrorHandler(this);
     }
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+
+    public ePortfolioModel getePortfolio() {
+        return ePortfolio;
+    }
+
+    public void setePortfolio(ePortfolioModel ePortfolio) {
+        this.ePortfolio = ePortfolio;
+    }
+
+    public ErrorHandler getErrorHandler() {
+        return errorHandler;
+    }
+
+    public void setErrorHandler(ErrorHandler errorHandler) {
+        this.errorHandler = errorHandler;
+    }
+    
+    
     
     public void startUI(Stage initPrimaryStage, String windowTitle) {
         initFileToolBar();
@@ -220,37 +254,33 @@ public class ePortfolioAppMakerView {
         siteToolbar.getChildren().addAll(titleLabel,pageTitle,nameLabel,studentName);*/
         workspace.setTop(siteToolbar);
         
-        initTabPane();
+        //initTabPane();
         
         workspace.setCenter(tabbedPane);
         tabbedPane.getStyleClass().add("file_toolbar");
+        currentTab = tabbedPane.getSelectionModel();
     }
     
-    private void initSiteViewerWorkspace(){
+    public void initSiteViewerWorkspace(){
         siteView=new WebView();
         scrollPane = new ScrollPane(siteView);
     }
-
-    private void initTabPane(){
-        tab1=new Tab();
-        tab1.setText("First Title Here");
+/*
+    public void initTabPane(){
+        
         currentTab = tabbedPane.getSelectionModel();
         
-        
-        pagesEditorPane = new VBox();
-        pagesEditorScrollPane= new ScrollPane(pagesEditorPane);
+        pagesEditorScrollPane = new ScrollPane(pv);
         pagesEditorScrollPane.setFitToWidth(true);
 	pagesEditorScrollPane.setFitToHeight(true);
 	//initTitleControls();
 
         
-        tab1.setContent(pagesEditorPane);
-        tab2=new Tab();
-        tab2.setText("Second Title Here");
-        tabbedPane.getTabs().addAll(tab1,tab2);
+        tab1.setContent(pagesEditorScrollPane);
+        tabbedPane.getTabs().addAll(tab1);
         
     }
-    
+  */  
     private void initWindow(String windowTitle) {
         primaryStage.setTitle(windowTitle);
 
@@ -293,10 +323,36 @@ public class ePortfolioAppMakerView {
     }
         
     private void initEventHandlers(){
-        controller= new ePortfolioController(this);
+        controller = new ePortfolioController(this,fileManager);
+	newPortButton.setOnAction(e -> {
+	    controller.handleNewPortRequest();
+	});
+	loadPortButton.setOnAction(e -> {
+	    controller.handleLoadPortRequest();
+	});
+	savePortButton.setOnAction(e -> {
+	    controller.handleSavePortRequest();
+	});
+	saveAsPortButton.setOnAction(e -> {
+	    controller.handleSaveAsPortRequest();
+	});
+        exportButton.setOnAction(e->{
+            controller.handleExportRequest();
+        });
+	exitButton.setOnAction(e -> {
+	    controller.handleExitRequest();
+	});
+        
+        
+        //components
+        controller= new ePortfolioController(this,fileManager);
         
         editListCompButton.setOnAction(e->{
-            listD=new listDialog(primaryStage);
+            
+            Component a = ePortfolio.getSelectedPage().getSelectedComp();
+            if(a instanceof ListComp){
+            listD=new listDialog(primaryStage,(ListComp)a);
+            }
         });
         updatePageTitleButton.setOnAction(e->{
            titleDialog= new titleDialog();      
@@ -310,11 +366,17 @@ public class ePortfolioAppMakerView {
         selectColorButton.setOnAction(e->{
             colorD= new colorDialog();
         });
+        removeCompButton.setOnAction(e->{
+           ePortfolio.getSelectedPage().getComponents().remove(ePortfolio.getSelectedPage().getSelectedComp());
+        });
+        selectComponentButton.setOnAction(e->{
+            
+        });
         selectPageFontButton.setOnAction(e->{
             pgFontD=new pageFontDialog();
         });
         addComponentButton.setOnAction(e->{
-           addD= new addCompDialog(); 
+           addD= new addCompDialog(ePortfolio); 
         });
         updateHeaderButton.setOnAction(e->{
            headerD=new headerDialog(); 
@@ -323,16 +385,32 @@ public class ePortfolioAppMakerView {
             footerD=new footerDialog();
         });
         editImageCompButton.setOnAction(e->{
-            imgD=new imgDialog();
+            
+            Component a = ePortfolio.getSelectedPage().getSelectedComp();
+            if(a instanceof Img){
+            imgD=new imgDialog(primaryStage,(Img)a);
+            }
         });
         editVideoCompButton.setOnAction(e->{
-           vidD=new videoDialog(); 
+            
+            Component a = ePortfolio.getSelectedPage().getSelectedComp();
+            if(a instanceof Video){
+            vidD=new videoDialog(primaryStage,(Video)a);
+            }
         });
         editSlideShowCompButton.setOnAction(e->{
-            ssm=new ssDialog(this.primaryStage);
+            
+            Component a = ePortfolio.getSelectedPage().getSelectedComp();
+            if(a instanceof SlideShowModel){
+            ssm=new ssDialog(primaryStage,(SlideShowModel)a);
+            }
         });
         editTextCompButton.setOnAction(e->{
-            textD=new textDialog(primaryStage);
+            
+            Component a = ePortfolio.getSelectedPage().getSelectedComp();
+            if(a instanceof Paragraph){
+            textD=new textDialog(primaryStage,(Paragraph)a);
+            }
         });
         selectBannerImageButton.setOnAction(e->{
            bannerD=new bannerDialog(); 
@@ -345,8 +423,17 @@ public class ePortfolioAppMakerView {
             }
         });
         addPageButton.setOnAction(e->{
-            tabbedPane.getTabs().add(nTab= new Tab(" New Tab Title"));
-            currentTab.select(nTab);
+            tab1=new Tab("New Tab");
+            pagesEditorScrollPane = new ScrollPane(pagesEditorPane);
+            pagesEditorScrollPane.setFitToWidth(true);
+            pagesEditorScrollPane.setFitToHeight(true);
+            //initTitleControls();
+            tab1.setContent(pagesEditorScrollPane);
+            tabbedPane.getTabs().add(tab1);
+            
+            pg = new Page(this);
+            ePortfolio.getPages().add(pg);
+            ePortfolio.setSelectedPage(pg);
         });
 
         removePageButton.setOnAction(e->{
@@ -362,7 +449,7 @@ public class ePortfolioAppMakerView {
 	savePortButton.setDisable(saved);
 	selectSiteViewerWorkspaceButton.setDisable(false);
 	
-        updatePageEditToolbarControls();
+        //updatePageEditToolbarControls();
     }
     
     public void updatePageEditToolbarControls(){
@@ -399,34 +486,22 @@ public class ePortfolioAppMakerView {
         updateFooterButton.setDisable(!pageSelected);	
         addComponentButton.setDisable(!pageSelected);	
         selectComponentButton.setDisable(!pageSelected);	
-        removeCompButton.setDisable(!pageSelected);	
-        
-    }
-    /**
-     * Uses the slide show data to reload all the components for
-     * slide editing.
-     * 
-     * @param slideShowToLoad SLide show being reloaded.
-     */
-        
-    public void reloadPagePane() {//redo this
-	pagesEditorPane.getChildren().clear();
-	reloadTitleControls();
-	for (Page page : ePortfolio.getPages()) {
-	    PageEditView slideEditor = new PageEditView(this, page);
-	    //if (ePortfolio.isSelectedPage(page))
-		//slideEditor.getStyleClass().add(CSS_CLASS_SELECTED_SLIDE_EDIT_VIEW);
-	    //else
-		//slideEditor.getStyleClass().add(CSS_CLASS_SLIDE_EDIT_VIEW);
-	    pagesEditorPane.getChildren().add(slideEditor);
-	    slideEditor.setOnMousePressed(e -> {
-		ePortfolio.setSelectedPage(page);
-		this.reloadPagePane();
-	    });
-	}
-	updatePageEditToolbarControls();
     }
     
+        
+    public void reloadPagePane() {
+        currentTab.getSelectedItem().setContent(null);
+        for(Component comp:ePortfolio.getSelectedPage().getComponents()){
+            ComponentEditView compEditor = new ComponentEditView(comp);
+            
+            pagesEditorScrollPane = new ScrollPane();
+            pagesEditorScrollPane.getChildren().add(compEditor);//initTitleControls();
+            pagesEditorScrollPane.setFitToWidth(true);
+            pagesEditorScrollPane.setFitToHeight(true);
+            currentTab.getSelectedItem().setContent(pagesEditorScrollPane);
+        }
+    }
+    /*
     private void initTitleControls() {
 	String labelPrompt = "New Title";
 	titlePane = new FlowPane();
@@ -454,4 +529,5 @@ public class ePortfolioAppMakerView {
 	    slidesEditorPane.getChildren().add(titlePane);
 	titleTextField.setText(slideShow.getTitle());
     }
+    */
 }

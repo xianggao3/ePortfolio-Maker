@@ -5,6 +5,7 @@
  */
 package eportfoliomaker.controller;
 
+import eportfoliomaker.view.ePortfolioAppMakerView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,8 @@ import javafx.stage.Stage;
  * @author xgao3
  */
 public class colorDialog extends Stage{
+    ePortfolioAppMakerView ui;
+    
     public colorDialog(){
         List<String> choices = new ArrayList<>();
         choices.add("Red");
@@ -32,7 +35,7 @@ public class colorDialog extends Stage{
         // Traditional way to get the response value.
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
-            System.out.println("Your choice: " + result.get());
+            ui.getePortfolio().getSelectedPage().setColorTheme(result.get());
         }
     }
 }

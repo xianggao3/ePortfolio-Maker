@@ -19,4 +19,5 @@ public abstract class Component {
     public void setType(String type) {
         this.type = type;
     }
+    
 }

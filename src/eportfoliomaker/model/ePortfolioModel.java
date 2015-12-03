@@ -5,6 +5,7 @@
  */
 package eportfoliomaker.model;
 
+import eportfoliomaker.view.PageEditView;
 import eportfoliomaker.view.ePortfolioAppMakerView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,15 +16,25 @@ import javafx.collections.ObservableList;
  */
 public class ePortfolioModel {
     ePortfolioAppMakerView ui;
-    String navbar;
+    ObservableList<String> navbar;
     ObservableList<Page> pages;
     Page selectedPage;
+    String studentName;
+    PageEditView pv;
 
-    public String getNavbar() {
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+    
+    public ObservableList<String> getNavbar() {
         return navbar;
     }
 
-    public void setNavbar(String navbar) {
+    public void setNavbar(ObservableList<String> navbar) {
         this.navbar = navbar;
     }
 
@@ -46,16 +57,36 @@ public class ePortfolioModel {
     public boolean isSelectedPage(Page testpage) {
 	return selectedPage == testpage;
     }
+
+    public ePortfolioAppMakerView getUi() {
+        return ui;
+    }
+
+    public void setUi(ePortfolioAppMakerView ui) {
+        this.ui = ui;
+    }
+
+    public PageEditView getPv() {
+        return pv;
+    }
+
+    public void setPv(PageEditView pv) {
+        this.pv = pv;
+    }
+    
     
     public ePortfolioModel(ePortfolioAppMakerView initUI) {
         initUI=ui;
         pages=FXCollections.observableArrayList();
+        navbar = FXCollections.observableArrayList();
         reset();
     }
 
-    private void reset() {
+    public void reset() {
 	pages.clear();
+        navbar.clear();
 	selectedPage = null;
+        studentName="";
     }
     
     

@@ -5,6 +5,7 @@
  */
 package eportfoliomaker.model;
 
+import eportfoliomaker.view.PageEditView;
 import eportfoliomaker.view.ePortfolioAppMakerView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +16,10 @@ import javafx.collections.ObservableList;
  */
 public class Page {
     ePortfolioAppMakerView ui;
+    
+    PageEditView pv;
     String Title;
+    String studentName;
     String bannerText;
     String banner;
     ObservableList<Component> components;
@@ -24,6 +28,15 @@ public class Page {
     String layoutTheme;
     String pageFont;
     String footer;
+    String header;
+
+    public String getHeader() {
+        return header;
+    }
+
+    public void setHeader(String header) {
+        this.header = header;
+    }
 
     public String getFooter() {
         return footer;
@@ -39,6 +52,14 @@ public class Page {
 
     public void setPageFont(String pageFont) {
         this.pageFont = pageFont;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 
     public String getColorTheme() {
@@ -99,7 +120,7 @@ public class Page {
     public boolean isSelectedComp(Component testcomp) {
 	return selectedComp == testcomp;
     }
-    
+
     
     
     public Page(ePortfolioAppMakerView initUI) {
@@ -111,11 +132,28 @@ public class Page {
     public void reset() {
 	components.clear();
 	selectedComp = null;
+        Title= "";
+        studentName= "";
+        bannerText= "";
+        banner= "";
+        colorTheme= "";
+        layoutTheme= "";
+        pageFont= "";
+        footer= "";
+        header= "";
     }
     
     public void addComp(Component comp){
         components.add(comp);
         ui.reloadPagePane();
 
+    }
+
+    public void setHeader() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setPageEditView(PageEditView pv) {
+        this.pv=pv;
     }
 }

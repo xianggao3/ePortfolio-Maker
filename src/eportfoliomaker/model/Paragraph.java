@@ -39,7 +39,7 @@ public class Paragraph extends Component{
     
     public Paragraph(){
         type = "p";
-        font= null;
-        text=null;
+        font= "No Font Applied";
+        text="No Text Currently";
     }
 }

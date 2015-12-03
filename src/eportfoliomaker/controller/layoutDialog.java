@@ -5,6 +5,7 @@
  */
 package eportfoliomaker.controller;
 
+import eportfoliomaker.view.ePortfolioAppMakerView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
  * @author xgao3
  */
 public class layoutDialog extends Stage{
+    ePortfolioAppMakerView ui;
     public layoutDialog(){
         List<String> choices = new ArrayList<>();
         choices.add("SAMPLE LAYOUT A");
@@ -32,7 +34,7 @@ public class layoutDialog extends Stage{
         // Traditional way to get the response value.
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
-            System.out.println("Your choice: " + result.get());
+            ui.getePortfolio().getSelectedPage().setLayoutTheme(result.get());
         }
     }
 }

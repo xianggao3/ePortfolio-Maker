@@ -65,7 +65,7 @@ public class bannerDialog {
 	    String path = file.getPath().substring(0, file.getPath().indexOf(file.getName()));
 	    String fileName = file.getName();
 	    model.getSelectedPage().setBanner(path+fileName);
-	    pages.updateSlideImage();
+	    //pages.updateSlideImage();
 	    ui.updateFileToolbarControls(false);//is this right? am i supposed to make a pageeditview and a apmakerview in this class?
 	}   
     }
