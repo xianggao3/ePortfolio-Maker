@@ -438,6 +438,8 @@ public class ePortfolioAppMakerView {
             ePortfolio.getPages().add(pg);
             ePortfolio.setSelectedPage(pg);
             reloadPagePane(pv);
+            
+            //pv.getStyleClass().add("tabPane");
         });
 
         removePageButton.setOnAction(e->{
@@ -497,10 +499,18 @@ public class ePortfolioAppMakerView {
         pv.getChildren().clear();
         for(Component comp:ePortfolio.getSelectedPage().getComponents()){
             ComponentEditView compEditor = new ComponentEditView(comp);
+            if(ePortfolio.getSelectedPage().isSelectedComp(comp)){
+                compEditor.getStyleClass().add("selected_tabPane");
+            }else{
+                compEditor.getStyleClass().add("tabPane");
+            }
             //initTitleControls();
             pagesEditorScrollPane = new ScrollPane(pv);
             pv.getChildren().add(compEditor);
-            
+            pv.setOnMousePressed(b->{
+                ePortfolio.getSelectedPage().setSelectedComp(comp);
+                this.reloadPagePane(pv);
+            });
             pagesEditorScrollPane.setFitToWidth(true);
             pagesEditorScrollPane.setFitToHeight(true);
             currentTab.getSelectedItem().setContent(pagesEditorScrollPane);

@@ -53,8 +53,8 @@ public class videoDialog extends Stage{
         imgScreen= new Scene(scn);
         imgScreen.getStylesheets().add("eportfoliomaker/style/Style.css");
         OKButton.setOnMouseReleased(e->{
-            vToEdit.setVideoW(width.getText());
-            vToEdit.setVideoH(height.getText());
+            vToEdit.setVideoW(Double.parseDouble(width.getText()));
+            vToEdit.setVideoH(Double.parseDouble(height.getText()));
             vToEdit.setCaption(caption.getText());
             vToEdit.setVideoFileName(fileName);
             vToEdit.setVideoPath(path);

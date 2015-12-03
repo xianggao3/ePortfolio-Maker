@@ -51,12 +51,15 @@ public class addCompDialog extends Stage{
                 ePortfolio.getSelectedPage().addComp(p);
             }else if(result.get()=="List"){
                 ListComp list = new ListComp();
+                listDialog lD= new listDialog(this,list);
                 ePortfolio.getSelectedPage().addComp(list);
             }else if(result.get()=="Image"){
                 Img img = new Img();
+                imgDialog i = new imgDialog(this,img);
                 ePortfolio.getSelectedPage().addComp(img);
             }else if(result.get()=="Video"){
                 Video vid = new Video();
+                videoDialog v = new videoDialog(this,vid);
                 ePortfolio.getSelectedPage().addComp(vid);
             }else if(result.get()=="Slideshow"){
                 //SlideShowModel ss = new SlideShowModel();

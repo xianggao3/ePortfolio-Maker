@@ -49,6 +49,7 @@ public  class ComponentEditView extends HBox{
     
     ComponentEditView( Component component) {
         loadComp(component);
+        this.getStyleClass().add("tabPane");
     }
     
 
@@ -77,9 +78,8 @@ public  class ComponentEditView extends HBox{
                 imgview.setImage(imgImage);
 
                 // AND RESIZE IT
-                double scaledWidth = 200;
-                double perc = scaledWidth / imgImage.getWidth();
-                double scaledHeight = imgImage.getHeight() * perc;
+                double scaledWidth = img.getImgW();
+                double scaledHeight = img.getImgH();
                 imgview.setFitWidth(scaledWidth);
                 imgview.setFitHeight(scaledHeight);
             } catch (Exception e) {
@@ -101,9 +101,8 @@ public  class ComponentEditView extends HBox{
 	    movieView.setMediaPlayer(mplayer);
 	    
 	    // AND RESIZE IT
-	    double scaledWidth = 350;
-	    double perc = scaledWidth / moviecomp.getWidth();
-	    double scaledHeight = moviecomp.getHeight() * perc;
+	    double scaledWidth = video.getVideoW();
+	    double scaledHeight = video.getVideoH();
 	    movieView.setFitWidth(scaledWidth);
 	    movieView.setFitHeight(scaledHeight);
             } catch (Exception e) {

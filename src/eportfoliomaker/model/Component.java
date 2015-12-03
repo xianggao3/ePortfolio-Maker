@@ -11,7 +11,8 @@ package eportfoliomaker.model;
  */
 public abstract class Component {
     String type;
-
+    boolean selected;
+    
     public String getType() {
         return type;
     }

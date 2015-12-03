@@ -8,6 +8,10 @@ package eportfoliomaker.controller;
 import eportfoliomaker.model.Img;
 import eportfoliomaker.view.ePortfolioAppMakerView;
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import static javafx.scene.input.KeyCode.SLASH;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -52,7 +57,11 @@ public class imgDialog extends Stage{
     public imgDialog(Stage primaryStage,Img pToEdi){
         initOwner(primaryStage);
         imgSelect.setOnAction(e->{
-            processSelectImage();
+            try {
+                processSelectImage();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(imgDialog.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         imgView= new ImageView (selectedImg);
         heightPane.getChildren().addAll(new Label("Height: "),height,new Label("px"));
@@ -84,8 +93,8 @@ public class imgDialog extends Stage{
             pToEdi.setCaption(caption.getText());
             pToEdi.setImgFileName(fileName);
             pToEdi.setImgPath(path);
-            pToEdi.setImgH(height.getText());
-            pToEdi.setImgW(width.getText());
+            pToEdi.setImgH(Double.parseDouble(height.getText()));
+            pToEdi.setImgW(Double.parseDouble(width.getText()));
             pToEdi.setOrientation(orientationPreference);
         });
         
@@ -99,7 +108,7 @@ public class imgDialog extends Stage{
         showAndWait();
     }
     
-    public void processSelectImage() {
+    public void processSelectImage() throws MalformedURLException {
 	FileChooser imageFileChooser = new FileChooser();
 	
 	// SET THE STARTING DIRECTORY
@@ -117,9 +126,16 @@ public class imgDialog extends Stage{
 	if (file != null) {
 	     path = file.getPath().substring(0, file.getPath().indexOf(file.getName()));
 	     fileName = file.getName();
-	    selectedImg= new Image(path+ fileName);
+             String fullName = path+fileName;
+             System.out.println(""+path+fileName);
+             String imagePath = path + SLASH +fileName;
+            File file2 = new File(imagePath);
+                URL fileURL = file2.toURI().toURL();
+                selectedImg = new Image(fileURL.toExternalForm());
+            
 	}   
     }
+    
     
     private Button initChildButton(Pane toolbar,String iconFileName,String cssClass,boolean disabled,String toolTip) {
         

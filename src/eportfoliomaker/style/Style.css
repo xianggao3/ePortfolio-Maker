@@ -37,6 +37,25 @@
     
     
 }
+.tabPane{
+    spacing:20;
+    -padding: 10;
+    -fx-border-radius:10px;
+    -fx-background-color:lightsteelblue;
+    -fx-border-style:solid;
+    -fx-border-width:2px;
+    -fx-border-color:gray;
+    -fx-font-size:35;
+}.selected_tabPane{
+    -fx-spacing:20;
+    -padding: 10;
+    -fx-border-radius:10px;
+    -fx-background-color:#ccccff;
+    -fx-border-style:solid;
+    -fx-border-width:2px;
+    -fx-border-color:gray;
+    -fx-font-size:35;
+}
 .mode_toolbar{
     -fx-background-color:lightblue;
     -fx-alignment:CENTER;

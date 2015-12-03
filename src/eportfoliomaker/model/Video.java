@@ -12,8 +12,8 @@ package eportfoliomaker.model;
 public class Video extends Component{
     String videoFileName;
     String src;
-    String videoH;
-    String videoW;
+    Double videoH;
+    Double videoW;
     String caption;
 
     public String getCaption() {
@@ -40,19 +40,19 @@ public class Video extends Component{
         this.src = videoPath;
     }
 
-    public String getVideoH() {
+    public Double getVideoH() {
         return videoH;
     }
 
-    public void setVideoH(String videoH) {
+    public void setVideoH(Double videoH) {
         this.videoH = videoH;
     }
 
-    public String getVideoW() {
+    public Double getVideoW() {
         return videoW;
     }
 
-    public void setVideoW(String videoW) {
+    public void setVideoW(Double videoW) {
         this.videoW = videoW;
     }
 
@@ -68,7 +68,7 @@ public class Video extends Component{
         type="video";
         videoFileName=null;
         src=null;
-        videoH="455";
-        videoW="810";
+        videoH=455.;
+        videoW=810.;
     }
 }
