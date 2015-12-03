@@ -43,11 +43,11 @@ public class addCompDialog extends Stage{
         // Traditional way to get the response value.
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
+            
             if (result.get()=="Text"){
                 
                 Paragraph p = new Paragraph();
                 textDialog tD = new textDialog(this,p);
-                
                 ePortfolio.getSelectedPage().addComp(p);
             }else if(result.get()=="List"){
                 ListComp list = new ListComp();

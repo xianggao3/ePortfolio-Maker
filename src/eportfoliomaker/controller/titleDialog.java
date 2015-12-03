@@ -31,6 +31,6 @@ public class titleDialog extends Stage{
         if (result.isPresent()){
             pui.getSelectedPage().setTitle(result.get());
         }
-        ui.reloadPagePane();
+        ui.reloadPagePane(ui.getePortfolio().getSelectedPage().getPv());
     }
 }

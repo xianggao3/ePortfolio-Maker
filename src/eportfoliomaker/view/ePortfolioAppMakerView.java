@@ -431,9 +431,13 @@ public class ePortfolioAppMakerView {
             tab1.setContent(pagesEditorScrollPane);
             tabbedPane.getTabs().add(tab1);
             
-            pg = new Page(this);
+            Page pg = new Page(this);
+            PageEditView pv = new PageEditView(ePortfolio);
+            pv.setPg(pg);
+            pg.setPageEditView(pv);
             ePortfolio.getPages().add(pg);
             ePortfolio.setSelectedPage(pg);
+            reloadPagePane(pv);
         });
 
         removePageButton.setOnAction(e->{
@@ -489,13 +493,14 @@ public class ePortfolioAppMakerView {
     }
     
         
-    public void reloadPagePane() {
+    public void reloadPagePane(PageEditView pv) {
         currentTab.getSelectedItem().setContent(null);
         for(Component comp:ePortfolio.getSelectedPage().getComponents()){
             ComponentEditView compEditor = new ComponentEditView(comp);
+            //initTitleControls();
+            pagesEditorScrollPane = new ScrollPane(pv);
+            pv.getChildren().add(compEditor);
             
-            pagesEditorScrollPane = new ScrollPane();
-            pagesEditorScrollPane.getChildren().add(compEditor);//initTitleControls();
             pagesEditorScrollPane.setFitToWidth(true);
             pagesEditorScrollPane.setFitToHeight(true);
             currentTab.getSelectedItem().setContent(pagesEditorScrollPane);

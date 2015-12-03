@@ -30,6 +30,14 @@ public class Page {
     String footer;
     String header;
 
+    public PageEditView getPv() {
+        return pv;
+    }
+
+    public void setPv(PageEditView pv) {
+        this.pv = pv;
+    }
+    
     public String getHeader() {
         return header;
     }
@@ -145,7 +153,7 @@ public class Page {
     
     public void addComp(Component comp){
         components.add(comp);
-        ui.reloadPagePane();
+        ui.reloadPagePane(pv);
 
     }
 
@@ -153,6 +161,7 @@ public class Page {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    
     public void setPageEditView(PageEditView pv) {
         this.pv=pv;
     }

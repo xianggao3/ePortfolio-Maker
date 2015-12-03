@@ -28,25 +28,34 @@ public class PageEditView extends VBox{
     Label bannerText;
     
     
-    PageEditView(ePortfolioModel ePortfol) {
-        ePortfolio=ePortfol;
-        titleLabel = new Label();studentNameLabel = new Label(); bannerText=new Label();
-        titleLabel.setText(pg.getTitle());
-        studentNameLabel.setText(pg.getStudentName());
-        bannerText.setText(pg.getBannertext());
-        getChildren().addAll(titleLabel,studentNameLabel,bannerText);
-        if(ePortfolio.getSelectedPage().getBanner()!=""){
-            Image bannerimg = new Image(ePortfolio.getSelectedPage().getBanner());
-            bannerView.setImage(bannerimg);
-            getChildren().add(bannerView);
-        }    
+
+        public PageEditView(ePortfolioModel ePortfolio) {
+            this.ePortfolio = ePortfolio;
+            this.titleLabel = new Label();
+            this.studentNameLabel = new Label();
+            this.bannerView = new ImageView();
+            this.bannerText = new Label();
+        }
+
+    public Page getPg() {
+        return pg;
     }
 
+    public void setPg(Page pg) {
+        this.pg = pg;
+    }
     
-    
-   
+    public void addComp(ComponentEditView comp)
+    {
+        components.add(comp);
+        //refresh(comp);
+    }
+    public void removeComp(ComponentEditView comp){
+        components.remove(comp);
+    }
 
-    
-    
-    
+    private void refresh(ComponentEditView comp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
+
