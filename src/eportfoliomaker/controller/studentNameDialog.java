@@ -22,6 +22,8 @@ public class studentNameDialog extends Stage{
     public studentNameDialog(ePortfolioAppMakerView ui,ePortfolioModel eP){
         this.ui=ui;
         model=eP;
+        
+        ui.reloadPagePane(eP.getSelectedPage().getPv());
         dialog = new TextInputDialog("Michael Appleseed");
         dialog.setTitle("Student Name");
         dialog.setHeaderText("Enter your Name");

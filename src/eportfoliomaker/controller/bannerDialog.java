@@ -31,20 +31,22 @@ public class bannerDialog {
     ePortfolioAppMakerView ui;
     PageEditView pages;
     
-    public bannerDialog(){
-    Alert alert = new Alert(AlertType.CONFIRMATION);
-    alert.setTitle("Banner Image");
-    alert.setHeaderText("Select a Banner Image");
+    public bannerDialog(ePortfolioAppMakerView ui, ePortfolioModel eP){
+        this.ui=ui;
+        model=eP;
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Banner Image");
+        alert.setHeaderText("Select a Banner Image");
 
-    ButtonType b1 = new ButtonType("Open Image");
-    ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+        ButtonType b1 = new ButtonType("Open Image");
+        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
 
-    alert.getButtonTypes().setAll(b1, buttonTypeCancel);
+        alert.getButtonTypes().setAll(b1, buttonTypeCancel);
 
-    Optional<ButtonType> result = alert.showAndWait();
-    if (result.get() == b1){
-            processSelectImage();
-    }
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == b1){
+                processSelectImage();
+        }
     } 
     
     public void processSelectImage() {

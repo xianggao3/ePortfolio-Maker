@@ -9,6 +9,7 @@ import eportfoliomaker.view.PageEditView;
 import eportfoliomaker.view.ePortfolioAppMakerView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Tab;
 
 /**
  *
@@ -29,6 +30,32 @@ public class Page {
     String pageFont;
     String footer;
     String header;
+    String index;
+    Tab tab;
+
+    public Tab getTab() {
+        return tab;
+    }
+
+    public void setTab(Tab tab) {
+        this.tab = tab;
+    }
+
+    public String getBannerText() {
+        return bannerText;
+    }
+
+    public void setBannerText(String bannerText) {
+        this.bannerText = bannerText;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
+    }
 
     public PageEditView getPv() {
         return pv;

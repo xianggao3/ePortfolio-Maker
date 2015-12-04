@@ -24,6 +24,8 @@ public class titleDialog extends Stage{
     public titleDialog(ePortfolioAppMakerView gui,ePortfolioModel eP){
         ui=gui;
         ePortfolio=eP;
+        
+        ui.reloadPagePane(eP.getSelectedPage().getPv());
         dialog = new TextInputDialog("New ePortfolio Page");
         dialog.setTitle("Change Title");
         dialog.setHeaderText("Enter your ePortfolio Page's Title");

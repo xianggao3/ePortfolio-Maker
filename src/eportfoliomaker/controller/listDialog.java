@@ -46,9 +46,10 @@ public class listDialog extends Stage{
         OKButton= new Button("OK");
         OKButton.setOnMouseReleased(e->{
             ltoEdit.setBullets(bulletArea.getText());
+            this.close();
         });
         
-        listbox.getChildren().addAll(listLabel,listBullets,bulletArea,OKButton);
+        listbox.getChildren().addAll(listBullets,bulletArea,OKButton);
         
         listbox.getStyleClass().add("dialog");
         

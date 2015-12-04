@@ -45,7 +45,6 @@ public class addCompDialog extends Stage{
         if (result.isPresent()){
             
             if (result.get()=="Text"){
-                
                 Paragraph p = new Paragraph();
                 textDialog tD = new textDialog(this,p);
                 ePortfolio.getSelectedPage().addComp(p);
