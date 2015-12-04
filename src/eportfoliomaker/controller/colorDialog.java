@@ -5,6 +5,7 @@
  */
 package eportfoliomaker.controller;
 
+import eportfoliomaker.model.ePortfolioModel;
 import eportfoliomaker.view.ePortfolioAppMakerView;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +19,10 @@ import javafx.stage.Stage;
  */
 public class colorDialog extends Stage{
     ePortfolioAppMakerView ui;
-    
-    public colorDialog(){
+    ePortfolioModel eP;
+    public colorDialog(ePortfolioAppMakerView gui,ePortfolioModel ep){
+        ui=gui;
+        eP=ep;
         List<String> choices = new ArrayList<>();
         choices.add("Red");
         choices.add("Blue");
@@ -37,5 +40,6 @@ public class colorDialog extends Stage{
         if (result.isPresent()){
             ui.getePortfolio().getSelectedPage().setColorTheme(result.get());
         }
+        ui.reloadPagePane(eP.getSelectedPage().getPv());
     }
 }

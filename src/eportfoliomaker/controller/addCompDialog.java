@@ -35,7 +35,7 @@ public class addCompDialog extends Stage{
         choices.add("Video");
         choices.add("Slideshow");
 
-        ChoiceDialog<String> dialog = new ChoiceDialog<>(" ", choices);
+        ChoiceDialog<String> dialog = new ChoiceDialog<>("Text", choices);
         dialog.setTitle("Components");
         dialog.setHeaderText("Component will be placed at the bottom of your current page");
         dialog.setContentText("Add a Component:");

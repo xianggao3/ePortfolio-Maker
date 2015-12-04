@@ -61,6 +61,7 @@ public class textDialog extends Stage{
         Button addTextHyperlinkButton=initChildButton(topPane,"hyperlink.png","page_edit_toolbar_icons",false,"Set a Hyperlink");
         topPane.add(font, 0,0);
         topPane.add(textFont, 0,1);
+        textFont.getSelectionModel().selectFirst();
         topPane.add(new Label("     Set a Hyperlink: "), 1, 0);
         
         textLabel=new Label("Paragraph:");

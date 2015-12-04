@@ -20,7 +20,6 @@ public class Page {
     
     PageEditView pv;
     String Title;
-    String studentName;
     String bannerText;
     String banner;
     ObservableList<Component> components;
@@ -89,13 +88,7 @@ public class Page {
         this.pageFont = pageFont;
     }
 
-    public String getStudentName() {
-        return studentName;
-    }
-
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
-    }
+    
 
     public String getColorTheme() {
         return colorTheme;
@@ -168,12 +161,11 @@ public class Page {
 	components.clear();
 	selectedComp = null;
         Title= "New ePortfolio Page";
-        studentName= "Michael Appleseed";
-        bannerText= "";
-        banner= "";
-        colorTheme= "";
-        layoutTheme= "";
-        pageFont= "";
+        bannerText= "None Selected";
+        banner= "None Selected";
+        colorTheme= "None Selected";
+        layoutTheme= "None Selected";
+        pageFont= "None Selected";
         footer= "";
         header= "";
     }

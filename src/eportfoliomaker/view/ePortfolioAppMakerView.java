@@ -10,7 +10,6 @@ import eportfoliomaker.controller.addCompDialog;
 import eportfoliomaker.controller.bannerDialog;
 import eportfoliomaker.controller.colorDialog;
 import eportfoliomaker.controller.ePortfolioController;
-import eportfoliomaker.controller.fontDialog;
 import eportfoliomaker.controller.footerDialog;
 import eportfoliomaker.controller.headerDialog;
 import eportfoliomaker.controller.imgDialog;
@@ -135,7 +134,6 @@ public class ePortfolioAppMakerView {
     layoutDialog layoutD;
     colorDialog colorD;
     pageFontDialog pgFontD;
-    fontDialog fontD;
     addCompDialog addD;
     headerDialog headerD;
     footerDialog footerD;
@@ -337,17 +335,17 @@ public class ePortfolioAppMakerView {
             nameDi=new studentNameDialog(this,ePortfolio);
         });
         selectLayoutButton.setOnAction(e->{
-           layoutD=new layoutDialog(); 
+           layoutD=new layoutDialog(this,ePortfolio); 
         });
         selectColorButton.setOnAction(e->{
-            colorD= new colorDialog();
+            colorD= new colorDialog(this,ePortfolio);
         });
         removeCompButton.setOnAction(e->{
            ePortfolio.getSelectedPage().getComponents().remove(ePortfolio.getSelectedPage().getSelectedComp());
            reloadPagePane(ePortfolio.getPv());
         });
         selectPageFontButton.setOnAction(e->{
-            pgFontD=new pageFontDialog();
+            pgFontD=new pageFontDialog(this,ePortfolio);
         });
         addComponentButton.setOnAction(e->{
            addD= new addCompDialog(ePortfolio); 
@@ -356,7 +354,7 @@ public class ePortfolioAppMakerView {
            headerD=new headerDialog(); 
         });
         updateFooterButton.setOnAction(e->{
-            footerD=new footerDialog();
+            footerD=new footerDialog(this,ePortfolio);
         });
         editImageCompButton.setOnAction(e->{
             
@@ -411,7 +409,7 @@ public class ePortfolioAppMakerView {
             Tab tab = new Tab(pg.getTitle());
             pg.setTab(tab);
             
-            pgTitle = new Label("By "+ pg.getStudentName());
+            pgTitle = new Label("By "+ ePortfolio.getStudentName());
             pvTitlePane = new HBox(pgTitle); 
             pv.getChildren().add(pvTitlePane);
             pv.setPg(pg);
@@ -436,6 +434,7 @@ public class ePortfolioAppMakerView {
             tab.setOnSelectionChanged(g->{
                 ePortfolio.setSelectedPage(pg);
                 currentTab=tab;
+                reloadPagePane(pv);
                 
             });
             tab.setContent(pagesEditorScrollPane);
@@ -498,10 +497,14 @@ public class ePortfolioAppMakerView {
         
         pv.getChildren().clear();
         
-            Label pgTitle= new Label("By "+ ePortfolio.getSelectedPage().getStudentName());
-            
-            pv.getChildren().add(pgTitle);
-            pv.getStyleClass().add("tabPane_a");
+        Label pgTitle= new Label("By "+ ePortfolio.getStudentName());
+        Label pgFont = new Label("Page Font: "+ePortfolio.getSelectedPage().getPageFont());    
+        Label pgLayout= new Label("Page Layout Theme: "+ePortfolio.getSelectedPage().getLayoutTheme());
+        Label pgColor = new Label("Page Color Theme: "+ePortfolio.getSelectedPage().getColorTheme());
+        VBox pgOptions = new VBox();
+        pgOptions.getChildren().addAll(pgTitle,pgLayout,pgColor,pgFont);
+        pv.getChildren().addAll(pgOptions);
+        pv.getStyleClass().add("tabPane_a");
             
         for(Component comp:ePortfolio.getSelectedPage().getComponents()){
             ComponentEditView compEditor = new ComponentEditView(comp);
@@ -520,7 +523,13 @@ public class ePortfolioAppMakerView {
             pagesEditorScrollPane.setFitToWidth(true);
             pagesEditorScrollPane.setFitToHeight(true);
             currentTab.setContent(pagesEditorScrollPane);
-            currentTab.setText(ePortfolio.getSelectedPage().getTitle()+"-"+ePortfolio.getSelectedPage().getStudentName());
+            currentTab.setText(ePortfolio.getSelectedPage().getTitle());
+        }
+        if(ePortfolio.getSelectedPage().getFooter()!=""){
+            Pane footPane = new Pane();
+            Label footerText = new Label("Footer: "+ePortfolio.getSelectedPage().getFooter());
+            footPane.getChildren().addAll(footerText);
+            pv.getChildren().add(footPane);
         }
     }
     /*

@@ -5,6 +5,7 @@
  */
 package eportfoliomaker.controller;
 
+import eportfoliomaker.model.ePortfolioModel;
 import eportfoliomaker.view.ePortfolioAppMakerView;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,10 @@ import javafx.stage.Stage;
  */
 public class layoutDialog extends Stage{
     ePortfolioAppMakerView ui;
-    public layoutDialog(){
+    ePortfolioModel eP;
+    public layoutDialog(ePortfolioAppMakerView gui,ePortfolioModel ep){
+        ui=gui;
+        eP=ep;
         List<String> choices = new ArrayList<>();
         choices.add("SAMPLE LAYOUT A");
         choices.add("SAMPLE LAYOUT B");
@@ -26,7 +30,7 @@ public class layoutDialog extends Stage{
         choices.add("SAMPLE LAYOUT D");
         choices.add("SAMPLE LAYOUT E");
 
-        ChoiceDialog<String> dialog = new ChoiceDialog<>(" ", choices);
+        ChoiceDialog<String> dialog = new ChoiceDialog<>("SAMPLE LAYOUT A", choices);
         dialog.setTitle("Layout");
         dialog.setHeaderText("Layout Choices");
         dialog.setContentText("Choose your layout:");
@@ -36,5 +40,6 @@ public class layoutDialog extends Stage{
         if (result.isPresent()){
             ui.getePortfolio().getSelectedPage().setLayoutTheme(result.get());
         }
+        ui.reloadPagePane(eP.getSelectedPage().getPv());
     }
 }

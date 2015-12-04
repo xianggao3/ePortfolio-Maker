@@ -31,7 +31,7 @@ public class studentNameDialog extends Stage{
         // Traditional way to get the response value.
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
-            eP.getSelectedPage().setStudentName(result.get());
+            eP.setStudentName(result.get());
         }
         ui.reloadPagePane(eP.getSelectedPage().getPv());
     }

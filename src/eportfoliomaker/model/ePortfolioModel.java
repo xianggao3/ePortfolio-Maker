@@ -86,7 +86,7 @@ public class ePortfolioModel {
 	pages.clear();
         navbar.clear();
 	selectedPage = null;
-        studentName="";
+        studentName="Michael Appleseed";
     }
     
     

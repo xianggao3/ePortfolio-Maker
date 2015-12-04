@@ -29,7 +29,6 @@ public class bannerDialog {
     
     ePortfolioModel model;
     ePortfolioAppMakerView ui;
-    PageEditView pages;
     
     public bannerDialog(ePortfolioAppMakerView ui, ePortfolioModel eP){
         this.ui=ui;
@@ -47,6 +46,7 @@ public class bannerDialog {
         if (result.get() == b1){
                 processSelectImage();
         }
+        ui.reloadPagePane(eP.getSelectedPage().getPv());
     } 
     
     public void processSelectImage() {
