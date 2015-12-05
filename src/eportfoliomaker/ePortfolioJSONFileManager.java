@@ -5,6 +5,7 @@
  */
 package eportfoliomaker;
 
+import org.json.*;
 import eportfoliomaker.model.Component;
 import eportfoliomaker.model.Img;
 import eportfoliomaker.model.ListComp;
@@ -20,10 +21,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -46,68 +50,54 @@ public class ePortfolioJSONFileManager {
     public static String JSON_CAPTION = "caption";
     public static String JSON_EXT = ".json";
     public static String SLASH = "/";
-    /**
-     * This method saves all the data associated with a slide show to a JSON
-     * file.
-     *
-     * @param ePortfolioToSave The course whose data we are saving.
-     *
-     * @throws IOException Thrown when there are issues writing to the JSON
-     * file.
-     */
-    public void saveePortfolio(ePortfolioModel ePToSave)throws IOException{//enter 1 model, will do gen 1 html per page
-        for(Page p:ePToSave.getPages()){
-            saveePortfolioPage(p);
-        }
-    }
-    
-    public void saveePortfolioPage(Page pToSave) throws IOException {
-	StringWriter sw = new StringWriter();
-        JsonObject singlePgJSON = makePageJsonObject(pToSave);
 
-	Map<String, Object> properties = new HashMap<>(1);
-	properties.put(JsonGenerator.PRETTY_PRINTING, true);
-
-	JsonWriterFactory writerFactory = Json.createWriterFactory(properties);
-	JsonWriter jsonWriter = writerFactory.createWriter(sw);
-	jsonWriter.writeObject(singlePgJSON);
-	jsonWriter.close();
-
-	// INIT THE WRITER
-	String slideShowTitle = "" + pToSave.getTitle();
-	String jsonFilePath = "./data/ePortfolios/" + SLASH + slideShowTitle + JSON_EXT;//if this doesnt work try file: and periods and \ or \\ or //
-	OutputStream os = new FileOutputStream(jsonFilePath);
-	JsonWriter jsonFileWriter = Json.createWriter(os);
-	jsonFileWriter.writeObject(singlePgJSON);
-	String prettyPrinted = sw.toString();
-	PrintWriter pw = new PrintWriter(jsonFilePath);
-	pw.write(prettyPrinted);
-	pw.close();
-	System.out.println(prettyPrinted);
-    }
-
-    /**
+    /**ALL LOADING HERE
      * This method loads the contents of a JSON file representing a slide show
      * into a SlideSShowModel objecct.
      *
-     * @param slideShowToLoad The slide show to load
+     * @param ePortToLoad The slide show to load
      * @param jsonFilePath The JSON file to load.
      * @throws IOException
      */
-    public void loadSlideShow(ePortfolioModel slideShowToLoad, String jsonFilePath) throws IOException {
+    public void loadSlideShow(ePortfolioModel ePortToLoad, String jsonFilePath) throws IOException {
 	// LOAD THE JSON FILE WITH ALL THE DATA
 	JsonObject json = loadJSONFile(jsonFilePath);
 
 	// NOW LOAD THE COURSE
-	slideShowToLoad.reset();
-	slideShowToLoad.setTitle(json.getString(JSON_TITLE));
-	JsonArray jsonSlidesArray = json.getJsonArray(JSON_SLIDES);
+	ePortToLoad.reset();
+	ePortToLoad.setStudentName(json.getString("name"));
+	JsonArray jsonSlidesArray = json.getJsonArray("pages");
 	for (int i = 0; i < jsonSlidesArray.size(); i++) {
-	    JsonObject slideJso = jsonSlidesArray.getJsonObject(i);
-	    slideShowToLoad.addSlide(slideJso.getString(JSON_IMAGE_FILE_NAME),
-		    slideJso.getString(JSON_IMAGE_PATH),
-		    slideJso.getString(JSON_CAPTION));
+	    JsonObject pageJso = jsonSlidesArray.getJsonObject(i);
+            Page p = new Page(ePortToLoad.getUi());
+	    ePortToLoad.getPages().add(p);
+            
+            p.setTitle(pageJso.getString("title"));
+            p.setBannerText(pageJso.getString("bannertext"));
+            p.setBanner(pageJso.getString("banner"));
+            p.setColorTheme(pageJso.getString("color"));
+            p.setLayoutTheme(pageJso.getString("layout"));
+            p.setPageFont(pageJso.getString("font"));
+            p.setFooter(pageJso.getString("footer"));
+            System.out.println(pageJso.getJsonArray("components"));
+            p.setComponents(loadCompsArray(pageJso.getJsonArray("components")));
+           
 	}
+        ePortToLoad.setSelectedPage(ePortToLoad.getPages().get(0));
+        ePortToLoad.getUi().reloadPagePane(ePortToLoad.getPv());
+    }
+    public ObservableList<Component> loadCompsArray(JsonArray compArray) throws IOException{
+        ObservableList<Component> comps = FXCollections.observableArrayList();
+        for(int i=0;i<compArray.size();i++){
+            String compType = compArray.getJsonObject(i).getString("type");
+            System.out.println(compType);
+            if(compType=="p"){
+                Paragraph a = new Paragraph();
+                a.setFont(compArray.getJsonObject(i).getString("pgfont"));
+                a.setText(compArray.getJsonObject(i).getString("text"));
+                comps.add(a);
+            }
+        }return comps;
     }
 
     // AND HERE ARE THE PRIVATE HELPER METHODS TO HELP THE PUBLIC ONES
@@ -129,32 +119,59 @@ public class ePortfolioJSONFileManager {
 	}
 	return items;
     }
-    /*
-    private JsonArray makeSlidesJsonArray(List<Component> slides) {
-	JsonArrayBuilder jsb = Json.createArrayBuilder();
-	for (Component slide : slides) {
-	    JsonObject jso = makeSlideJsonObject(slide);
-	    jsb.add(jso);
-	}
-	JsonArray jA = jsb.build();
-	return jA;
+    
+    
+    
+    //ALL SAVING HERE
+     public void saveePortfolioPage(ePortfolioModel pToSave) throws IOException {
+	StringWriter sw = new StringWriter();
+        JsonObject singlePgJSON = saveePortfolio(pToSave);
+
+	Map<String, Object> properties = new HashMap<>(1);
+	properties.put(JsonGenerator.PRETTY_PRINTING, true);
+
+	JsonWriterFactory writerFactory = Json.createWriterFactory(properties);
+	JsonWriter jsonWriter = writerFactory.createWriter(sw);
+	jsonWriter.writeObject(singlePgJSON);
+	jsonWriter.close();
+
+	// INIT THE WRITER
+	String slideShowTitle = "" + pToSave.getStudentName();
+	String jsonFilePath = "./data/ePortfolios/" + SLASH + slideShowTitle + JSON_EXT;//if this doesnt work try file: and periods and \ or \\ or //
+	OutputStream os = new FileOutputStream(jsonFilePath);
+	JsonWriter jsonFileWriter = Json.createWriter(os);
+	jsonFileWriter.writeObject(singlePgJSON);
+	String prettyPrinted = sw.toString();
+	PrintWriter pw = new PrintWriter(jsonFilePath);
+	pw.write(prettyPrinted);
+	pw.close();
+	System.out.println(prettyPrinted);
     }
 
-    private JsonObject makeSlideJsonObject(Page slide) {
-	JsonObject jso = Json.createObjectBuilder()
-		.add(JSON_IMAGE_FILE_NAME, slide.getImageFileName())
-		.add(JSON_IMAGE_PATH, slide.getImagePath())
-		.add(JSON_CAPTION, slide.getCaption())
-		.build();
-	return jso;
+    
+     public JsonObject saveePortfolio(ePortfolioModel ePToSave){//enter 1 model, will do gen 1 html per page
+       JsonObject jso= Json.createObjectBuilder()
+               .add("name", ePToSave.getStudentName())
+               .add("pages",makePagesArrayObject(ePToSave))
+               .build();
+       return jso;
     }
-    */
+     
+    public JsonArray makePagesArrayObject(ePortfolioModel ep){
+        JsonArrayBuilder jsb = Json.createArrayBuilder();
+        for(Page p: ep.getPages()){
+            jsb.add(makePageJsonObject(p));
+        }
+        JsonArray JA=jsb.build();
+        return JA;
+       
+    }
     
     //make a single page
     public JsonObject makePageJsonObject(Page p){
         JsonObject jso= Json.createObjectBuilder()
                 .add("title", p.getTitle())
-                .add("name", p.getStudentName())
+                //.add("name", p.getStudentName())
                 .add("banner",p.getBanner())
                 .add("bannertext",p.getBannerText())
                 .add("color",p.getColorTheme())

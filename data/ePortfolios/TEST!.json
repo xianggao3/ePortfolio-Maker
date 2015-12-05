@@ -1,0 +1,42 @@
+
+{
+    "pages":[
+        {
+            "title":"2",
+            "name":"Michael Appleseed",
+            "banner":"None Selected",
+            "bannertext":"None Selected",
+            "color":"None Selected",
+            "layout":"None Selected",
+            "font":"None Selected",
+            "footer":"",
+            "components":[
+                {
+                    "type":"p",
+                    "pgfont":"SAMPLE FONT 3",
+                    "text":"1"
+                }
+            ]
+        },
+        {
+            "title":"New ePortfolio Page",
+            "name":"Michael Appleseed",
+            "banner":"None Selected",
+            "bannertext":"None Selected",
+            "color":"None Selected",
+            "layout":"None Selected",
+            "font":"None Selected",
+            "footer":"",
+            "components":[
+                {
+                    "type":"img",
+                    "src":"BryceCanyonUtah.jpgC:\\Users\\xgao3\\Documents\\NetBeansProjects\\ePortfolioMaker\\images\\img\\",
+                    "orientation":"none",
+                    "width":75.0,
+                    "height":60.0,
+                    "caption":"232"
+                }
+            ]
+        }
+    ]
+}

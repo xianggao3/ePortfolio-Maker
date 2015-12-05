@@ -22,6 +22,7 @@ public class ePortfolioModel {
     String studentName;
     PageEditView pv;
 
+    
     public String getStudentName() {
         return studentName;
     }

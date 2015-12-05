@@ -32,6 +32,7 @@ import eportfoliomaker.model.Video;
 import eportfoliomaker.model.ePortfolioModel;
 import eportfoliomaker.controller.SlideshowMakerView;
 import eportfoliomaker.controller.SlideshowMakerView;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -219,7 +220,7 @@ public class ePortfolioAppMakerView {
         rightEditToolbar=new VBox();
         rightEditToolbar.getStyleClass().add("page_edit_toolbar");
         addComponentButton=initChildButton(rightEditToolbar,"addComp.png","page_edit_toolbar_icons",false,"Add Component");
-        removeCompButton=initChildButton(rightEditToolbar,"remove.png","page_edit_toolbar_icons",false,"Remove Component");
+        removeCompButton=initChildButton(rightEditToolbar,"Del.png","page_edit_toolbar_icons",false,"Remove Component");
         editTextCompButton=initChildButton(rightEditToolbar,"text.png","page_edit_toolbar_icons",false,"Text");
         editListCompButton=initChildButton(rightEditToolbar,"list.png","page_edit_toolbar_icons",false,"List");
         editImageCompButton=initChildButton(rightEditToolbar,"img.png","page_edit_toolbar_icons",false,"Image");
@@ -303,9 +304,14 @@ public class ePortfolioAppMakerView {
 	});
 	loadPortButton.setOnAction(e -> {
 	    controller.handleLoadPortRequest();
+            reloadPagePane(ePortfolio.getPv());
 	});
 	savePortButton.setOnAction(e -> {
-	    controller.handleSavePortRequest();
+            try {
+                controller.handleSavePortRequest();
+            } catch (IOException ex) {
+                Logger.getLogger(ePortfolioAppMakerView.class.getName()).log(Level.SEVERE, null, ex);
+            }
 	});
 	saveAsPortButton.setOnAction(e -> {
 	    controller.handleSaveAsPortRequest();
@@ -374,7 +380,7 @@ public class ePortfolioAppMakerView {
             
             Component a = ePortfolio.getSelectedPage().getSelectedComp();
             if(a instanceof SlideShowModelComponent){
-            ssm=new SlideshowMakerView(this);
+            ssm=new SlideshowMakerView(this,(SlideShowModelComponent) a);
             }
         });
         editTextCompButton.setOnAction(e->{
@@ -489,7 +495,6 @@ public class ePortfolioAppMakerView {
         updateHeaderButton.setDisable(!pageSelected);	
         updateFooterButton.setDisable(!pageSelected);	
         addComponentButton.setDisable(!pageSelected);	
-        selectComponentButton.setDisable(!pageSelected);	
     }
     
         

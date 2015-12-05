@@ -1,0 +1,21 @@
+
+{
+    "pages":[
+        {
+            "title":"e",
+            "banner":"None Selected",
+            "bannertext":"None Selected",
+            "color":"None Selected",
+            "layout":"None Selected",
+            "font":"None Selected",
+            "footer":"",
+            "components":[
+                {
+                    "type":"p",
+                    "pgfont":"No Font Applied",
+                    "text":"e"
+                }
+            ]
+        }
+    ]
+}

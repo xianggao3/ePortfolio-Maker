@@ -1,0 +1,34 @@
+
+{
+    "name":"this",
+    "pages":[
+        {
+            "title":"New ePortfolio Page",
+            "banner":"None Selected",
+            "bannertext":"None Selected",
+            "color":"None Selected",
+            "layout":"None Selected",
+            "font":"None Selected",
+            "footer":"",
+            "components":[
+                {
+                    "type":"p",
+                    "pgfont":"No Font Applied",
+                    "text":"1"
+                },
+                {
+                    "type":"list",
+                    "text":" • \n • \n • \n"
+                },
+                {
+                    "type":"img",
+                    "src":"BadlandsSouthDakota.jpgC:\\Users\\xgao3\\Documents\\NetBeansProjects\\ePortfolioMaker\\images\\img\\",
+                    "orientation":"none",
+                    "width":75.0,
+                    "height":60.0,
+                    "caption":"2"
+                }
+            ]
+        }
+    ]
+}

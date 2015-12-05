@@ -10,12 +10,15 @@ import eportfoliomaker.ePortfolioJSONFileManager;
 import eportfoliomaker.model.ePortfolioModel;
 import eportfoliomaker.slideshow.LanguagePropertyType;
 import static eportfoliomaker.slideshow.LanguagePropertyType.LABEL_SAVE_UNSAVED_WORK;
+import eportfoliomaker.view.PageEditView;
 import eportfoliomaker.view.ePortfolioAppMakerView;
+import java.io.File;
 import java.io.IOException;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import properties_manager.PropertiesManager;
 import ssm.view.YesNoCancelDialog;
@@ -67,27 +70,15 @@ public class ePortfolioController {
             eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
         }
     }
-     public boolean handleSavePortRequest() {
-        try {
-	    // GET THE SLIDE SHOW TO SAVE
-	    ePortfolioModel slideShowToSave = ui.getePortfolio();
-	    
-            // SAVE IT TO A FILE
-            ePortfolioIO.saveePortfolio(slideShowToSave);
-
-            // MARK IT AS SAVED
-            saved = true;
-
-            // AND REFRESH THE GUI, WHICH WILL ENABLE AND DISABLE
-            // THE APPROPRIATE CONTROLS
-            ui.updateFileToolbarControls(saved);
-	    return true;
-        } catch (IOException ioe) {
-            ErrorHandler eH = ui.getErrorHandler();
-            eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
-	    return false;
-        }
+     public boolean handleSavePortRequest() throws IOException {
+         ePortfolioModel slideShowToSave = ui.getePortfolio();
+         ePortfolioIO.saveePortfolioPage(slideShowToSave);
+         saved = true;
+         ui.updateFileToolbarControls(saved);
+         return true;
     }
+     
+     
       
       private boolean promptToSave() throws IOException {
         // PROMPT THE USER TO SAVE UNSAVED WORK
@@ -115,5 +106,44 @@ public class ePortfolioController {
         // HAD IN MIND IN THE FIRST PLACE
         return true;
     }
+      private void promptToOpen() throws IOException {
+        // AND NOW ASK THE USER FOR THE COURSE TO OPEN
+        FileChooser slideShowFileChooser = new FileChooser();
+        slideShowFileChooser.setInitialDirectory(new File("./data/ePortfolios/"));
+        File selectedFile = slideShowFileChooser.showOpenDialog(ui.getPrimaryStage());
+
+        // ONLY OPEN A NEW FILE IF THE USER SAYS OK
+        if (selectedFile != null) {
+                
+		ePortfolioModel slideShowToLoad = ui.getePortfolio();
+                slideShowToLoad.setUi(ui);
+                PageEditView pev = new PageEditView(slideShowToLoad);
+                slideShowToLoad.setPv(pev);
+                ePortfolioIO.loadSlideShow(slideShowToLoad, selectedFile.getAbsolutePath());
+                ui.reloadPagePane(slideShowToLoad.getPv());
+                saved = true;
+                ui.updateFileToolbarControls(saved);
+            
+        }
+    }
+
+    public void handleLoadPortRequest() {
+try {
+            // WE MAY HAVE TO SAVE CURRENT WORK
+            boolean continueToOpen = true;
+            if (!saved) {
+                // THE USER CAN OPT OUT HERE WITH A CANCEL
+                continueToOpen = promptToSave();
+            }
+
+            // IF THE USER REALLY WANTS TO OPEN A POSE
+            if (continueToOpen) {
+                // GO AHEAD AND PROCEED MAKING A NEW POSE
+                promptToOpen();
+            }
+        } catch (IOException ioe) {
+            ErrorHandler eH = ui.getErrorHandler();
+            eH.processError(LanguagePropertyType.ERROR_DATA_FILE_LOADING);
+        }    }
     
 }
