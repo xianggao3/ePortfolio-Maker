@@ -104,6 +104,8 @@ public class imgDialog extends Stage{
             pToEdi.setImgH(Double.parseDouble(height.getText()));
             pToEdi.setImgW(Double.parseDouble(width.getText()));
             pToEdi.setOrientation(orientationPreference);
+            ui.getePortfolio().getSelectedPage().addComp(pToEdi);
+
             this.close();
         });
         

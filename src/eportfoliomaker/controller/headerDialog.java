@@ -5,6 +5,7 @@
  */
 package eportfoliomaker.controller;
 
+import eportfoliomaker.model.Header;
 import eportfoliomaker.view.ePortfolioAppMakerView;
 import java.util.Optional;
 import javafx.scene.control.TextInputDialog;
@@ -15,19 +16,20 @@ import javafx.stage.Stage;
  * @author xgao3
  */
 public class headerDialog extends Stage{
-    
     ePortfolioAppMakerView ui;
-    public headerDialog(){
+    public headerDialog(ePortfolioAppMakerView ui,Header h){
+        this.ui=ui;
         TextInputDialog dialog = new TextInputDialog("Header Text");
-        dialog.setTitle("Header");
+        dialog.setTitle("Add Header");
         dialog.setHeaderText("Change Header Text");
-        dialog.setContentText("Please enter your Header Text:");
+        dialog.setContentText(h.getText());
 
         // Traditional way to get the response value.
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
-            ui.getePortfolio().getSelectedPage().setHeader(result.get());
+            h.setText(result.get());
                     
+                ui.getePortfolio().getSelectedPage().addComp(h);
         }
     }
 }

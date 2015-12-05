@@ -35,6 +35,7 @@ public class PageEditView extends VBox{
             this.studentNameLabel = new Label();
             this.bannerView = new ImageView();
             this.bannerText = new Label();
+            
         }
 
     public Page getPg() {
@@ -54,8 +55,6 @@ public class PageEditView extends VBox{
         components.remove(comp);
     }
 
-    private void refresh(ComponentEditView comp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 }
 

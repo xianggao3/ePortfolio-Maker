@@ -47,6 +47,8 @@ public class listDialog extends Stage{
         OKButton= new Button("OK");
         OKButton.setOnMouseReleased(e->{
             ltoEdit.setBullets(bulletArea.getText());
+            
+               ui.getePortfolio().getSelectedPage().addComp(ltoEdit);
             this.close();
         });
         

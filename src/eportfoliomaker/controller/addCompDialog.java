@@ -5,6 +5,7 @@
  */
 package eportfoliomaker.controller;
 
+import eportfoliomaker.model.Header;
 import eportfoliomaker.model.Img;
 import eportfoliomaker.model.Paragraph;
 import eportfoliomaker.model.ePortfolioModel;
@@ -32,6 +33,7 @@ public class addCompDialog extends Stage{
         ePortfolio=eP;
         List<String> choices = new ArrayList<>();
         choices.add("Text");
+        choices.add("Header");
         choices.add("List");
         choices.add("Image");
         choices.add("Video");
@@ -49,19 +51,18 @@ public class addCompDialog extends Stage{
             if (result.get()=="Text"){
                 Paragraph p = new Paragraph();
                 textDialog tD = new textDialog(ui,p);
-                ePortfolio.getSelectedPage().addComp(p);
+            }else if(result.get()==("Header")){
+                Header p = new Header();
+                headerDialog hD = new headerDialog(ui,p);
             }else if(result.get()=="List"){
                 ListComp list = new ListComp();
                 listDialog lD= new listDialog(this,list);
-                ePortfolio.getSelectedPage().addComp(list);
             }else if(result.get()=="Image"){
                 Img img = new Img();
                 imgDialog i = new imgDialog(this,img);
-                ePortfolio.getSelectedPage().addComp(img);
             }else if(result.get()=="Video"){
                 Video vid = new Video();
                 videoDialog v = new videoDialog(this,vid);
-                ePortfolio.getSelectedPage().addComp(vid);
             }else if(result.get()=="Slideshow"){
                 
                 SlideShowModelComponent ss = new SlideShowModelComponent();

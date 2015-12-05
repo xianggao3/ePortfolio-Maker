@@ -98,6 +98,7 @@ public class SlideshowMakerView extends Stage{
         s.getChildren().addAll(ssmPane);
 	primaryScene.getStylesheets().add(STYLE_SHEET_UI);
         setScene(primaryScene);
+        ui.getePortfolio().getSelectedPage().addComp(ss);
         showAndWait();
     }
     

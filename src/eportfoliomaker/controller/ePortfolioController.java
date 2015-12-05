@@ -38,14 +38,17 @@ public class ePortfolioController {
         saved = true;
         ePortfolioIO=ePortIO;
     }
-    
+    public void markAsEdited() {
+        saved = false;
+        ui.updateFileToolbarControls(saved);
+    }
     
 
     public void handleNewPortRequest() {
-      try {
+        try {
             // WE MAY HAVE TO SAVE CURRENT WORK
             boolean continueToMakeNew = true;
-            if (!saved) {
+            if (!saved){
                 // THE USER CAN OPT OUT HERE WITH A CANCEL
                 continueToMakeNew = promptToSave();
             }
@@ -53,17 +56,19 @@ public class ePortfolioController {
             // IF THE USER REALLY WANTS TO MAKE A NEW COURSE
             if (continueToMakeNew) {
                 // RESET THE DATA, WHICH SHOULD TRIGGER A RESET OF THE UI
-                ePortfolioModel ePortfolio = ui.getePortfolio();
-		ePortfolio.reset();
+                ePortfolioModel slideShow = ui.getePortfolio();
+		slideShow.reset();
                 saved = false;
-                
+
                 // REFRESH THE GUI, WHICH WILL ENABLE AND DISABLE
                 // THE APPROPRIATE CONTROLS
                 ui.updateFileToolbarControls(saved);
 
 		// MAKE SURE THE TITLE CONTROLS ARE ENABLED
-		//ui.reloadTitleControls();	
-		ui.reloadPagePane(ePortfolio.getPv());
+		//ui.reloadTitleControls();	not needed i think
+                
+		ui.reloadPagePane(slideShow.getPv());
+                
             }
         } catch (IOException ioe) {
             ErrorHandler eH = ui.getErrorHandler();

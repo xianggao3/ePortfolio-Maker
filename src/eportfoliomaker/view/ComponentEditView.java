@@ -6,6 +6,7 @@
 package eportfoliomaker.view;
 
 import eportfoliomaker.model.Component;
+import eportfoliomaker.model.Header;
 import eportfoliomaker.model.Img;
 import eportfoliomaker.model.ListComp;
 import eportfoliomaker.model.Page;
@@ -39,7 +40,9 @@ public  class ComponentEditView extends HBox{
     ListComp list;
     Img img;
     Video video;
+    Header h;
     SlideShowModelComponent ss;
+    Label type= new Label();
     
     Label text= new Label();
     Label text2= new Label();
@@ -55,21 +58,30 @@ public  class ComponentEditView extends HBox{
 
     public void loadComp(Component comp) {
         if(comp.getType()=="p"){
+            type.setText("T :");
+            
             p = (Paragraph)comp;
             text.setText(p.getText());
-            getChildren().add(text);
+            getChildren().addAll(type,text);
+            
+        }else if(comp.getType()=="header"){
+            h=(Header)comp;
+            text.setText(h.getText());
+            getChildren().addAll(type,text);
             
         }else if(comp.getType()=="list"){
             
+            type.setText("L :");
             list=(ListComp)comp;
             text.setText(list.getBullets());
-            getChildren().add(text);
+            getChildren().addAll(type,text);
             
         }else if(comp.getType()=="slideshow"){
             
             
         }else if(comp.getType()=="img"){
             
+            type.setText("I :");
             img=(Img)comp;
             String imagePath = img.getImgPath()+ img.getImgFileName();
 //            File file = new File(imagePath);
@@ -91,10 +103,11 @@ public  class ComponentEditView extends HBox{
 //            }
                 text.setText(img.getCaption());
                 VBox compbox = new VBox(imgview,text);
-            getChildren().addAll(compbox);
+            getChildren().addAll(type,compbox);
             
         }else if(comp.getType()=="video"){
             
+            type.setText("V :");
             video=(Video)comp;
             String videoPath = video.getVideoPath()+ video.getVideoFileName();
             File file=new File("images/img/"+video.getVideoFileName());
@@ -109,7 +122,7 @@ public  class ComponentEditView extends HBox{
                 movieView.getMediaPlayer().play();
                 text.setText(video.getCaption());
                 VBox compbox = new VBox(movieView,text);
-            getChildren().addAll(compbox);
+            getChildren().addAll(type,compbox);
         }
     }
 }

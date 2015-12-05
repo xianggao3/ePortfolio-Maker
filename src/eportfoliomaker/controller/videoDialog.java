@@ -63,7 +63,8 @@ public class videoDialog extends Stage{
             if(fileName!=null){
                 vToEdit.setVideoFileName(fileName);
                 vToEdit.setVideoPath(path);
-            }
+            }ui.getePortfolio().getSelectedPage().addComp(vToEdit);
+
             this.close();
         });
         

@@ -22,11 +22,9 @@ public class EPortfolioMaker extends Application{
 
     ePortfolioJSONFileManager fileManager=new ePortfolioJSONFileManager();
     ePortfolioAppMakerView ui = new ePortfolioAppMakerView(fileManager);
-    
     /**
      * @param args the command line arguments
      */
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         String windowIconPath="./images/icons/Logo.png";

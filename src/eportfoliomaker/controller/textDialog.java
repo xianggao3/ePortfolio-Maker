@@ -72,7 +72,10 @@ public class textDialog extends Stage{
         OKButton.setOnMouseReleased(e->{
            pToEdit.setText(textArea.getText());
            pToEdit.setFont(textFont.getValue().toString());
+           
+                ui.getePortfolio().getSelectedPage().addComp(pToEdit);
            this.close();
+           
         });
         textbox.getChildren().addAll(topPane,textLabel,textArea,OKButton);
         

@@ -32,6 +32,7 @@ import eportfoliomaker.model.Video;
 import eportfoliomaker.model.ePortfolioModel;
 import eportfoliomaker.controller.SlideshowMakerView;
 import eportfoliomaker.controller.SlideshowMakerView;
+import eportfoliomaker.model.Header;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
@@ -149,6 +150,7 @@ public class ePortfolioAppMakerView {
     Page pg;
     Label pgTitle;
     HBox pvTitlePane;
+    Image banner;
     
     public ePortfolioAppMakerView(ePortfolioJSONFileManager initFileManager){
         fileManager= initFileManager;
@@ -184,9 +186,9 @@ public class ePortfolioAppMakerView {
     
     public void startUI(Stage initPrimaryStage, String windowTitle) {
         initFileToolBar();
-        initWorkspace();
         initPageEditToolbar();
-        initSiteViewerWorkspace();
+        initWorkspace();
+        //initSiteViewerWorkspace();
         initEventHandlers();
         primaryStage=initPrimaryStage;
         initWindow(windowTitle);
@@ -198,7 +200,7 @@ public class ePortfolioAppMakerView {
         
         newPortButton=initChildButton(fileToolBarPane,"NewOrig.png","",false,"New ePortfolio");
         loadPortButton=initChildButton(fileToolBarPane,"LoadOrig.png","",false,"Load an Existing ePortfolio");
-        savePortButton=initChildButton(fileToolBarPane,"SaveOrig.png","",false,"Save the Current ePortfolio");
+        savePortButton=initChildButton(fileToolBarPane,"SaveOrig.png","",true,"Save the Current ePortfolio");
         saveAsPortButton=initChildButton(fileToolBarPane,"saveAs.png","",true,"Save the ePortfolio As");
         exportButton=initChildButton(fileToolBarPane,"ExportOrig.png","",true,"Export the Current ePortfolio");
         exitButton=initChildButton(fileToolBarPane,"ExitOrig.png","",false,"Exit Application");
@@ -207,25 +209,25 @@ public class ePortfolioAppMakerView {
         pageEditToolbar=new VBox();
         pageEditToolbar.getStyleClass().add("page_edit_toolbar");
         
-        updatePageTitleButton=initChildButton(pageEditToolbar,"title.png","page_edit_toolbar_icons",false,"Change the Title of the Current Page");
-        updateStudentNameButton=initChildButton(pageEditToolbar,"name.png","page_edit_toolbar_icons",false,"Change Student Name");
-        selectBannerImageButton=initChildButton(pageEditToolbar,"banner.png","page_edit_toolbar_icons",false,"Select Banner Image");
-        selectLayoutButton=initChildButton(pageEditToolbar,"layout.png","page_edit_toolbar_icons",false,"Select Layout");
-        selectColorButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",false,"Select Color");
+        updatePageTitleButton=initChildButton(pageEditToolbar,"title.png","page_edit_toolbar_icons",true,"Change the Title of the Current Page");
+        updateStudentNameButton=initChildButton(pageEditToolbar,"name.png","page_edit_toolbar_icons",true,"Change Student Name");
+        selectBannerImageButton=initChildButton(pageEditToolbar,"banner.png","page_edit_toolbar_icons",true,"Select Banner Image");
+        selectLayoutButton=initChildButton(pageEditToolbar,"layout.png","page_edit_toolbar_icons",true,"Select Layout");
+        selectColorButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",true,"Select Color");
         //dont need chooseComponentFontButton=initChildButton(pageEditToolbar,"font.png","page_edit_toolbar_icons",false,"Choose Component Font");
-        selectPageFontButton=initChildButton(pageEditToolbar,"font.png","page_edit_toolbar_icons",false,"Change the Page's Font");
-        updateHeaderButton=initChildButton(pageEditToolbar,"header.png","page_edit_toolbar_icons",false,"Change Header");
-        updateFooterButton=initChildButton(pageEditToolbar,"footer.png","page_edit_toolbar_icons",false,"Change Footer");
+        selectPageFontButton=initChildButton(pageEditToolbar,"font.png","page_edit_toolbar_icons",true,"Change the Page's Font");
+        updateHeaderButton=initChildButton(pageEditToolbar,"header.png","page_edit_toolbar_icons",true,"Change Header");
+        updateFooterButton=initChildButton(pageEditToolbar,"footer.png","page_edit_toolbar_icons",true,"Change Footer");
         //
         rightEditToolbar=new VBox();
         rightEditToolbar.getStyleClass().add("page_edit_toolbar");
-        addComponentButton=initChildButton(rightEditToolbar,"addComp.png","page_edit_toolbar_icons",false,"Add Component");
-        removeCompButton=initChildButton(rightEditToolbar,"Del.png","page_edit_toolbar_icons",false,"Remove Component");
-        editTextCompButton=initChildButton(rightEditToolbar,"text.png","page_edit_toolbar_icons",false,"Text");
-        editListCompButton=initChildButton(rightEditToolbar,"list.png","page_edit_toolbar_icons",false,"List");
-        editImageCompButton=initChildButton(rightEditToolbar,"img.png","page_edit_toolbar_icons",false,"Image");
-        editSlideShowCompButton=initChildButton(rightEditToolbar,"slideshow.png","page_edit_toolbar_icons",false,"Slideshow");
-        editVideoCompButton=initChildButton(rightEditToolbar,"video.png","page_edit_toolbar_icons",false,"Video");
+        addComponentButton=initChildButton(rightEditToolbar,"addComp.png","page_edit_toolbar_icons",true,"Add Component");
+        removeCompButton=initChildButton(rightEditToolbar,"Del.png","page_edit_toolbar_icons",true,"Remove Component");
+        editTextCompButton=initChildButton(rightEditToolbar,"text.png","page_edit_toolbar_icons",true,"Text");
+        editListCompButton=initChildButton(rightEditToolbar,"list.png","page_edit_toolbar_icons",true,"List");
+        editImageCompButton=initChildButton(rightEditToolbar,"img.png","page_edit_toolbar_icons",true,"Image");
+        editSlideShowCompButton=initChildButton(rightEditToolbar,"slideshow.png","page_edit_toolbar_icons",true,"Slideshow");
+        editVideoCompButton=initChildButton(rightEditToolbar,"video.png","page_edit_toolbar_icons",true,"Video");
     }
 
     
@@ -247,7 +249,7 @@ public class ePortfolioAppMakerView {
         
         workspace.setCenter(tabbedPane);
         tabbedPane.getStyleClass().add("file_toolbar");
-        currentTab = tabbedPane.getSelectionModel().getSelectedItem();
+        //currentTab = tabbedPane.getSelectionModel().getSelectedItem();---------------?????????????????????? do i need?
     }
     
     public void initSiteViewerWorkspace(){
@@ -357,7 +359,10 @@ public class ePortfolioAppMakerView {
            addD= new addCompDialog(this,ePortfolio); 
         });
         updateHeaderButton.setOnAction(e->{
-           headerD=new headerDialog(); 
+            Component a = ePortfolio.getSelectedPage().getSelectedComp();
+            if(a instanceof Header){
+            headerD=new headerDialog(this,(Header)a);
+            }
         });
         updateFooterButton.setOnAction(e->{
             footerD=new footerDialog(this,ePortfolio);
@@ -498,44 +503,14 @@ public class ePortfolioAppMakerView {
     }
     
         
-    public void reloadPagePane(PageEditView pv) {
-        if(pv!=null){
-        pv.getChildren().clear();
-        }
-        Label pgTitle= new Label("By "+ ePortfolio.getStudentName());
-        Label pgFont = new Label("Page Font: "+ePortfolio.getSelectedPage().getPageFont());    
-        Label pgLayout= new Label("Page Layout Theme: "+ePortfolio.getSelectedPage().getLayoutTheme());
-        Label pgColor = new Label("Page Color Theme: "+ePortfolio.getSelectedPage().getColorTheme());
-        VBox pgOptions = new VBox();
-        pgOptions.getChildren().addAll(pgTitle,pgLayout,pgColor,pgFont);
-        pv.getChildren().addAll(pgOptions);
-        pv.getStyleClass().add("tabPane_a");
+    public void reloadPagePane() {
+        pagesEditorPane.getChildren().clear();
+        
+        for(Page p : ePortfolio.getPages()){
+            PageEditView pv= new PageEditView(ePortfolio);
             
-        for(Component comp:ePortfolio.getSelectedPage().getComponents()){
-            ComponentEditView compEditor = new ComponentEditView(comp);
-            if(ePortfolio.getSelectedPage().isSelectedComp(comp)){
-                compEditor.getStyleClass().add("selected_tabPane");
-            }else{
-                compEditor.getStyleClass().add("tabPane");
-            }
-            //initTitleControls();
-            pagesEditorScrollPane = new ScrollPane(pv);
-            pv.getChildren().add(compEditor);
-            compEditor.setOnMousePressed(b->{
-                ePortfolio.getSelectedPage().setSelectedComp(comp);
-                this.reloadPagePane(pv);
-            });
-            pagesEditorScrollPane.setFitToWidth(true);
-            pagesEditorScrollPane.setFitToHeight(true);
-            currentTab.setContent(pagesEditorScrollPane);
-            currentTab.setText(ePortfolio.getSelectedPage().getTitle());
         }
-        if(ePortfolio.getSelectedPage().getFooter()!=""){
-            Pane footPane = new Pane();
-            Label footerText = new Label("Footer: "+ePortfolio.getSelectedPage().getFooter());
-            footPane.getChildren().addAll(footerText);
-            pv.getChildren().add(footPane);
-        }
+        updatePageEditToolbarControls();
     }
     /*
     private void initTitleControls() {
@@ -560,7 +535,7 @@ public class ePortfolioAppMakerView {
 	titleTextField.getStyleClass().add(CSS_CLASS_TITLE_TEXT_FIELD);
     }
     
-    public void reloadTitleControls() {
+    public void reloadTitleControls() {//not needed
 	if (slidesEditorPane.getChildren().size() == 0)
 	    slidesEditorPane.getChildren().add(titlePane);
 	titleTextField.setText(slideShow.getTitle());

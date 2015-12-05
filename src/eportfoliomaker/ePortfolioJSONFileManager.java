@@ -7,6 +7,7 @@ package eportfoliomaker;
 
 import org.json.*;
 import eportfoliomaker.model.Component;
+import eportfoliomaker.model.Header;
 import eportfoliomaker.model.Img;
 import eportfoliomaker.model.ListComp;
 import eportfoliomaker.model.Page;
@@ -74,7 +75,8 @@ public class ePortfolioJSONFileManager {
             
             p.setTitle(pageJso.getString("title"));
             p.setBannerText(pageJso.getString("bannertext"));
-            p.setBanner(pageJso.getString("banner"));
+            p.setBannerPath(pageJso.getString("bannerpath"));
+            p.setBannerFileName(pageJso.getString("bannerfilename"));
             p.setColorTheme(pageJso.getString("color"));
             p.setLayoutTheme(pageJso.getString("layout"));
             p.setPageFont(pageJso.getString("font"));
@@ -91,11 +93,39 @@ public class ePortfolioJSONFileManager {
         for(int i=0;i<compArray.size();i++){
             String compType = compArray.getJsonObject(i).getString("type");
             System.out.println(compType);
-            if(compType=="p"){
+            if(compType.equals("p")){
                 Paragraph a = new Paragraph();
                 a.setFont(compArray.getJsonObject(i).getString("pgfont"));
                 a.setText(compArray.getJsonObject(i).getString("text"));
                 comps.add(a);
+            }else if (compType.equals("header")){
+                Header a = new Header();
+                a.setText(compArray.getJsonObject(i).getString("text"));
+                comps.add(a);
+                
+            }else if(compType.equals("list")){
+                ListComp a = new ListComp();
+                a.setBullets(compArray.getJsonObject(i).getString("text"));
+                comps.add(a);
+            }else if(compType.equals("img")){
+                Img a = new Img();
+                a.setCaption(compArray.getJsonObject(i).getString("caption"));
+                a.setImgH(Double.parseDouble(compArray.getJsonObject(i).getString("height")));
+                a.setImgW(Double.parseDouble(compArray.getJsonObject(i).getString("width")));
+                a.setOrientation(compArray.getJsonObject(i).getString("orientation"));
+                a.setImgFileName(compArray.getJsonObject(i).getString("imgfilename"));
+                a.setImgPath(compArray.getJsonObject(i).getString("imgpath"));
+                comps.add(a);
+            }else if(compType.equals("video")){
+                Video a = new Video();
+                a.setCaption(compArray.getJsonObject(i).getString("caption"));
+                a.setVideoH(Double.parseDouble(compArray.getJsonObject(i).getString("height")));
+                a.setVideoW(Double.parseDouble(compArray.getJsonObject(i).getString("width")));
+                a.setVideoFileName(compArray.getJsonObject(i).getString("videofilename"));
+                a.setVideoPath(compArray.getJsonObject(i).getString("videopath"));
+                comps.add(a);
+            }else if(compType.equals("slideshow")){
+                
             }
         }return comps;
     }
@@ -171,8 +201,8 @@ public class ePortfolioJSONFileManager {
     public JsonObject makePageJsonObject(Page p){
         JsonObject jso= Json.createObjectBuilder()
                 .add("title", p.getTitle())
-                //.add("name", p.getStudentName())
-                .add("banner",p.getBanner())
+                .add("bannerpath",p.getBannerPath())
+                .add("bannerfilename", p.getBannerFileName())
                 .add("bannertext",p.getBannerText())
                 .add("color",p.getColorTheme())
                 .add("layout", p.getLayoutTheme())
@@ -198,6 +228,8 @@ public class ePortfolioJSONFileManager {
         
         if(comp.getType()=="p"){
                 return makeTextObject((Paragraph)comp);
+        }else if(comp.getType()=="header"){
+                return makeHeaderObject((Header)comp);
         }else if(comp.getType()=="list"){
                 return makeListObject((ListComp)comp);
         }else if(comp.getType()=="img"){
@@ -209,6 +241,13 @@ public class ePortfolioJSONFileManager {
         }else{
             return null;
         }
+    }
+    public JsonObject makeHeaderObject(Header p){
+        JsonObject jso=Json.createObjectBuilder()
+                .add("type",p.getType())
+                .add("text",p.getText())
+                .build();
+        return jso;
     }
     public JsonObject makeTextObject(Paragraph p){
         JsonObject jso = Json.createObjectBuilder()
@@ -228,7 +267,8 @@ public class ePortfolioJSONFileManager {
     public JsonObject makeImgObject(Img p){
         JsonObject jso = Json.createObjectBuilder()
                 .add("type", p.getType())
-                .add("src",p.getImgFileName()+p.getImgPath())
+                .add("imgpath",p.getImgPath())
+                .add("imgfilename",p.getImgFileName())
                 .add("orientation",p.getOrientation())
                 .add("width",p.getImgW())
                 .add("height",p.getImgH())
@@ -239,7 +279,8 @@ public class ePortfolioJSONFileManager {
     public JsonObject makeVideoObject(Video p){
         JsonObject jso=Json.createObjectBuilder()
                 .add("type",p.getType())
-                .add("src", p.getSrc()+p.getVideoFileName())
+                .add("videopath", p.getVideoPath())
+                .add("videofilename",p.getVideoFileName())
                 .add("width",p.getVideoW())
                 .add("height", p.getVideoH())
                 .add("caption",p.getCaption())

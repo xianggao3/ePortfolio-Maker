@@ -1,0 +1,37 @@
+
+{
+    "name":"Michael Appleseed",
+    "pages":[
+        {
+            "title":"New ePortfolio Page",
+            "banner":"None Selected",
+            "bannertext":"None Selected",
+            "color":"None Selected",
+            "layout":"None Selected",
+            "font":"None Selected",
+            "footer":"",
+            "components":[
+                {
+                    "type":"list",
+                    "text":" • \n • \n • \n"
+                }
+            ]
+        },
+        {
+            "title":"44",
+            "banner":"None Selected",
+            "bannertext":"None Selected",
+            "color":"None Selected",
+            "layout":"None Selected",
+            "font":"None Selected",
+            "footer":"",
+            "components":[
+                {
+                    "type":"p",
+                    "pgfont":"No Font Applied",
+                    "text":"er"
+                }
+            ]
+        }
+    ]
+}

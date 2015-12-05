@@ -1,9 +1,9 @@
 
 {
+    "name":"AA",
     "pages":[
         {
-            "title":"2",
-            "name":"Michael Appleseed",
+            "title":"s",
             "banner":"None Selected",
             "bannertext":"None Selected",
             "color":"None Selected",
@@ -13,14 +13,13 @@
             "components":[
                 {
                     "type":"p",
-                    "pgfont":"SAMPLE FONT 3",
-                    "text":"1"
+                    "pgfont":"SAMPLE FONT 2",
+                    "text":"sasasas"
                 }
             ]
         },
         {
             "title":"New ePortfolio Page",
-            "name":"Michael Appleseed",
             "banner":"None Selected",
             "bannertext":"None Selected",
             "color":"None Selected",
@@ -29,12 +28,8 @@
             "footer":"",
             "components":[
                 {
-                    "type":"img",
-                    "src":"BryceCanyonUtah.jpgC:\\Users\\xgao3\\Documents\\NetBeansProjects\\ePortfolioMaker\\images\\img\\",
-                    "orientation":"none",
-                    "width":75.0,
-                    "height":60.0,
-                    "caption":"232"
+                    "type":"list",
+                    "text":" • sasa\n • \n • s\n"
                 }
             ]
         }

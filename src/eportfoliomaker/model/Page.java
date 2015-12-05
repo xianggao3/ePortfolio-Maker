@@ -21,14 +21,14 @@ public class Page {
     PageEditView pv;
     String Title;
     String bannerText;
-    String banner;
+    String bannerPath;
+    String bannerFileName;
     ObservableList<Component> components;
     Component selectedComp;
     String colorTheme;
     String layoutTheme;
     String pageFont;
     String footer;
-    String header;
     String index;
     String studentName;
     Tab tab;
@@ -69,13 +69,6 @@ public class Page {
         this.pv = pv;
     }
     
-    public String getHeader() {
-        return header;
-    }
-
-    public void setHeader(String header) {
-        this.header = header;
-    }
 
     public String getFooter() {
         return footer;
@@ -127,14 +120,6 @@ public class Page {
         this.bannerText = bannertext;
     }
 
-    public String getBanner() {
-        return banner;
-    }
-
-    public void setBanner(String banner) {
-        this.banner = banner;
-    }
-
     public ObservableList<Component> getComponents() {
         return components;
     }
@@ -169,18 +154,35 @@ public class Page {
     public void setStudentName(String studentName) {
         this.studentName = studentName;
     }
+
+    public String getBannerPath() {
+        return bannerPath;
+    }
+
+    public void setBannerPath(String bannerPath) {
+        this.bannerPath = bannerPath;
+    }
+
+    public String getBannerFileName() {
+        return bannerFileName;
+    }
+
+    public void setBannerFileName(String bannerFileName) {
+        this.bannerFileName = bannerFileName;
+    }
+    
     
     public void reset() {
 	components.clear();
 	selectedComp = null;
         Title= "New ePortfolio Page";
         bannerText= "None Selected";
-        banner= "None Selected";
+        bannerFileName=null;
+        bannerPath=null;
         colorTheme= "None Selected";
         layoutTheme= "None Selected";
         pageFont= "None Selected";
         footer= "";
-        header= "";
     }
     
     public void addComp(Component comp){
