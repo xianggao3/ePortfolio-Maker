@@ -40,6 +40,6 @@ public class Paragraph extends Component{
     public Paragraph(){
         type = "p";
         font= "No Font Applied";
-        text="No Text Currently";
+        text="";
     }
 }

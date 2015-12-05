@@ -67,6 +67,27 @@ public class ePortfolioController {
             eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
         }
     }
+     public boolean handleSaveSlideShowRequest() {
+        try {
+	    // GET THE SLIDE SHOW TO SAVE
+	    ePortfolioModel slideShowToSave = ui.getePortfolio();
+	    
+            // SAVE IT TO A FILE
+            ePortfolioIO.saveePortfolio(slideShowToSave);
+
+            // MARK IT AS SAVED
+            saved = true;
+
+            // AND REFRESH THE GUI, WHICH WILL ENABLE AND DISABLE
+            // THE APPROPRIATE CONTROLS
+            ui.updateFileToolbarControls(saved);
+	    return true;
+        } catch (IOException ioe) {
+            ErrorHandler eH = ui.getErrorHandler();
+            eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
+	    return false;
+        }
+    }
       
       private boolean promptToSave() throws IOException {
         // PROMPT THE USER TO SAVE UNSAVED WORK

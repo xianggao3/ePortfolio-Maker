@@ -79,7 +79,7 @@ public class Img extends Component {
         imgFileName=null;
         imgPath=null;
         orientation="middle";
-        imgH=375.;
-        imgW=500.;
+        imgH=60.;
+        imgW=75.;
     }
 }

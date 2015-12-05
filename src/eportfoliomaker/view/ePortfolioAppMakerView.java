@@ -348,7 +348,7 @@ public class ePortfolioAppMakerView {
             pgFontD=new pageFontDialog(this,ePortfolio);
         });
         addComponentButton.setOnAction(e->{
-           addD= new addCompDialog(ePortfolio); 
+           addD= new addCompDialog(this,ePortfolio); 
         });
         updateHeaderButton.setOnAction(e->{
            headerD=new headerDialog(); 
@@ -381,7 +381,7 @@ public class ePortfolioAppMakerView {
             
             Component a = ePortfolio.getSelectedPage().getSelectedComp();
             if(a instanceof Paragraph){
-            textD=new textDialog(primaryStage,(Paragraph)a);
+            textD=new textDialog(this,(Paragraph)a);
             }
         });
         selectBannerImageButton.setOnAction(e->{

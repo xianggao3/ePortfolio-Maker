@@ -43,8 +43,9 @@ public class textDialog extends Stage{
     TextArea textArea;
     GridPane topPane;
 
-    public textDialog(Stage primaryStage,Paragraph pToEdit){
-        initOwner(primaryStage);
+    public textDialog(ePortfolioAppMakerView ui,Paragraph pToEdit){
+        this.ui=ui;
+        initOwner(ui.getPrimaryStage());
         
         ObservableList<String> fonts = FXCollections.observableArrayList(
         "SAMPLE FONT 1",
@@ -61,11 +62,12 @@ public class textDialog extends Stage{
         Button addTextHyperlinkButton=initChildButton(topPane,"hyperlink.png","page_edit_toolbar_icons",false,"Set a Hyperlink");
         topPane.add(font, 0,0);
         topPane.add(textFont, 0,1);
-        textFont.getSelectionModel().selectFirst();
+        textFont.getSelectionModel().select(pToEdit.getFont());
         topPane.add(new Label("     Set a Hyperlink: "), 1, 0);
         
         textLabel=new Label("Paragraph:");
         textArea = new TextArea();
+        textArea.setText(pToEdit.getText());
         OKButton= new Button("OK");
         OKButton.setOnMouseReleased(e->{
            pToEdit.setText(textArea.getText());
@@ -80,9 +82,8 @@ public class textDialog extends Stage{
         textScene.getStylesheets().add("eportfoliomaker/style/Style.css");
         this.setScene(textScene);
         showAndWait();
-        
-        
     }
+    
     private Button initChildButton(GridPane toolbar,String iconFileName,String cssClass,boolean disabled,String toolTip) {
         
 	String imagePath = "file:" + "./images/icons/" + iconFileName;

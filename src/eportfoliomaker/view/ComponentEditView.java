@@ -47,7 +47,6 @@ public  class ComponentEditView extends HBox{
     MediaView movieView= new MediaView();
     
     
-    
     ComponentEditView( Component component) {
         loadComp(component);
         this.getStyleClass().add("tabPane");
@@ -61,6 +60,7 @@ public  class ComponentEditView extends HBox{
             getChildren().add(text);
             
         }else if(comp.getType()=="list"){
+            
             list=(ListComp)comp;
             text.setText(list.getBullets());
             getChildren().add(text);
@@ -69,6 +69,7 @@ public  class ComponentEditView extends HBox{
             
             
         }else if(comp.getType()=="img"){
+            
             img=(Img)comp;
             String imagePath = img.getImgPath()+ img.getImgFileName();
 //            File file = new File(imagePath);

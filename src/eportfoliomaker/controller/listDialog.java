@@ -37,6 +37,7 @@ public class listDialog extends Stage{
         Label listBullets=new Label("Bullets:");
         
         TextArea bulletArea = new TextArea();
+        bulletArea.setText(ltoEdit.getBullets());
         bulletArea.setOnKeyPressed(e->{
             if (e.getCode().equals(KeyCode.ENTER))
             {

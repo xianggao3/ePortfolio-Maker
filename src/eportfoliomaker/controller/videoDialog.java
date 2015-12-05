@@ -38,6 +38,10 @@ public class videoDialog extends Stage{
     
     public videoDialog(Stage primaryStage,Video vToEdit){
         initOwner(primaryStage);
+        height.setText(vToEdit.getVideoH().toString());
+        width.setText(vToEdit.getVideoW().toString());
+        caption.setText(vToEdit.getCaption());
+        
         vidSelect.setOnAction(e->{
             processSelectImage();
         });
@@ -56,8 +60,10 @@ public class videoDialog extends Stage{
             vToEdit.setVideoW(Double.parseDouble(width.getText()));
             vToEdit.setVideoH(Double.parseDouble(height.getText()));
             vToEdit.setCaption(caption.getText());
-            vToEdit.setVideoFileName(fileName);
-            vToEdit.setVideoPath(path);
+            if(fileName!=null){
+                vToEdit.setVideoFileName(fileName);
+                vToEdit.setVideoPath(path);
+            }
             this.close();
         });
         

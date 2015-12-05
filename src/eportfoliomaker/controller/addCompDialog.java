@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import eportfoliomaker.model.ListComp;
 import eportfoliomaker.model.SlideShowModel;
 import eportfoliomaker.model.Video;
+import eportfoliomaker.view.ePortfolioAppMakerView;
 
 
 /**
@@ -23,10 +24,11 @@ import eportfoliomaker.model.Video;
  * @author xgao3
  */
 public class addCompDialog extends Stage{
+    ePortfolioAppMakerView ui;
+    ePortfolioModel ePortfolio;
     
-    public ePortfolioModel ePortfolio;
-    
-    public addCompDialog(ePortfolioModel eP){
+    public addCompDialog(ePortfolioAppMakerView ui,ePortfolioModel eP){
+        this.ui=ui;
         ePortfolio=eP;
         List<String> choices = new ArrayList<>();
         choices.add("Text");
@@ -46,7 +48,7 @@ public class addCompDialog extends Stage{
             
             if (result.get()=="Text"){
                 Paragraph p = new Paragraph();
-                textDialog tD = new textDialog(this,p);
+                textDialog tD = new textDialog(ui,p);
                 ePortfolio.getSelectedPage().addComp(p);
             }else if(result.get()=="List"){
                 ListComp list = new ListComp();
@@ -64,7 +66,6 @@ public class addCompDialog extends Stage{
                 //SlideShowModel ss = new SlideShowModel();
                 //ui.getSelectedPage().addComp(ss);
             }
-           
         }
         
     }

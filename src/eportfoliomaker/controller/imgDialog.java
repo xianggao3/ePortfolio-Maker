@@ -56,6 +56,10 @@ public class imgDialog extends Stage{
     
     public imgDialog(Stage primaryStage,Img pToEdi){
         initOwner(primaryStage);
+        caption.setText(pToEdi.getCaption());
+        height.setText(pToEdi.getImgH().toString());
+        width.setText(pToEdi.getImgW().toString());
+        
         imgSelect.setOnAction(e->{
             try {
                 processSelectImage();
@@ -63,7 +67,11 @@ public class imgDialog extends Stage{
                 Logger.getLogger(imgDialog.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+        selectedImg= new Image("file:images/img/"+fileName); 
+        
         imgView= new ImageView (selectedImg);
+        imgView.setFitHeight(100);
+        imgView.setFitWidth(120);
         heightPane.getChildren().addAll(new Label("Height: "),height,new Label("px"));
         widthPane.getChildren().addAll(new Label("Width: "),width,new Label("px"));
         captionPane.getChildren().addAll(new Label("Caption: "),caption);
@@ -91,8 +99,10 @@ public class imgDialog extends Stage{
         scn.add(OKButton, 2,2);
         OKButton.setOnMouseReleased(e->{
             pToEdi.setCaption(caption.getText());
-            pToEdi.setImgFileName(fileName);
-            pToEdi.setImgPath(path);
+            if(fileName!=null){
+                pToEdi.setImgFileName(fileName);
+                pToEdi.setImgPath(path);
+            }
             pToEdi.setImgH(Double.parseDouble(height.getText()));
             pToEdi.setImgW(Double.parseDouble(width.getText()));
             pToEdi.setOrientation(orientationPreference);
@@ -130,9 +140,7 @@ public class imgDialog extends Stage{
              String fullName = path+fileName;
              System.out.println(""+path+fileName);
              String imagePath = path + SLASH +fileName;
-            File file2 = new File(imagePath);
-                URL fileURL = file2.toURI().toURL();
-                selectedImg = new Image(fileURL.toExternalForm());
+                selectedImg = new Image(("file:images/img/"+fileName));
             
 	}   
     }
