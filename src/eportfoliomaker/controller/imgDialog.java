@@ -67,8 +67,7 @@ public class imgDialog extends Stage{
                 Logger.getLogger(imgDialog.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        selectedImg= new Image("file:images/img/"+fileName); 
-        
+        selectedImg= new Image("file:images/img/"+fileName);
         imgView= new ImageView (selectedImg);
         imgView.setFitHeight(100);
         imgView.setFitWidth(120);
@@ -88,7 +87,6 @@ public class imgDialog extends Stage{
         leftFloat.setOnMouseReleased(e->{
             orientationPreference="right";
         });
-        
         scn.add(buttonsPane,1,1);
         scn.add(heightPane,2,0);
         scn.add(imgSelect,0,0);
@@ -141,7 +139,6 @@ public class imgDialog extends Stage{
              System.out.println(""+path+fileName);
              String imagePath = path + SLASH +fileName;
                 selectedImg = new Image(("file:images/img/"+fileName));
-            
 	}   
     }
     

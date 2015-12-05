@@ -14,7 +14,7 @@ import java.util.Optional;
 import javafx.scene.control.ChoiceDialog;
 import javafx.stage.Stage;
 import eportfoliomaker.model.ListComp;
-import eportfoliomaker.model.SlideShowModel;
+import eportfoliomaker.model.SlideShowModelComponent;
 import eportfoliomaker.model.Video;
 import eportfoliomaker.view.ePortfolioAppMakerView;
 
@@ -63,8 +63,10 @@ public class addCompDialog extends Stage{
                 videoDialog v = new videoDialog(this,vid);
                 ePortfolio.getSelectedPage().addComp(vid);
             }else if(result.get()=="Slideshow"){
-                //SlideShowModel ss = new SlideShowModel();
-                //ui.getSelectedPage().addComp(ss);
+                
+                SlideShowModelComponent ss = new SlideShowModelComponent();
+                SlideshowMakerView ssD= new SlideshowMakerView(ui,ss);
+                ePortfolio.getSelectedPage().addComp(ss);
             }
         }
         

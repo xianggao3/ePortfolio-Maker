@@ -8,7 +8,7 @@ import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_CAPTION_PROMP
 import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_CAPTION_TEXT_FIELD;
 import static eportfoliomaker.slideshow.StartupConstants.CSS_CLASS_SLIDE_EDIT_VIEW;
 import static eportfoliomaker.slideshow.StartupConstants.DEFAULT_THUMBNAIL_WIDTH;
-import eportfoliomaker.slideshow.ssDialog;
+import eportfoliomaker.controller.SlideshowMakerView;
 import java.io.File;
 import java.net.URL;
 import javafx.scene.control.Label;
@@ -28,7 +28,7 @@ import properties_manager.PropertiesManager;
  * @author McKilla Gorilla & _____________
  */
 public class SlideEditView extends HBox {
-    ssDialog ui;
+    SlideshowMakerView ui;
     
     // SLIDE THIS COMPONENT EDITS
     Slide slide;
@@ -50,7 +50,7 @@ public class SlideEditView extends HBox {
      * 
      * @param initSlide The slide to be edited by this component.
      */
-    public SlideEditView(ssDialog initUi, Slide initSlide) {
+    public SlideEditView(SlideshowMakerView initUi, Slide initSlide) {
 	// KEEP THIS FOR LATER
 	ui = initUi;
 	

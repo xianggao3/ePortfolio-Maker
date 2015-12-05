@@ -1,6 +1,7 @@
 package eportfoliomaker.slideshow;
 
-import eportfoliomaker.model.SlideShowModel;
+import eportfoliomaker.controller.SlideshowMakerView;
+import eportfoliomaker.model.SlideShowModelComponent;
 import static eportfoliomaker.slideshow.LanguagePropertyType.DEFAULT_IMAGE_CAPTION;
 import static eportfoliomaker.slideshow.StartupConstants.DEFAULT_SLIDE_IMAGE;
 import static eportfoliomaker.slideshow.StartupConstants.PATH_SLIDE_SHOW_IMAGES;
@@ -13,12 +14,12 @@ import properties_manager.PropertiesManager;
  */
 public class SlideShowEditController {
     // APP UI
-    private ssDialog ui;
+    private SlideshowMakerView ui;
     
     /**
      * This constructor keeps the UI for later.
      */
-    public SlideShowEditController(ssDialog initUI) {
+    public SlideShowEditController(SlideshowMakerView initUI) {
 	ui = initUI;
     }
     
@@ -27,7 +28,7 @@ public class SlideShowEditController {
      * slide to the slide show.
      */
     public void processAddSlideRequest() {
-	SlideShowModel slideShow = ui.getSlideShow();
+	SlideShowModelComponent slideShow = ui.getSlideShow();
 	PropertiesManager props = PropertiesManager.getPropertiesManager();
 	slideShow.addSlide(DEFAULT_SLIDE_IMAGE, PATH_SLIDE_SHOW_IMAGES, props.getProperty(DEFAULT_IMAGE_CAPTION));
 	ui.updateFileToolbarControls(false);
@@ -38,7 +39,7 @@ public class SlideShowEditController {
      * and wishes to remove it from the slide show.
      */
     public void processRemoveSlideRequest() {
-	SlideShowModel slideShow = ui.getSlideShow();
+	SlideShowModelComponent slideShow = ui.getSlideShow();
 	slideShow.removeSelectedSlide();
 	ui.reloadSlideShowPane();
 	ui.updateFileToolbarControls(false);
@@ -49,7 +50,7 @@ public class SlideShowEditController {
      * and wishes to move it up in the slide show.
      */
     public void processMoveSlideUpRequest() {
-	SlideShowModel slideShow = ui.getSlideShow();
+	SlideShowModelComponent slideShow = ui.getSlideShow();
 	slideShow.moveSelectedSlideUp();	
 	ui.updateFileToolbarControls(false);	
     }
@@ -59,7 +60,7 @@ public class SlideShowEditController {
      * and wises to move it down in the slide show.
      */
     public void processMoveSlideDownRequest() {
-	SlideShowModel slideShow = ui.getSlideShow();
+	SlideShowModelComponent slideShow = ui.getSlideShow();
 	slideShow.moveSelectedSlideDown();	
 	ui.updateFileToolbarControls(false);
     }

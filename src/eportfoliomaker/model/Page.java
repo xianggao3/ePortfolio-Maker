@@ -30,6 +30,7 @@ public class Page {
     String footer;
     String header;
     String index;
+    String studentName;
     Tab tab;
 
     public Tab getTab() {
@@ -155,6 +156,15 @@ public class Page {
 	ui = initUI;
 	components = FXCollections.observableArrayList();
 	reset();	
+        studentName=initUI.getePortfolio().getStudentName();
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
     
     public void reset() {

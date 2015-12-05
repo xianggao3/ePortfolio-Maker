@@ -27,11 +27,11 @@ import eportfoliomaker.model.Img;
 import eportfoliomaker.model.ListComp;
 import eportfoliomaker.model.Page;
 import eportfoliomaker.model.Paragraph;
-import eportfoliomaker.model.SlideShowModel;
+import eportfoliomaker.model.SlideShowModelComponent;
 import eportfoliomaker.model.Video;
 import eportfoliomaker.model.ePortfolioModel;
-import eportfoliomaker.slideshow.ssDialog;
-import eportfoliomaker.slideshow.ssDialog;
+import eportfoliomaker.controller.SlideshowMakerView;
+import eportfoliomaker.controller.SlideshowMakerView;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -139,7 +139,7 @@ public class ePortfolioAppMakerView {
     footerDialog footerD;
     imgDialog imgD;
     videoDialog vidD;
-    ssDialog ssm;
+    SlideshowMakerView ssm;
     textDialog textD;
     bannerDialog bannerD;
     siteViewer sv;
@@ -197,7 +197,7 @@ public class ePortfolioAppMakerView {
         
         newPortButton=initChildButton(fileToolBarPane,"NewOrig.png","",false,"New ePortfolio");
         loadPortButton=initChildButton(fileToolBarPane,"LoadOrig.png","",false,"Load an Existing ePortfolio");
-        savePortButton=initChildButton(fileToolBarPane,"SaveOrig.png","",true,"Save the Current ePortfolio");
+        savePortButton=initChildButton(fileToolBarPane,"SaveOrig.png","",false,"Save the Current ePortfolio");
         saveAsPortButton=initChildButton(fileToolBarPane,"saveAs.png","",true,"Save the ePortfolio As");
         exportButton=initChildButton(fileToolBarPane,"ExportOrig.png","",true,"Export the Current ePortfolio");
         exitButton=initChildButton(fileToolBarPane,"ExitOrig.png","",false,"Exit Application");
@@ -373,8 +373,8 @@ public class ePortfolioAppMakerView {
         editSlideShowCompButton.setOnAction(e->{
             
             Component a = ePortfolio.getSelectedPage().getSelectedComp();
-            if(a instanceof SlideShowModel){
-            ssm=new ssDialog(primaryStage,(SlideShowModel)a);
+            if(a instanceof SlideShowModelComponent){
+            ssm=new SlideshowMakerView(this);
             }
         });
         editTextCompButton.setOnAction(e->{
@@ -494,9 +494,9 @@ public class ePortfolioAppMakerView {
     
         
     public void reloadPagePane(PageEditView pv) {
-        
+        if(pv!=null){
         pv.getChildren().clear();
-        
+        }
         Label pgTitle= new Label("By "+ ePortfolio.getStudentName());
         Label pgFont = new Label("Page Font: "+ePortfolio.getSelectedPage().getPageFont());    
         Label pgLayout= new Label("Page Layout Theme: "+ePortfolio.getSelectedPage().getLayoutTheme());

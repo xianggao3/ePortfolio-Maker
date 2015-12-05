@@ -3,10 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eportfoliomaker.slideshow;
+package eportfoliomaker.controller;
 
 import eportfoliomaker.model.Slide;
-import eportfoliomaker.model.SlideShowModel;
+import eportfoliomaker.model.SlideShowModelComponent;
+import eportfoliomaker.slideshow.LanguagePropertyType;
+import eportfoliomaker.slideshow.SlideEditView;
+import eportfoliomaker.slideshow.SlideShowEditController;
 import static eportfoliomaker.slideshow.LanguagePropertyType.LABEL_SLIDESHOW_TITLE;
 import static eportfoliomaker.slideshow.LanguagePropertyType.TOOLTIP_ADD_SLIDE;
 import static eportfoliomaker.slideshow.LanguagePropertyType.TOOLTIP_MOVE_DOWN;
@@ -27,6 +30,7 @@ import static eportfoliomaker.slideshow.StartupConstants.ICON_MOVE_UP;
 import static eportfoliomaker.slideshow.StartupConstants.ICON_REMOVE_SLIDE;
 import static eportfoliomaker.slideshow.StartupConstants.PATH_ICONS;
 import static eportfoliomaker.slideshow.StartupConstants.STYLE_SHEET_UI;
+import eportfoliomaker.view.ePortfolioAppMakerView;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -50,11 +54,11 @@ import properties_manager.PropertiesManager;
  *
  * @author xgao3
  */
-public class ssDialog extends Stage{
-    Scene primaryScene;
+public class SlideshowMakerView extends Stage{
 
     // THIS PANE ORGANIZES THE BIG PICTURE CONTAINERS FOR THE
     // APPLICATION GUI
+    Scene primaryScene;
     BorderPane ssmPane;
     
     // WORKSPACE
@@ -77,27 +81,28 @@ public class ssDialog extends Stage{
     VBox slidesEditorPane;
 
     // THIS IS THE SLIDE SHOW WE'RE WORKING WITH
-    SlideShowModel slideShow;
+    SlideShowModelComponent slideShow;
+    ePortfolioAppMakerView ui;
     private SlideShowEditController editController;
-    private ErrorHandler errorHandler;
     
-    public ssDialog(Stage stage, SlideShowModel ss){
-        initOwner(stage);
-	slideShow = new SlideShowModel(this);
+    public SlideshowMakerView(ePortfolioAppMakerView ui,SlideShowModelComponent ss){//scomponent
+        initOwner(ui.getPrimaryStage());
+        this.ui=ui;
+        slideShow=ss;
         
         startUI(this,"Slideshow Maker");
         FlowPane s = new FlowPane();
         
+        ssmPane = new BorderPane();
 	ssmPane.setCenter(workspace);
-        s.getChildren().addAll(ssmPane);      
-        Scene primaryScene = new Scene(s);
+        s.getChildren().addAll(ssmPane);
 	primaryScene.getStylesheets().add(STYLE_SHEET_UI);
         setScene(primaryScene);
         showAndWait();
     }
     
     
-    public SlideShowModel getSlideShow() {
+    public SlideShowModelComponent getSlideShow() {
 	return slideShow;
     }
 
@@ -105,9 +110,7 @@ public class ssDialog extends Stage{
 	return this;
     
     }
-    public ErrorHandler getErrorHandler() {
-	return errorHandler;
-    }
+    
     
     
     public void startUI(Stage initPrimaryStage, String windowTitle) {
@@ -121,7 +124,6 @@ public class ssDialog extends Stage{
 
 	// AND FINALLY START UP THE WINDOW (WITHOUT THE WORKSPACE)
 	// KEEP THE WINDOW FOR LATER
-	initWindow(windowTitle);
     }
 
     // UI SETUP HELPER METHODS
@@ -141,7 +143,6 @@ public class ssDialog extends Stage{
 	slidesEditorScrollPane = new ScrollPane(slidesEditorPane);
 	slidesEditorScrollPane.setFitToWidth(true);
 	slidesEditorScrollPane.setFitToHeight(true);
-	initTitleControls();
 	
 	// NOW PUT THESE TWO IN THE WORKSPACE
 	workspace.setLeft(slideEditToolbar);
@@ -250,7 +251,6 @@ public class ssDialog extends Stage{
      */
     public void reloadSlideShowPane() {
 	slidesEditorPane.getChildren().clear();
-	reloadTitleControls();
 	for (Slide slide : slideShow.getSlides()) {
 	    SlideEditView slideEditor = new SlideEditView(this, slide);
 	    if (slideShow.isSelectedSlide(slide))
@@ -266,32 +266,6 @@ public class ssDialog extends Stage{
 	updateSlideshowEditToolbarControls();
     }
     
-    private void initTitleControls() {
-	PropertiesManager props = PropertiesManager.getPropertiesManager();
-	String labelPrompt ="Slideshow Title:";
-	titlePane = new FlowPane();
-	titleLabel = new Label(labelPrompt);
-	titleTextField = new TextField();
-	
-	titlePane.getChildren().add(titleLabel);
-	titlePane.getChildren().add(titleTextField);
-	
-	String titlePrompt = props.getProperty(LanguagePropertyType.LABEL_SLIDESHOW_TITLE);
-	titleTextField.setText(titlePrompt);
-	
-	titleTextField.textProperty().addListener(e -> {
-	    slideShow.setTitle(titleTextField.getText());
-	    updateFileToolbarControls(false);
-	});
-	
-	titlePane.getStyleClass().add(CSS_CLASS_TITLE_PANE);
-	titleLabel.getStyleClass().add(CSS_CLASS_TITLE_PROMPT);
-	titleTextField.getStyleClass().add(CSS_CLASS_TITLE_TEXT_FIELD);
-    }
     
-    public void reloadTitleControls() {
-	if (slidesEditorPane.getChildren().size() == 0)
-	    slidesEditorPane.getChildren().add(titlePane);
-	titleTextField.setText(slideShow.getTitle());
-    }
+    
 }

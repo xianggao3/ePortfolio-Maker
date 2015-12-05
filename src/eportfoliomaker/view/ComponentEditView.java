@@ -10,7 +10,7 @@ import eportfoliomaker.model.Img;
 import eportfoliomaker.model.ListComp;
 import eportfoliomaker.model.Page;
 import eportfoliomaker.model.Paragraph;
-import eportfoliomaker.model.SlideShowModel;
+import eportfoliomaker.model.SlideShowModelComponent;
 import eportfoliomaker.model.Video;
 import eportfoliomaker.slideshow.ErrorHandler;
 import eportfoliomaker.slideshow.LanguagePropertyType;
@@ -39,7 +39,7 @@ public  class ComponentEditView extends HBox{
     ListComp list;
     Img img;
     Video video;
-    SlideShowModel ss;
+    SlideShowModelComponent ss;
     
     Label text= new Label();
     Label text2= new Label();

@@ -10,11 +10,21 @@ package eportfoliomaker.model;
  * @author xgao3
  */
 public class Video extends Component{
+
+   
     String videoFileName;
     String src;
     Double videoH;
     Double videoW;
     String caption;
+    
+     public String getSrc() {
+        return src;
+    }
+
+    public void setSrc(String src) {
+        this.src = src;
+    }
 
     public String getCaption() {
         return caption;

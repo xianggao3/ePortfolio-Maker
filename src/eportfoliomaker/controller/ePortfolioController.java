@@ -67,7 +67,7 @@ public class ePortfolioController {
             eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
         }
     }
-     public boolean handleSaveSlideShowRequest() {
+     public boolean handleSavePortRequest() {
         try {
 	    // GET THE SLIDE SHOW TO SAVE
 	    ePortfolioModel slideShowToSave = ui.getePortfolio();

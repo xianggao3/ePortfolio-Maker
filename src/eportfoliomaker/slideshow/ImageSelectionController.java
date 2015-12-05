@@ -5,7 +5,7 @@ import javafx.stage.FileChooser;
 import static eportfoliomaker.slideshow.StartupConstants.PATH_SLIDE_SHOW_IMAGES;
 import eportfoliomaker.model.Slide;
 import eportfoliomaker.slideshow.SlideEditView;
-import eportfoliomaker.slideshow.ssDialog;
+import eportfoliomaker.controller.SlideshowMakerView;
 
 /**
  * This controller provides a controller for when the user chooses to
@@ -14,12 +14,12 @@ import eportfoliomaker.slideshow.ssDialog;
  * @author McKilla Gorilla & _____________
  */
 public class ImageSelectionController {
-    ssDialog ui;
+    SlideshowMakerView ui;
     
     /**
      * Default contstructor doesn't need to initialize anything
      */
-    public ImageSelectionController(ssDialog initUi) {   
+    public ImageSelectionController(SlideshowMakerView initUi) {   
 	ui = initUi;
     }
     

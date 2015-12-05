@@ -5,6 +5,13 @@
  */
 package eportfoliomaker;
 
+import eportfoliomaker.model.Component;
+import eportfoliomaker.model.Img;
+import eportfoliomaker.model.ListComp;
+import eportfoliomaker.model.Page;
+import eportfoliomaker.model.Paragraph;
+import eportfoliomaker.model.SlideShowModelComponent;
+import eportfoliomaker.model.Video;
 import eportfoliomaker.model.ePortfolioModel;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -48,32 +55,30 @@ public class ePortfolioJSONFileManager {
      * @throws IOException Thrown when there are issues writing to the JSON
      * file.
      */
-    public void saveePortfolio(ePortfolioModel ePortfolioToSave) throws IOException {
+    public void saveePortfolio(ePortfolioModel ePToSave)throws IOException{//enter 1 model, will do gen 1 html per page
+        for(Page p:ePToSave.getPages()){
+            saveePortfolioPage(p);
+        }
+    }
+    
+    public void saveePortfolioPage(Page pToSave) throws IOException {
 	StringWriter sw = new StringWriter();
-
-	// BUILD THE SLIDES ARRAY
-	JsonArray slidesJsonArray = makeSlidesJsonArray(ePortfolioToSave.getPages());
-
-	// NOW BUILD THE COURSE USING EVERYTHING WE'VE ALREADY MADE
-	JsonObject slideShowJsonObject = Json.createObjectBuilder()
-		.add(JSON_TITLE, ePortfolioToSave.getTitle())
-		.add(JSON_SLIDES, slidesJsonArray)
-		.build();
+        JsonObject singlePgJSON = makePageJsonObject(pToSave);
 
 	Map<String, Object> properties = new HashMap<>(1);
 	properties.put(JsonGenerator.PRETTY_PRINTING, true);
 
 	JsonWriterFactory writerFactory = Json.createWriterFactory(properties);
 	JsonWriter jsonWriter = writerFactory.createWriter(sw);
-	jsonWriter.writeObject(slideShowJsonObject);
+	jsonWriter.writeObject(singlePgJSON);
 	jsonWriter.close();
 
 	// INIT THE WRITER
-	String slideShowTitle = "" + ePortfolioToSave.getTitle();
-	String jsonFilePath = PATH_SLIDE_SHOWS + SLASH + slideShowTitle + JSON_EXT;
+	String slideShowTitle = "" + pToSave.getTitle();
+	String jsonFilePath = "./data/ePortfolios/" + SLASH + slideShowTitle + JSON_EXT;//if this doesnt work try file: and periods and \ or \\ or //
 	OutputStream os = new FileOutputStream(jsonFilePath);
 	JsonWriter jsonFileWriter = Json.createWriter(os);
-	jsonFileWriter.writeObject(slideShowJsonObject);
+	jsonFileWriter.writeObject(singlePgJSON);
 	String prettyPrinted = sw.toString();
 	PrintWriter pw = new PrintWriter(jsonFilePath);
 	pw.write(prettyPrinted);
@@ -89,7 +94,7 @@ public class ePortfolioJSONFileManager {
      * @param jsonFilePath The JSON file to load.
      * @throws IOException
      */
-    public void loadSlideShow(SlideShowModel slideShowToLoad, String jsonFilePath) throws IOException {
+    public void loadSlideShow(ePortfolioModel slideShowToLoad, String jsonFilePath) throws IOException {
 	// LOAD THE JSON FILE WITH ALL THE DATA
 	JsonObject json = loadJSONFile(jsonFilePath);
 
@@ -124,10 +129,10 @@ public class ePortfolioJSONFileManager {
 	}
 	return items;
     }
-
-    private JsonArray makeSlidesJsonArray(List<Slide> slides) {
+    /*
+    private JsonArray makeSlidesJsonArray(List<Component> slides) {
 	JsonArrayBuilder jsb = Json.createArrayBuilder();
-	for (Slide slide : slides) {
+	for (Component slide : slides) {
 	    JsonObject jso = makeSlideJsonObject(slide);
 	    jsb.add(jso);
 	}
@@ -135,7 +140,7 @@ public class ePortfolioJSONFileManager {
 	return jA;
     }
 
-    private JsonObject makeSlideJsonObject(Slide slide) {
+    private JsonObject makeSlideJsonObject(Page slide) {
 	JsonObject jso = Json.createObjectBuilder()
 		.add(JSON_IMAGE_FILE_NAME, slide.getImageFileName())
 		.add(JSON_IMAGE_PATH, slide.getImagePath())
@@ -143,6 +148,95 @@ public class ePortfolioJSONFileManager {
 		.build();
 	return jso;
     }
+    */
+    
+    //make a single page
+    public JsonObject makePageJsonObject(Page p){
+        JsonObject jso= Json.createObjectBuilder()
+                .add("title", p.getTitle())
+                .add("name", p.getStudentName())
+                .add("banner",p.getBanner())
+                .add("bannertext",p.getBannerText())
+                .add("color",p.getColorTheme())
+                .add("layout", p.getLayoutTheme())
+                .add("font",p.getPageFont())
+                .add("footer",p.getFooter())
+                .add("components",makeCompArrayObject(p))
+                .build() ;
+        return jso;
+    }
+    
+    //creates array of all comps in a page
+    public JsonArray makeCompArrayObject(Page p){
+        JsonArrayBuilder jsb= Json.createArrayBuilder();
+        for(Component c:p.getComponents()){
+            jsb.add(makeCompObject(c));
+        }
+        JsonArray JA= jsb.build();
+        return JA;
+    }
+    
+    //make a 1 component into json-
+    public JsonObject makeCompObject(Component comp){
+        
+        if(comp.getType()=="p"){
+                return makeTextObject((Paragraph)comp);
+        }else if(comp.getType()=="list"){
+                return makeListObject((ListComp)comp);
+        }else if(comp.getType()=="img"){
+                return makeImgObject((Img)comp);
+        }else if(comp.getType()=="video"){
+                return makeVideoObject((Video)comp);
+        }else if(comp.getType()=="slideshow"){
+                return makeSSObject((SlideShowModelComponent)comp);
+        }else{
+            return null;
+        }
+    }
+    public JsonObject makeTextObject(Paragraph p){
+        JsonObject jso = Json.createObjectBuilder()
+                .add("type", p.getType())
+                .add("pgfont",p.getFont())
+                .add("text",p.getText())
+                .build();
+        return jso;
+    }
+    public JsonObject makeListObject(ListComp p){
+        JsonObject jso = Json.createObjectBuilder()
+                .add("type", p.getType())
+                .add("text",p.getBullets())
+                .build();
+        return jso;
+    }
+    public JsonObject makeImgObject(Img p){
+        JsonObject jso = Json.createObjectBuilder()
+                .add("type", p.getType())
+                .add("src",p.getImgFileName()+p.getImgPath())
+                .add("orientation",p.getOrientation())
+                .add("width",p.getImgW())
+                .add("height",p.getImgH())
+                .add("caption",p.getCaption())
+                .build();
+        return jso;
+    }
+    public JsonObject makeVideoObject(Video p){
+        JsonObject jso=Json.createObjectBuilder()
+                .add("type",p.getType())
+                .add("src", p.getSrc()+p.getVideoFileName())
+                .add("width",p.getVideoW())
+                .add("height", p.getVideoH())
+                .add("caption",p.getCaption())
+                .build();
+        return jso;
+    }
+    public JsonObject makeSSObject(SlideShowModelComponent p ){
+        JsonObject jso=Json.createObjectBuilder()
+                .add("type",p.getType())
+                .build();
+                return jso;
+                
+    }
+    
 }
 
-}
+
