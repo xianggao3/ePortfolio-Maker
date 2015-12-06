@@ -48,11 +48,11 @@ public class textDialog extends Stage{
         initOwner(ui.getPrimaryStage());
         
         ObservableList<String> fonts = FXCollections.observableArrayList(
-        "SAMPLE FONT 1",
-        "SAMPLE FONT 2",
-        "SAMPLE FONT 3",
-        "SAMPLE FONT 4",
-        "SAMPLE FONT 5"
+        "Montserrat",
+        "OpenSans",
+        "Raleway",
+        "Slabo",
+        "Ubuntu"
         );
         textbox = new VBox();
         

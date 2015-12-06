@@ -1,0 +1,76 @@
+
+{
+    "name":"Xiang Gao",
+    "pages":[
+        {
+            "title":"index",
+            "bannerpath":"C:\\Users\\xgao3\\Documents\\NetBeansProjects\\ePortfolioMaker\\images\\img\\",
+            "bannerfilename":"SaltUtah.jpg",
+            "bannertext":"None Selected",
+            "color":"DeepSea",
+            "layout":"A",
+            "font":"OpenSans",
+            "footer":"This is my footer!",
+            "components":[
+                {
+                    "type":"header",
+                    "text":"About me"
+                },
+                {
+                    "type":"p",
+                    "pgfont":"Montserrat",
+                    "text":"Hello this is about me"
+                },
+                {
+                    "type":"list",
+                    "text":" • Male\n • 19 Years Old\n • Lives in New York\n"
+                }
+            ]
+        },
+        {
+            "title":"Some pics",
+            "bannerpath":"",
+            "bannerfilename":"",
+            "bannertext":"None Selected",
+            "color":"Pandora",
+            "layout":"B",
+            "font":"Ubuntu",
+            "footer":"Second page footer!",
+            "components":[
+                {
+                    "type":"img",
+                    "imgpath":"C:\\Users\\xgao3\\Documents\\NetBeansProjects\\ePortfolioMaker\\images\\img\\",
+                    "imgfilename":"ArchesUtah.jpg",
+                    "orientation":"right",
+                    "width":"150",
+                    "height":"100",
+                    "caption":"CSE 219"
+                },
+                {
+                    "type":"header",
+                    "text":"Another header!"
+                }
+            ]
+        },
+        {
+            "title":"Video page",
+            "bannerpath":"",
+            "bannerfilename":"",
+            "bannertext":"None Selected",
+            "color":"Wooden",
+            "layout":"D",
+            "font":"Raleway",
+            "footer":"",
+            "components":[
+                {
+                    "type":"video",
+                    "videopath":"C:\\Users\\xgao3\\Documents\\NetBeansProjects\\ePortfolioMaker\\images\\img\\",
+                    "videofilename":"SampleVideo_1080x720_1mb.mp4",
+                    "width":"455",
+                    "height":"300",
+                    "caption":"Video hcaption here"
+                }
+            ]
+        }
+    ]
+}

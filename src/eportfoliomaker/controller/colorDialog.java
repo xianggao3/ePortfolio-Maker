@@ -24,13 +24,13 @@ public class colorDialog extends Stage{
         ui=gui;
         eP=ep;
         List<String> choices = new ArrayList<>();
-        choices.add("Red");
-        choices.add("Blue");
-        choices.add("Yellow");
-        choices.add("Dark");
-        choices.add("Light");
+        choices.add("DeepSea");
+        choices.add("Snowflake");
+        choices.add("Pandora");
+        choices.add("DarkGlow");
+        choices.add("Wooden");
 
-        ChoiceDialog<String> dialog = new ChoiceDialog<>("Red", choices);
+        ChoiceDialog<String> dialog = new ChoiceDialog<>("DeepSea", choices);
         dialog.setTitle("Color Theme");
         dialog.setHeaderText("Color Theme Choices");
         dialog.setContentText("Choose your Color:");

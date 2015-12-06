@@ -24,13 +24,13 @@ public class pageFontDialog extends Stage{
         eP=ep;
         ui=gui;
         List<String> choices = new ArrayList<>();
-        choices.add("SAMPLE PAGE FONT A");
-        choices.add("SAMPLE PAGE FONT B");
-        choices.add("SAMPLE PAGE FONT C");
-        choices.add("SAMPLE PAGE FONT D");
-        choices.add("SAMPLE PAGE FONT E");
+        choices.add("OpenSans");
+        choices.add("Montserrat");
+        choices.add("Raleway");
+        choices.add("Slabo");
+        choices.add("Ubuntu");
 
-        ChoiceDialog<String> dialog = new ChoiceDialog<>("SAMPLE PAGE FONT A", choices);
+        ChoiceDialog<String> dialog = new ChoiceDialog<>("OpenSans", choices);
         dialog.setTitle("Page Fonts");
         dialog.setHeaderText("Page Font Choices");
         dialog.setContentText("Choose your Page Font:");

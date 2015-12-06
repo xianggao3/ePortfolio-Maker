@@ -546,8 +546,6 @@ public class ePortfolioAppMakerView {
     public void reset(){
         for(Tab t : tabbedPane.getTabs()){
             tabbedPane.getTabs().remove(t);
-        }for(Tab t : tabbedPane.getTabs()){
-            tabbedPane.getTabs().remove(t);
         }
     }
     

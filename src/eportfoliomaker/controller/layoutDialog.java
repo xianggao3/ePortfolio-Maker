@@ -24,13 +24,13 @@ public class layoutDialog extends Stage{
         ui=gui;
         eP=ep;
         List<String> choices = new ArrayList<>();
-        choices.add("SAMPLE LAYOUT A");
-        choices.add("SAMPLE LAYOUT B");
-        choices.add("SAMPLE LAYOUT C");
-        choices.add("SAMPLE LAYOUT D");
-        choices.add("SAMPLE LAYOUT E");
+        choices.add("A");
+        choices.add("B");
+        choices.add("C");
+        choices.add("D");
+        choices.add("E");
 
-        ChoiceDialog<String> dialog = new ChoiceDialog<>("SAMPLE LAYOUT A", choices);
+        ChoiceDialog<String> dialog = new ChoiceDialog<>("A", choices);
         dialog.setTitle("Layout");
         dialog.setHeaderText("Layout Choices");
         dialog.setContentText("Choose your layout:");
