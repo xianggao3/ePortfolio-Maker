@@ -1,0 +1,26 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 4, 2015, 7:46:34 PM
+    Author     : xgao3
+*/
+
+body{
+    background-image: url("http://pandora.com/images/background.jpg");
+    color:white;
+}
+#content{
+    color: blue;
+}
+#navbar{
+    
+}
+#navbar a:visited{
+    color:white;
+}
+#navbar a{
+        
+}

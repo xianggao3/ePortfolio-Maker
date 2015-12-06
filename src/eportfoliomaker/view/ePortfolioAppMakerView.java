@@ -327,11 +327,20 @@ public class ePortfolioAppMakerView {
             reloadPagePane();
 	});
 	saveAsPortButton.setOnAction(e -> {
-	    controller.handleSaveAsPortRequest();
+            nameDi=new studentNameDialog(this,ePortfolio);
+            try {
+                controller.handleSavePortRequest();
+            } catch (IOException ex) {
+                Logger.getLogger(ePortfolioAppMakerView.class.getName()).log(Level.SEVERE, null, ex);
+            }
             reloadPagePane();
 	});
         exportButton.setOnAction(e->{
-            controller.handleExportRequest();
+            try {
+                controller.exportSite(ePortfolio);
+            } catch (IOException ex) {
+                Logger.getLogger(ePortfolioAppMakerView.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             reloadPagePane();
         });

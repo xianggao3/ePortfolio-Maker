@@ -1,4 +1,4 @@
-package ssm;
+package eportfoliomaker;
 
 import eportfoliomaker.model.Component;
 import eportfoliomaker.model.Img;
