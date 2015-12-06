@@ -224,13 +224,13 @@ public class ePortfolioAppMakerView {
         selectColorButton=initChildButton(pageEditToolbar,"color.png","page_edit_toolbar_icons",true,"Select Color");
         //dont need chooseComponentFontButton=initChildButton(pageEditToolbar,"font.png","page_edit_toolbar_icons",false,"Choose Component Font");
         selectPageFontButton=initChildButton(pageEditToolbar,"font.png","page_edit_toolbar_icons",true,"Change the Page's Font");
-        updateHeaderButton=initChildButton(pageEditToolbar,"header.png","page_edit_toolbar_icons",true,"Change Header");
         updateFooterButton=initChildButton(pageEditToolbar,"footer.png","page_edit_toolbar_icons",true,"Change Footer");
         //
         rightEditToolbar=new VBox();
         rightEditToolbar.getStyleClass().add("page_edit_toolbar");
         addComponentButton=initChildButton(rightEditToolbar,"addComp.png","page_edit_toolbar_icons",true,"Add Component");
         removeCompButton=initChildButton(rightEditToolbar,"Del.png","page_edit_toolbar_icons",true,"Remove Component");
+        updateHeaderButton=initChildButton(rightEditToolbar,"header.png","page_edit_toolbar_icons",true,"Change Header");
         editTextCompButton=initChildButton(rightEditToolbar,"text.png","page_edit_toolbar_icons",true,"Text");
         editListCompButton=initChildButton(rightEditToolbar,"list.png","page_edit_toolbar_icons",true,"List");
         editImageCompButton=initChildButton(rightEditToolbar,"img.png","page_edit_toolbar_icons",true,"Image");
@@ -500,6 +500,8 @@ public class ePortfolioAppMakerView {
         editImageCompButton.setDisable(true);
         editSlideShowCompButton.setDisable(true);
         editVideoCompButton.setDisable(true);
+        updateHeaderButton.setDisable(true);
+        
 	if(ePortfolio.isPageSelected()==true){
             if(ePortfolio.getSelectedPage().isCompSelected()==true){
                 pageSelected =true;
@@ -513,6 +515,8 @@ public class ePortfolioAppMakerView {
                     editSlideShowCompButton.setDisable(false);
                 }else if(ePortfolio.getSelectedPage().getSelectedComp().getType()=="video"){
                     editVideoCompButton.setDisable(false);
+                }else if(ePortfolio.getSelectedPage().getSelectedComp().getType()=="header"){
+                    updateHeaderButton.setDisable(false);
                 }
             }
         }
@@ -522,10 +526,10 @@ public class ePortfolioAppMakerView {
         selectBannerImageButton.setDisable(!pageSelected);	
         selectLayoutButton.setDisable(!pageSelected);	
         selectColorButton.setDisable(!pageSelected);	
-        selectPageFontButton.setDisable(!pageSelected);	
-        updateHeaderButton.setDisable(!pageSelected);	
+        selectPageFontButton.setDisable(!pageSelected);		
         updateFooterButton.setDisable(!pageSelected);	
         addComponentButton.setDisable(!pageSelected);	
+        
     }
     public TabPane getTabPane(){
         return tabbedPane;

@@ -19,15 +19,16 @@ public class headerDialog extends Stage{
     ePortfolioAppMakerView ui;
     public headerDialog(ePortfolioAppMakerView ui,Header h){
         this.ui=ui;
-        TextInputDialog dialog = new TextInputDialog("Header Text");
+        TextInputDialog dialog = new TextInputDialog(h.getText());
         dialog.setTitle("Add Header");
         dialog.setHeaderText("Change Header Text");
-        dialog.setContentText(h.getText());
+        dialog.setContentText("Header: ");
 
         // Traditional way to get the response value.
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
             h.setText(result.get());
+            ui.reloadPagePane();
         }
     }
 }

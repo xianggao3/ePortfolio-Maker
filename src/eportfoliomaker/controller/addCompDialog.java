@@ -32,8 +32,8 @@ public class addCompDialog extends Stage{
         this.ui=ui;
         ePortfolio=eP;
         List<String> choices = new ArrayList<>();
-        choices.add("Text");
         choices.add("Header");
+        choices.add("Text");
         choices.add("List");
         choices.add("Image");
         choices.add("Video");
