@@ -14,8 +14,8 @@ public class Video extends Component{
    
     String videoFileName;
     String src;
-    Double videoH;
-    Double videoW;
+    String videoH;
+    String videoW;
     String caption;
     
      public String getSrc() {
@@ -50,19 +50,19 @@ public class Video extends Component{
         this.src = videoPath;
     }
 
-    public Double getVideoH() {
+    public String getVideoH() {
         return videoH;
     }
 
-    public void setVideoH(Double videoH) {
+    public void setVideoH(String videoH) {
         this.videoH = videoH;
     }
 
-    public Double getVideoW() {
+    public String getVideoW() {
         return videoW;
     }
 
-    public void setVideoW(Double videoW) {
+    public void setVideoW(String videoW) {
         this.videoW = videoW;
     }
 
@@ -78,7 +78,7 @@ public class Video extends Component{
         type="video";
         videoFileName=null;
         src=null;
-        videoH=300.;
-        videoW=455.;
+        videoH="300";
+        videoW="455";
     }
 }

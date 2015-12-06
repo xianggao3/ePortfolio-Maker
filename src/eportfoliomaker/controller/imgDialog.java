@@ -102,8 +102,8 @@ public class imgDialog extends Stage{
                 pToEdi.setImgFileName(fileName);
                 pToEdi.setImgPath(path);
             }
-            pToEdi.setImgH(Double.parseDouble(height.getText()));
-            pToEdi.setImgW(Double.parseDouble(width.getText()));
+            pToEdi.setImgH((height.getText()));
+            pToEdi.setImgW((width.getText()));
             pToEdi.setOrientation(orientationPreference);
 
             this.close();

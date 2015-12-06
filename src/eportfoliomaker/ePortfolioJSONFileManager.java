@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Tab;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -62,14 +63,15 @@ public class ePortfolioJSONFileManager {
      */
     public void loadSlideShow(ePortfolioModel ePortToLoad, String jsonFilePath) throws IOException {
 	// LOAD THE JSON FILE WITH ALL THE DATA
+        ePortToLoad.getUi().reset();
 	JsonObject json = loadJSONFile(jsonFilePath);
 
 	// NOW LOAD THE COURSE
 	ePortToLoad.reset();
 	ePortToLoad.setStudentName(json.getString("name"));
-	JsonArray jsonSlidesArray = json.getJsonArray("pages");
-	for (int i = 0; i < jsonSlidesArray.size(); i++) {
-	    JsonObject pageJso = jsonSlidesArray.getJsonObject(i);
+	JsonArray pageJsonArray = json.getJsonArray("pages");
+	for (int i = 0; i < pageJsonArray.size(); i++) {
+	    JsonObject pageJso = pageJsonArray.getJsonObject(i);
             Page p = new Page(ePortToLoad.getUi());
 	    ePortToLoad.getPages().add(p);
             
@@ -83,8 +85,12 @@ public class ePortfolioJSONFileManager {
             p.setFooter(pageJso.getString("footer"));
             System.out.println(pageJso.getJsonArray("components"));
             p.setComponents(loadCompsArray(pageJso.getJsonArray("components")));
-           
+           Tab t = new Tab();
+           t.setText(p.getTitle());
+           ePortToLoad.getUi().getTabPane().getTabs().add(t);
+           ePortToLoad.getUi().setCurrentTab(t);
 	}
+        
         ePortToLoad.setSelectedPage(ePortToLoad.getPages().get(0));
         ePortToLoad.getUi().reloadPagePane();
     }
@@ -110,8 +116,8 @@ public class ePortfolioJSONFileManager {
             }else if(compType.equals("img")){
                 Img a = new Img();
                 a.setCaption(compArray.getJsonObject(i).getString("caption"));
-                a.setImgH(Double.parseDouble(compArray.getJsonObject(i).getString("height")));
-                a.setImgW(Double.parseDouble(compArray.getJsonObject(i).getString("width")));
+                a.setImgH((compArray.getJsonObject(i).getString("height")));
+                a.setImgW((compArray.getJsonObject(i).getString("width")));
                 a.setOrientation(compArray.getJsonObject(i).getString("orientation"));
                 a.setImgFileName(compArray.getJsonObject(i).getString("imgfilename"));
                 a.setImgPath(compArray.getJsonObject(i).getString("imgpath"));
@@ -119,8 +125,8 @@ public class ePortfolioJSONFileManager {
             }else if(compType.equals("video")){
                 Video a = new Video();
                 a.setCaption(compArray.getJsonObject(i).getString("caption"));
-                a.setVideoH(Double.parseDouble(compArray.getJsonObject(i).getString("height")));
-                a.setVideoW(Double.parseDouble(compArray.getJsonObject(i).getString("width")));
+                a.setVideoH((compArray.getJsonObject(i).getString("height")));
+                a.setVideoW((compArray.getJsonObject(i).getString("width")));
                 a.setVideoFileName(compArray.getJsonObject(i).getString("videofilename"));
                 a.setVideoPath(compArray.getJsonObject(i).getString("videopath"));
                 comps.add(a);

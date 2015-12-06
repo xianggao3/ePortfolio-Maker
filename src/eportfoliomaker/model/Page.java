@@ -177,8 +177,8 @@ public class Page {
 	selectedComp = null;
         Title= "New ePortfolio Page";
         bannerText= "None Selected";
-        bannerFileName=null;
-        bannerPath=null;
+        bannerFileName="";
+        bannerPath="";
         colorTheme= "None Selected";
         layoutTheme= "None Selected";
         pageFont= "None Selected";

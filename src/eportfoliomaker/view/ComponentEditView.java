@@ -93,8 +93,8 @@ public  class ComponentEditView extends HBox{
                 imgview.setImage(imgImage);
 
                 // AND RESIZE IT
-                double scaledWidth = img.getImgW();
-                double scaledHeight = img.getImgH();
+                double scaledWidth = Double.parseDouble(img.getImgW());
+                double scaledHeight = Double.parseDouble(img.getImgH());
                 imgview.setFitWidth(scaledWidth);
                 imgview.setFitHeight(scaledHeight);
 //            } catch (Exception e) {
@@ -115,8 +115,8 @@ public  class ComponentEditView extends HBox{
                 MediaPlayer mplayer = new MediaPlayer(movie);
                 movieView.setMediaPlayer(mplayer);
                 // AND RESIZE IT
-                double scaledWidth = video.getVideoW();
-                double scaledHeight = video.getVideoH();
+                double scaledWidth = Double.parseDouble(video.getVideoW());
+                double scaledHeight = Double.parseDouble(video.getVideoH());
                 movieView.setFitWidth(scaledWidth);
                 movieView.setFitHeight(scaledHeight);
                 movieView.getMediaPlayer().play();

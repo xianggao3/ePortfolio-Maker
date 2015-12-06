@@ -96,7 +96,6 @@ public class ePortfolioAppMakerView {
     
     //Tabs in the middle (Pages)
     TabPane tabbedPane=new TabPane();
-    Tab thisTab;
     Tab tab2;
     PageEditView pagesEditorPane;
     ScrollPane pagesEditorScrollPane;
@@ -158,6 +157,15 @@ public class ePortfolioAppMakerView {
         errorHandler=new ErrorHandler(this);
     }
 
+    public Tab getCurrentTab() {
+        return currentTab;
+    }
+
+    public void setCurrentTab(Tab currentTab) {
+        this.currentTab = currentTab;
+    }
+
+    
     public Stage getPrimaryStage() {
         return primaryStage;
     }
@@ -307,6 +315,7 @@ public class ePortfolioAppMakerView {
 	loadPortButton.setOnAction(e -> {
 	    controller.handleLoadPortRequest();
             reloadPagePane();
+            
 	});
 	savePortButton.setOnAction(e -> {
             try {
@@ -314,15 +323,21 @@ public class ePortfolioAppMakerView {
             } catch (IOException ex) {
                 Logger.getLogger(ePortfolioAppMakerView.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            reloadPagePane();
 	});
 	saveAsPortButton.setOnAction(e -> {
 	    controller.handleSaveAsPortRequest();
+            reloadPagePane();
 	});
         exportButton.setOnAction(e->{
             controller.handleExportRequest();
+            
+            reloadPagePane();
         });
 	exitButton.setOnAction(e -> {
-	    controller.handleExitRequest();
+	    primaryStage.close();
+            reloadPagePane();
 	});
         
         
@@ -465,13 +480,17 @@ public class ePortfolioAppMakerView {
     public void updateFileToolbarControls(boolean saved) {
 	// FIRST MAKE SURE THE WORKSPACE IS THERE
 	ePortMakerPane.setCenter(workspace);
+        addPageButton.setDisable(false);
+	selectSiteViewerWorkspaceButton.setDisable(false);
 	
 	// NEXT ENABLE/DISABLE BUTTONS AS NEEDED IN THE FILE TOOLBAR
-	savePortButton.setDisable(saved);
-	selectSiteViewerWorkspaceButton.setDisable(false);
-        addPageButton.setDisable(saved);
-	removePageButton.setDisable(saved);
+	savePortButton.setDisable(false);
+        saveAsPortButton.setDisable(false);
+        exportButton.setDisable(false);
+        
+	removePageButton.setDisable(false);
         updatePageEditToolbarControls();
+        reloadPagePane();
     }
     
     public void updatePageEditToolbarControls(){
@@ -507,6 +526,16 @@ public class ePortfolioAppMakerView {
         updateHeaderButton.setDisable(!pageSelected);	
         updateFooterButton.setDisable(!pageSelected);	
         addComponentButton.setDisable(!pageSelected);	
+    }
+    public TabPane getTabPane(){
+        return tabbedPane;
+    }
+    public void reset(){
+        for(Tab t : tabbedPane.getTabs()){
+            tabbedPane.getTabs().remove(t);
+        }for(Tab t : tabbedPane.getTabs()){
+            tabbedPane.getTabs().remove(t);
+        }
     }
     
         

@@ -51,7 +51,7 @@ public class YesNoCancelDialog extends Stage {
         initOwner(primaryStage);
         
         // LABEL TO DISPLAY THE CUSTOM MESSAGE
-        messageLabel = new Label();        
+        messageLabel = new Label("Your work is unsaved, are you sure you want to proceed?");        
 
         EventHandler yesNoCancelHandler = (EventHandler<ActionEvent>) (ActionEvent ae) -> {
             Button sourceButton = (Button)ae.getSource();
@@ -64,7 +64,9 @@ public class YesNoCancelDialog extends Stage {
         noButton = new Button(NO);
         cancelButton = new Button(CANCEL);
         yesButton.setOnAction(yesNoCancelHandler);
-        noButton.setOnAction(yesNoCancelHandler);
+        noButton.setOnAction(e->{
+            this.close();
+        });
         cancelButton.setOnAction(yesNoCancelHandler);
 
         // NOW ORGANIZE OUR BUTTONS
@@ -76,16 +78,11 @@ public class YesNoCancelDialog extends Stage {
         // WE'LL PUT EVERYTHING HERE
         messagePane = new VBox();
         messagePane.setAlignment(Pos.CENTER);
-        messagePane.getChildren().add(messageLabel);
+        Label lb = new Label("Your work is unsaved, are you sure you want to proceed?");   
+        messagePane.getChildren().add(lb);
         messagePane.getChildren().add(buttonBox);
 
 	// CSS CLASSES
-	yesButton.getStyleClass().add(CSS_CLASS_LANG_OK_BUTTON);
-	noButton.getStyleClass().add(CSS_CLASS_LANG_OK_BUTTON);
-	cancelButton.getStyleClass().add(CSS_CLASS_LANG_OK_BUTTON);
-	messageLabel.getStyleClass().add(CSS_CLASS_LANG_PROMPT);
-	messagePane.getStyleClass().add(CSS_CLASS_LANG_DIALOG_PANE);
-	buttonBox.getStyleClass().add(CSS_CLASS_LANG_DIALOG_PANE);
 	
         // MAKE IT LOOK NICE
         messagePane.setPadding(new Insets(10, 20, 20, 20));
@@ -93,7 +90,6 @@ public class YesNoCancelDialog extends Stage {
 
         // AND PUT IT IN THE WINDOW
         messageScene = new Scene(messagePane);
-	messageScene.getStylesheets().add(STYLE_SHEET_UI);
         this.setScene(messageScene);
     }
 

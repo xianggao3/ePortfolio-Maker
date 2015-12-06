@@ -1,0 +1,31 @@
+
+{
+    "name":"test2",
+    "pages":[
+        {
+            "title":"1",
+            "bannerpath":"",
+            "bannerfilename":"",
+            "bannertext":"None Selected",
+            "color":"None Selected",
+            "layout":"None Selected",
+            "font":"None Selected",
+            "footer":"",
+            "components":[
+                {
+                    "type":"p",
+                    "pgfont":"No Font Applied",
+                    "text":"dasd"
+                },
+                {
+                    "type":"header",
+                    "text":"1"
+                },
+                {
+                    "type":"list",
+                    "text":"11 • \n"
+                }
+            ]
+        }
+    ]
+}

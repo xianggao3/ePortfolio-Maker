@@ -13,8 +13,8 @@ public class Img extends Component {
     String imgFileName;
     String imgPath;
     String orientation;
-    Double imgH;
-    Double imgW;
+    String imgH;
+    String imgW;
     String caption;
 
     public String getCaption() {
@@ -49,19 +49,19 @@ public class Img extends Component {
         this.orientation = Orientation;
     }
 
-    public Double getImgH() {
+    public String getImgH() {
         return imgH;
     }
 
-    public void setImgH(Double imgH) {
+    public void setImgH(String imgH) {
         this.imgH = imgH;
     }
 
-    public Double getImgW() {
+    public String getImgW() {
         return imgW;
     }
 
-    public void setImgW(Double imgW) {
+    public void setImgW(String imgW) {
         this.imgW = imgW;
     }
 
@@ -79,7 +79,7 @@ public class Img extends Component {
         imgFileName=null;
         imgPath=null;
         orientation="middle";
-        imgH=60.;
-        imgW=75.;
+        imgH="60";
+        imgW="75";
     }
 }
