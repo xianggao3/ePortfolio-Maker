@@ -1,0 +1,65 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 4, 2015, 6:24:29 PM
+    Author     : xgao3
+*/
+body{
+    font-family: 'Slabo 27px', serif;
+    background-image: url("http://www.mountairyhabitat.org/wp-content/uploads/2013/05/gray-background1.jpg");
+    background-repeat:repeat-x;
+    background-attachment: fixed;
+
+}
+
+#writing{
+    background-color: #ffffff;
+  border: 1px solid black;
+  opacity:0.6;
+  filter:alpha(opacity=60);
+}
+
+#navbar{
+    border-bottom: 1px solid gray;
+    line-height: 40px;
+    background-color: lightslategray;
+    border-bottom-color: black;
+    position: absolute;
+    left: 0px;
+    width: 100px;
+    height: 100%;
+    top:0%;
+    float:left;
+    border-radius: 10px;
+    
+}
+
+#navbar a {
+    display: block;
+        margin-top: 1cm;
+    border: 1px solid;
+    border-radius: 10px;
+        color:white;
+    
+}
+
+#navbar a:hover{
+    color: black;
+    
+}
+#navbar a:visited{
+    
+}
+
+#banner {
+    position: absolute;
+    left: 100px;
+}
+#content{
+    position:relative;
+    left:100px;
+    top:400px;
+}

@@ -1,0 +1,28 @@
+{
+    "title":"Eric Cartman",
+    "navbar":[
+        {"page":"About Eric Cartman", "type":"a",  "src":"../ePortfolio/index.html"},
+        {"page":"Likes and Dislikes", "type":"a",  "src":"../ePortfolio/page2.html"},
+        {"page":"Favourite Quotes",   "type":"a",  "src":"../ePortfolio/page3.html"},
+        {"page":"Pictures of Cartman","type":"a",  "src":"../ePortfolio/page4.html"},
+        {"page":"Watch Cartman",       "type":"a",  "src":"../ePortfolio/page5.html"}
+    ],
+    "pages":
+        {
+            "banner":"Favorite Quotes",
+            "content":[
+                {"type":"img","src":"./img/Eric_cartman.png"},
+                {"type":"list","list":[
+                        {"type":"li","li":"Screw you guys, I’m going home!"},
+                        {"type":"li","li":"No Kitty! Bad Kitty!!"},
+                        {"type":"li","li":"No Kitty, this is MY pot pie!!!"},
+                        {"type":"li","li":"Nya nya nya nya NYAAAA nya!"},
+                        {"type":"li","li":"HOW DO I REEEEECH THESE KEEEEEDS!?!?!?!?"},
+                        {"type":"li","li":"Boooooo. Boo Wendy. Boo Wendy Testaburger. Boo."},
+                        {"type":"li","li":"CARTMAN BRAAAAAH!"},
+                        {"type":"li","li":"Stan, don't you know the first law of physics? Anything that's fun costs at least $8"}
+                ]}
+            ]
+            }   
+}
+    
