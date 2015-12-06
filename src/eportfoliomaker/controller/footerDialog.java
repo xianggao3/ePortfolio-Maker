@@ -31,6 +31,6 @@ public class footerDialog extends Stage{
         if (result.isPresent()){
             ui.getePortfolio().getSelectedPage().setFooter(result.get());
         }
-        ui.reloadPagePane(eP.getSelectedPage().getPv());
+        ui.reloadPagePane();
     }
 }

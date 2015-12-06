@@ -187,7 +187,7 @@ public class Page {
     
     public void addComp(Component comp){
         components.add(comp);
-        ui.reloadPagePane(pv);
+        ui.reloadPagePane();
 
     }
 

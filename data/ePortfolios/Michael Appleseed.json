@@ -4,32 +4,38 @@
     "pages":[
         {
             "title":"New ePortfolio Page",
-            "banner":"None Selected",
+            "bannerpath":"C:\\Users\\xgao3\\Documents\\NetBeansProjects\\ePortfolioMaker\\images\\img\\",
+            "bannerfilename":"BadlandsSouthDakota.jpg",
             "bannertext":"None Selected",
             "color":"None Selected",
             "layout":"None Selected",
             "font":"None Selected",
             "footer":"",
             "components":[
+                {
+                    "type":"header",
+                    "text":"Header Text"
+                },
                 {
                     "type":"list",
-                    "text":" • \n • \n • \n"
-                }
-            ]
-        },
-        {
-            "title":"44",
-            "banner":"None Selected",
-            "bannertext":"None Selected",
-            "color":"None Selected",
-            "layout":"None Selected",
-            "font":"None Selected",
-            "footer":"",
-            "components":[
+                    "text":"dasdas • \n • \n • \n • \n"
+                },
                 {
-                    "type":"p",
-                    "pgfont":"No Font Applied",
-                    "text":"er"
+                    "type":"img",
+                    "imgpath":"C:\\Users\\xgao3\\Documents\\NetBeansProjects\\ePortfolioMaker\\images\\img\\",
+                    "imgfilename":"BadlandsSouthDakota.jpg",
+                    "orientation":"right",
+                    "width":75.0,
+                    "height":60.0,
+                    "caption":"dasdas"
+                },
+                {
+                    "type":"video",
+                    "videopath":"C:\\Users\\xgao3\\Documents\\NetBeansProjects\\ePortfolioMaker\\images\\img\\",
+                    "videofilename":"SampleVideo_1080x720_1mb.mp4",
+                    "width":455.0,
+                    "height":300.0,
+                    "caption":"fasdfasd"
                 }
             ]
         }

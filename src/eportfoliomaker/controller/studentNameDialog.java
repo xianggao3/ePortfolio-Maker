@@ -23,7 +23,7 @@ public class studentNameDialog extends Stage{
         this.ui=ui;
         model=eP;
         
-        ui.reloadPagePane(eP.getSelectedPage().getPv());
+        ui.reloadPagePane();
         dialog = new TextInputDialog("Michael Appleseed");
         dialog.setTitle("Student Name");
         dialog.setHeaderText("Enter your Name");
@@ -33,6 +33,6 @@ public class studentNameDialog extends Stage{
         if (result.isPresent()){
             eP.setStudentName(result.get());
         }
-        ui.reloadPagePane(eP.getSelectedPage().getPv());
+        ui.reloadPagePane();
     }
 }

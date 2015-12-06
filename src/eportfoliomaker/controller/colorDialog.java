@@ -40,6 +40,6 @@ public class colorDialog extends Stage{
         if (result.isPresent()){
             ui.getePortfolio().getSelectedPage().setColorTheme(result.get());
         }
-        ui.reloadPagePane(eP.getSelectedPage().getPv());
+        ui.reloadPagePane();
     }
 }

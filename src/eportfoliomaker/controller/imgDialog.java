@@ -54,8 +54,9 @@ public class imgDialog extends Stage{
     String fileName;
     String orientationPreference;
     
-    public imgDialog(Stage primaryStage,Img pToEdi){
-        initOwner(primaryStage);
+    public imgDialog(ePortfolioAppMakerView ui,Img pToEdi){
+        this.ui=ui;
+        initOwner(ui.getPrimaryStage());
         caption.setText(pToEdi.getCaption());
         height.setText(pToEdi.getImgH().toString());
         width.setText(pToEdi.getImgW().toString());
@@ -104,7 +105,6 @@ public class imgDialog extends Stage{
             pToEdi.setImgH(Double.parseDouble(height.getText()));
             pToEdi.setImgW(Double.parseDouble(width.getText()));
             pToEdi.setOrientation(orientationPreference);
-            ui.getePortfolio().getSelectedPage().addComp(pToEdi);
 
             this.close();
         });
@@ -116,6 +116,7 @@ public class imgDialog extends Stage{
         imgScreen.getStylesheets().add("eportfoliomaker/style/Style.css");
         this.setTitle("Image");
         this.setScene(imgScreen);
+        
         showAndWait();
     }
     

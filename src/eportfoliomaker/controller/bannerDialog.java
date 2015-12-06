@@ -46,7 +46,7 @@ public class bannerDialog {
         if (result.get() == b1){
                 processSelectImage();
         }
-        ui.reloadPagePane(eP.getSelectedPage().getPv());
+        ui.reloadPagePane();
     } 
     
     public void processSelectImage() {

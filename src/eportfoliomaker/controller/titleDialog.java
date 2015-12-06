@@ -25,7 +25,7 @@ public class titleDialog extends Stage{
         ui=gui;
         ePortfolio=eP;
         
-        ui.reloadPagePane(eP.getSelectedPage().getPv());
+        ui.reloadPagePane();
         dialog = new TextInputDialog("New ePortfolio Page");
         dialog.setTitle("Change Title");
         dialog.setHeaderText("Enter your ePortfolio Page's Title");
@@ -35,6 +35,6 @@ public class titleDialog extends Stage{
         if (result.isPresent()){
             ePortfolio.getSelectedPage().setTitle(result.get());
         }
-        ui.reloadPagePane(ePortfolio.getSelectedPage().getPv());
+        ui.reloadPagePane();
     }
 }

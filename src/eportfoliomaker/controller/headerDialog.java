@@ -28,8 +28,6 @@ public class headerDialog extends Stage{
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
             h.setText(result.get());
-                    
-                ui.getePortfolio().getSelectedPage().addComp(h);
         }
     }
 }

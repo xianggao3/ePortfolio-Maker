@@ -36,8 +36,9 @@ public class videoDialog extends Stage{
     String path;
     String fileName;
     
-    public videoDialog(Stage primaryStage,Video vToEdit){
-        initOwner(primaryStage);
+    public videoDialog(ePortfolioAppMakerView ui,Video vToEdit){
+        this.ui=ui;
+        initOwner(ui.getPrimaryStage());
         height.setText(vToEdit.getVideoH().toString());
         width.setText(vToEdit.getVideoW().toString());
         caption.setText(vToEdit.getCaption());
@@ -63,7 +64,7 @@ public class videoDialog extends Stage{
             if(fileName!=null){
                 vToEdit.setVideoFileName(fileName);
                 vToEdit.setVideoPath(path);
-            }ui.getePortfolio().getSelectedPage().addComp(vToEdit);
+            }
 
             this.close();
         });

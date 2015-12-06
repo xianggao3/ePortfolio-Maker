@@ -240,8 +240,8 @@ public class ePortfolioAppMakerView {
         selectSiteViewerWorkspaceButton=initChildButton(workSpaceModeToolbar,"siteView.png","",false,"Enter Site View Mode");
         workspace.setBottom(workSpaceModeToolbar);
         
-        addPageButton=initChildButton(siteToolbar,"addPage.png","",false,"Add a Page");
-        removePageButton=initChildButton(siteToolbar,"deletePage.png","",false,"Delete Current Page");
+        addPageButton=initChildButton(siteToolbar,"addPage.png","",true,"Add a Page");
+        removePageButton=initChildButton(siteToolbar,"deletePage.png","",true,"Delete Current Page");
         siteToolbar.getStyleClass().add("site_toolbar");
         workspace.setTop(siteToolbar);
         
@@ -249,7 +249,7 @@ public class ePortfolioAppMakerView {
         
         workspace.setCenter(tabbedPane);
         tabbedPane.getStyleClass().add("file_toolbar");
-        //currentTab = tabbedPane.getSelectionModel().getSelectedItem();---------------?????????????????????? do i need?
+        currentTab = tabbedPane.getSelectionModel().getSelectedItem();
     }
     
     public void initSiteViewerWorkspace(){
@@ -306,7 +306,7 @@ public class ePortfolioAppMakerView {
 	});
 	loadPortButton.setOnAction(e -> {
 	    controller.handleLoadPortRequest();
-            reloadPagePane(ePortfolio.getPv());
+            reloadPagePane();
 	});
 	savePortButton.setOnAction(e -> {
             try {
@@ -333,8 +333,9 @@ public class ePortfolioAppMakerView {
             
             Component a = ePortfolio.getSelectedPage().getSelectedComp();
             if(a instanceof ListComp){
-            listD=new listDialog(primaryStage,(ListComp)a);
+            listD=new listDialog(this,(ListComp)a);
             }
+            reloadPagePane();
         });
         updatePageTitleButton.setOnAction(e->{
            titleDialog= new titleDialog(this,ePortfolio);      
@@ -350,7 +351,8 @@ public class ePortfolioAppMakerView {
         });
         removeCompButton.setOnAction(e->{
            ePortfolio.getSelectedPage().getComponents().remove(ePortfolio.getSelectedPage().getSelectedComp());
-           reloadPagePane(ePortfolio.getPv());
+           
+            reloadPagePane();
         });
         selectPageFontButton.setOnAction(e->{
             pgFontD=new pageFontDialog(this,ePortfolio);
@@ -371,15 +373,17 @@ public class ePortfolioAppMakerView {
             
             Component a = ePortfolio.getSelectedPage().getSelectedComp();
             if(a instanceof Img){
-            imgD=new imgDialog(primaryStage,(Img)a);
+            imgD=new imgDialog(this,(Img)a);
             }
+            reloadPagePane();
         });
         editVideoCompButton.setOnAction(e->{
             
             Component a = ePortfolio.getSelectedPage().getSelectedComp();
             if(a instanceof Video){
-            vidD=new videoDialog(primaryStage,(Video)a);
+            vidD=new videoDialog(this,(Video)a);
             }
+            reloadPagePane();
         });
         editSlideShowCompButton.setOnAction(e->{
             
@@ -387,6 +391,7 @@ public class ePortfolioAppMakerView {
             if(a instanceof SlideShowModelComponent){
             ssm=new SlideshowMakerView(this,(SlideShowModelComponent) a);
             }
+            reloadPagePane();
         });
         editTextCompButton.setOnAction(e->{
             
@@ -394,6 +399,7 @@ public class ePortfolioAppMakerView {
             if(a instanceof Paragraph){
             textD=new textDialog(this,(Paragraph)a);
             }
+            reloadPagePane();
         });
         selectBannerImageButton.setOnAction(e->{
            bannerD=new bannerDialog(this,ePortfolio); 
@@ -445,7 +451,7 @@ public class ePortfolioAppMakerView {
             tab.setOnSelectionChanged(g->{
                 ePortfolio.setSelectedPage(pg);
                 currentTab=tab;
-                reloadPagePane(pv);
+                reloadPagePane();
                 
             });
             tab.setContent(pagesEditorScrollPane);
@@ -463,12 +469,13 @@ public class ePortfolioAppMakerView {
 	// NEXT ENABLE/DISABLE BUTTONS AS NEEDED IN THE FILE TOOLBAR
 	savePortButton.setDisable(saved);
 	selectSiteViewerWorkspaceButton.setDisable(false);
-	
+        addPageButton.setDisable(saved);
+	removePageButton.setDisable(saved);
         updatePageEditToolbarControls();
     }
     
     public void updatePageEditToolbarControls(){
-        boolean pageSelected=false;
+        boolean pageSelected=true;
         editTextCompButton.setDisable(true);
         editListCompButton.setDisable(true);
         editImageCompButton.setDisable(true);
@@ -504,11 +511,53 @@ public class ePortfolioAppMakerView {
     
         
     public void reloadPagePane() {
-        pagesEditorPane.getChildren().clear();
         
         for(Page p : ePortfolio.getPages()){
             PageEditView pv= new PageEditView(ePortfolio);
-            
+            if(pv!=null){
+            pv.getChildren().clear();
+            }
+            Label pgTitle= new Label("By "+ ePortfolio.getStudentName());
+            Label pgFont = new Label("Page Font: "+ePortfolio.getSelectedPage().getPageFont());    
+            Label pgLayout= new Label("Page Layout Theme: "+ePortfolio.getSelectedPage().getLayoutTheme());
+            Label pgColor = new Label("Page Color Theme: "+ePortfolio.getSelectedPage().getColorTheme());
+            if(ePortfolio.getSelectedPage().getBannerFileName()!=null){
+             banner= new Image("file:images/img/"+ePortfolio.getSelectedPage().getBannerFileName());
+            }
+            ImageView bannerView = new ImageView(banner);
+            bannerView.setFitHeight(100);
+            bannerView.setFitWidth(600);
+            Label bannertxt= new Label("Banner Text: "+ePortfolio.getSelectedPage().getBannerText());
+            VBox pgOptions = new VBox();
+            pgOptions.getChildren().addAll(pgTitle,pgLayout,pgColor,pgFont,bannertxt,bannerView);
+            pv.getChildren().addAll(pgOptions);
+            pv.getStyleClass().add("tabPane_a");
+
+            for(Component comp:ePortfolio.getSelectedPage().getComponents()){
+                ComponentEditView compEditor = new ComponentEditView(comp);
+                if(ePortfolio.getSelectedPage().isSelectedComp(comp)){
+                    compEditor.getStyleClass().add("selected_tabPane");
+                }else{
+                    compEditor.getStyleClass().add("tabPane");
+                }
+                //initTitleControls();
+                pagesEditorScrollPane = new ScrollPane(pv);
+                pv.getChildren().add(compEditor);
+                compEditor.setOnMousePressed(b->{
+                    ePortfolio.getSelectedPage().setSelectedComp(comp);
+                    this.reloadPagePane();
+                });
+                pagesEditorScrollPane.setFitToWidth(true);
+                pagesEditorScrollPane.setFitToHeight(true);
+                currentTab.setContent(pagesEditorScrollPane);
+                currentTab.setText(ePortfolio.getSelectedPage().getTitle());
+            }
+            if(ePortfolio.getSelectedPage().getFooter()!=""){
+                Pane footPane = new Pane();
+                Label footerText = new Label("Footer: "+ePortfolio.getSelectedPage().getFooter());
+                footPane.getChildren().addAll(footerText);
+                pv.getChildren().add(footPane);
+            }
         }
         updatePageEditToolbarControls();
     }

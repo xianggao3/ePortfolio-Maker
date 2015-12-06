@@ -73,7 +73,6 @@ public class textDialog extends Stage{
            pToEdit.setText(textArea.getText());
            pToEdit.setFont(textFont.getValue().toString());
            
-                ui.getePortfolio().getSelectedPage().addComp(pToEdit);
            this.close();
            
         });
@@ -84,6 +83,7 @@ public class textDialog extends Stage{
         textScene = new Scene(textbox);
         textScene.getStylesheets().add("eportfoliomaker/style/Style.css");
         this.setScene(textScene);
+        
         showAndWait();
     }
     

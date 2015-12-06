@@ -40,6 +40,6 @@ public class layoutDialog extends Stage{
         if (result.isPresent()){
             ui.getePortfolio().getSelectedPage().setLayoutTheme(result.get());
         }
-        ui.reloadPagePane(eP.getSelectedPage().getPv());
+        ui.reloadPagePane();
     }
 }

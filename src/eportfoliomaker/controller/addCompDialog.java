@@ -51,18 +51,23 @@ public class addCompDialog extends Stage{
             if (result.get()=="Text"){
                 Paragraph p = new Paragraph();
                 textDialog tD = new textDialog(ui,p);
+                ui.getePortfolio().getSelectedPage().addComp(p);
             }else if(result.get()==("Header")){
                 Header p = new Header();
                 headerDialog hD = new headerDialog(ui,p);
+                ui.getePortfolio().getSelectedPage().addComp(p);
             }else if(result.get()=="List"){
                 ListComp list = new ListComp();
-                listDialog lD= new listDialog(this,list);
+                listDialog lD= new listDialog(ui,list);
+                ui.getePortfolio().getSelectedPage().addComp(list);
             }else if(result.get()=="Image"){
                 Img img = new Img();
-                imgDialog i = new imgDialog(this,img);
+                imgDialog i = new imgDialog(ui,img);
+                ui.getePortfolio().getSelectedPage().addComp(img);
             }else if(result.get()=="Video"){
                 Video vid = new Video();
-                videoDialog v = new videoDialog(this,vid);
+                videoDialog v = new videoDialog(ui,vid);
+                ui.getePortfolio().getSelectedPage().addComp(vid);
             }else if(result.get()=="Slideshow"){
                 
                 SlideShowModelComponent ss = new SlideShowModelComponent();

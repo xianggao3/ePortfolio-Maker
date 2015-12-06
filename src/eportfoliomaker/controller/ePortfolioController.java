@@ -67,7 +67,7 @@ public class ePortfolioController {
 		// MAKE SURE THE TITLE CONTROLS ARE ENABLED
 		//ui.reloadTitleControls();	not needed i think
                 
-		ui.reloadPagePane(slideShow.getPv());
+		ui.reloadPagePane();
                 
             }
         } catch (IOException ioe) {
@@ -125,7 +125,7 @@ public class ePortfolioController {
                 PageEditView pev = new PageEditView(slideShowToLoad);
                 slideShowToLoad.setPv(pev);
                 ePortfolioIO.loadSlideShow(slideShowToLoad, selectedFile.getAbsolutePath());
-                ui.reloadPagePane(slideShowToLoad.getPv());
+                ui.reloadPagePane();
                 saved = true;
                 ui.updateFileToolbarControls(saved);
             

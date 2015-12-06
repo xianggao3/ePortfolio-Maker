@@ -40,6 +40,6 @@ public class pageFontDialog extends Stage{
         if (result.isPresent()){      
             eP.getSelectedPage().setPageFont(result.get());
         }
-        ui.reloadPagePane(eP.getSelectedPage().getPv());
+        ui.reloadPagePane();
     }
 }

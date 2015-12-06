@@ -31,8 +31,9 @@ public class listDialog extends Stage{
     Button OKButton;
     Button cancelButton;
 
-    public listDialog(Stage primaryStage,ListComp ltoEdit){        
-        initOwner(primaryStage);
+    public listDialog(ePortfolioAppMakerView ui,ListComp ltoEdit){      
+        this.ui=ui;
+        initOwner(ui.getPrimaryStage());
         listbox = new VBox();
         Label listBullets=new Label("Bullets:");
         
@@ -48,7 +49,7 @@ public class listDialog extends Stage{
         OKButton.setOnMouseReleased(e->{
             ltoEdit.setBullets(bulletArea.getText());
             
-               ui.getePortfolio().getSelectedPage().addComp(ltoEdit);
+               
             this.close();
         });
         
@@ -59,6 +60,7 @@ public class listDialog extends Stage{
         listScene = new Scene(listbox);
         listScene.getStylesheets().add("eportfoliomaker/style/Style.css");
         this.setScene(listScene);
+        
         showAndWait();
     }
 }

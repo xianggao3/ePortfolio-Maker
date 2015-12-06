@@ -86,7 +86,7 @@ public class ePortfolioJSONFileManager {
            
 	}
         ePortToLoad.setSelectedPage(ePortToLoad.getPages().get(0));
-        ePortToLoad.getUi().reloadPagePane(ePortToLoad.getPv());
+        ePortToLoad.getUi().reloadPagePane();
     }
     public ObservableList<Component> loadCompsArray(JsonArray compArray) throws IOException{
         ObservableList<Component> comps = FXCollections.observableArrayList();

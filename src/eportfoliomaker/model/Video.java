@@ -78,7 +78,7 @@ public class Video extends Component{
         type="video";
         videoFileName=null;
         src=null;
-        videoH=455.;
-        videoW=810.;
+        videoH=300.;
+        videoW=455.;
     }
 }
